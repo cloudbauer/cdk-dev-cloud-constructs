@@ -35,13 +35,13 @@ main DevCloudConstruct
 TypeScript/JavaScript:
 
 ```bash
-npm i @bitbauer/cdk-dev-cloud-constructs
+npm i cdk-dev-cloud-constructs
 ```
 
 Python:
 
 ```bash
-pip install bitbauer.cdk-dev-cloud-constructs
+pip install cdk-dev-cloud-constructs
 ```
 
 ## License

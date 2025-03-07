@@ -9,11 +9,11 @@ const project = new awscdk.AwsCdkConstructLibrary({
   defaultReleaseBranch: 'main',
   jsiiVersion: '~5.7.0',
   keywords: ['awscdk', 'gitlab', 'jenkins'],
-  
-  // publishToPypi: {
-  //   distName: 'cdk-dev-cloud-constructs',
-  //   module: 'cdk_dev_cloud_constructs',
-  // },
+
+  publishToPypi: {
+    distName: 'cdk-dev-cloud-constructs',
+    module: 'cdk_dev_cloud_constructs',
+  },
   projenrcTs: true,
   repositoryUrl: 'https://github.com/cloudbauer/cdk-dev-cloud-constructs.git',
 
