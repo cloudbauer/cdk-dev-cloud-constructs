@@ -21,7 +21,7 @@ export interface GitlabProps {
    */
   readonly domainName?: string;
 }
-  
+
 /**
  * VSCodeServer - spin it up in under 10 minutes
  */
