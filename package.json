@@ -36,13 +36,11 @@
     "organization": false
   },
   "devDependencies": {
-    "@aws-quickstart/eks-blueprints": "1.16.3",
     "@stylistic/eslint-plugin": "^2",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.14.0",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
-    "aws-cdk": "2.173.4",
     "aws-cdk-lib": "2.173.4",
     "commit-and-tag-version": "^12",
     "constructs": "10.4.2",
@@ -62,13 +60,16 @@
     "typescript": "^5.8.3"
   },
   "peerDependencies": {
-    "aws-cdk": "^2.173.4",
     "aws-cdk-lib": "^2.173.4",
     "constructs": "^10.4.2"
   },
   "dependencies": {
+    "@aws-quickstart/eks-blueprints": "1.16.3",
     "cdk-nag": "^2.35.65"
   },
+  "bundledDependencies": [
+    "@aws-quickstart/eks-blueprints"
+  ],
   "keywords": [
     "awscdk",
     "cdk",
