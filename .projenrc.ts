@@ -24,9 +24,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
   ],
   peerDeps: [
     'aws-cdk@^' + CDK_VERSION,
-    '@aws-quickstart/eks-blueprints@^1.16.3',
   ],
-
+  
   publishToPypi: {
     distName: 'cdk-dev-cloud-constructs',
     module: 'cdk_dev_cloud_constructs',
