@@ -1,5 +1,3 @@
-export class Hello {
-  public sayHello() {
-    return 'hello, world!';
-  }
-}
+export * from './eks-cluster';
+export * from './gitlab';
+export * from './hello';

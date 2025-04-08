@@ -21,7 +21,7 @@ main DevCloudConstruct
 
 # cdk-dev-cloud-constructs
 
-[![](https://constructs.dev/favicon.ico) Construct Hub](https://constructs.dev/packages/@bitbauer/cdk-dev-cloud-constructs)
+[![](https://constructs.dev/favicon.ico) Construct Hub](https://constructs.dev/packages/cdk-dev-cloud-constructs)
 
 -----
 
