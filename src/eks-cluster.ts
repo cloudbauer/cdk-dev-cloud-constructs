@@ -21,7 +21,7 @@ class TeamPlatform extends blueprints.teams.PlatformTeam {
 /**
  * Properties for the EksCluster construct
  */
-export interface EksClusterConstructProps {
+export interface EksClusterStackProps {
   /**
      * cluster base domain name
      */
@@ -33,7 +33,7 @@ export interface EksClusterConstructProps {
  * Demonstrates how to leverage more than one node group along with Fargate profiles.
  */
 
-export default class EksClusterConstructConstruct {
+export class EksClusterStackBuilder {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
 
     const account = props?.env?.account!;
@@ -45,17 +45,20 @@ export default class EksClusterConstructConstruct {
     const stackID = `${id}-stack`;
 
     const clusterProvider = new blueprints.GenericClusterProvider({
-      version: eks.KubernetesVersion.V1_21,
+      version: eks.KubernetesVersion.V1_31,
       managedNodeGroups: [
         {
           id: 'mng-ondemand',
           amiType: eks.NodegroupAmiType.AL2_X86_64,
-          instanceTypes: [new ec2.InstanceType('m5.2xlarge')],
+          instanceTypes: [new ec2.InstanceType('t3.medium')],
+          minSize: 3,
+          maxSize: 6,
         },
         {
           id: 'mng2-spot',
           instanceTypes: [ec2.InstanceType.of(ec2.InstanceClass.BURSTABLE3, ec2.InstanceSize.MEDIUM)],
           nodeGroupCapacityType: eks.CapacityType.SPOT,
+          minSize: 3,
         },
       ],
       fargateProfiles: {
