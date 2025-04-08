@@ -3,7 +3,7 @@
   "description": "CDK Construct Library to create an open source developer platform at AWS",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cloudbauer/cdk-dev-cloud-constructs.git"
+    "url": "https://github.com/cloudbauer/cdk-dev-cloud-constructs"
   },
   "scripts": {
     "build": "npx projen build",
@@ -41,11 +41,11 @@
     "@types/node": "^22.14.0",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
-    "aws-cdk-lib": "2.177.0",
+    "aws-cdk-lib": "2.173.4",
     "commit-and-tag-version": "^12",
-    "constructs": "10.0.5",
+    "constructs": "10.4.2",
     "eslint": "^9",
-    "eslint-import-resolver-typescript": "^3.10.0",
+    "eslint-import-resolver-typescript": "^4.3.2",
     "eslint-plugin-import": "^2.31.0",
     "jest": "^29.7.0",
     "jest-junit": "^16",
@@ -60,9 +60,16 @@
     "typescript": "^5.8.3"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^2.177.0",
-    "constructs": "^10.0.5"
+    "aws-cdk-lib": "^2.173.4",
+    "constructs": "^10.4.2"
   },
+  "dependencies": {
+    "@aws-quickstart/eks-blueprints": "1.16.3",
+    "cdk-nag": "^2.35.65"
+  },
+  "bundledDependencies": [
+    "@aws-quickstart/eks-blueprints"
+  ],
   "keywords": [
     "awscdk",
     "cdk",
