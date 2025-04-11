@@ -65,7 +65,7 @@
   },
   "dependencies": {
     "@aws-quickstart/eks-blueprints": "1.16.3",
-    "cdk-nag": "^2.35.65"
+    "cdk-nag": "^2.35.67"
   },
   "bundledDependencies": [
     "@aws-quickstart/eks-blueprints"
