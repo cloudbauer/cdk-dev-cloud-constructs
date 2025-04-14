@@ -5,9 +5,6 @@
       "description": "Full release build",
       "steps": [
         {
-          "spawn": "default"
-        },
-        {
           "spawn": "pre-compile"
         },
         {
@@ -42,53 +39,12 @@
       ],
       "condition": "git log --oneline -1 | grep -qv \"chore(release):\""
     },
-    "clobber": {
-      "name": "clobber",
-      "description": "hard resets to HEAD of origin and cleans the local repo",
-      "env": {
-        "BRANCH": "$(git branch --show-current)"
-      },
-      "steps": [
-        {
-          "exec": "git checkout -b scratch",
-          "name": "save current HEAD in \"scratch\" branch"
-        },
-        {
-          "exec": "git checkout $BRANCH"
-        },
-        {
-          "exec": "git fetch origin",
-          "name": "fetch latest changes from origin"
-        },
-        {
-          "exec": "git reset --hard origin/$BRANCH",
-          "name": "hard reset to origin commit"
-        },
-        {
-          "exec": "git clean -fdx",
-          "name": "clean all untracked files"
-        },
-        {
-          "say": "ready to rock! (unpushed commits are under the \"scratch\" branch)"
-        }
-      ],
-      "condition": "git diff --exit-code > /dev/null"
-    },
-    "compat": {
-      "name": "compat",
-      "description": "Perform API compatibility check against latest version",
-      "steps": [
-        {
-          "exec": "jsii-diff npm:$(node -p \"require('./package.json').name\") -k --ignore-file .compatignore || (echo \"\nUNEXPECTED BREAKING CHANGES: add keys such as 'removed:constructs.Node.of' to .compatignore to skip.\n\" && exit 1)"
-        }
-      ]
-    },
     "compile": {
       "name": "compile",
       "description": "Only compile",
       "steps": [
         {
-          "exec": "jsii --silence-warnings=reserved-word"
+          "exec": "tsc --build"
         }
       ]
     },
@@ -97,28 +53,8 @@
       "description": "Synthesize project files",
       "steps": [
         {
-          "exec": "ts-node --project tsconfig.dev.json .projenrc.ts"
-        }
-      ]
-    },
-    "docgen": {
-      "name": "docgen",
-      "description": "Generate API.md from .jsii manifest",
-      "steps": [
-        {
-          "exec": "jsii-docgen -o API.md"
-        }
-      ]
-    },
-    "eject": {
-      "name": "eject",
-      "description": "Remove projen from the project",
-      "env": {
-        "PROJEN_EJECTING": "true"
-      },
-      "steps": [
-        {
-          "spawn": "default"
+          "exec": "npx projen default",
+          "cwd": ".."
         }
       ]
     },
@@ -130,7 +66,7 @@
       },
       "steps": [
         {
-          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern $@ src test build-tools projenrc .projenrc.ts",
+          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern $@ src test build-tools",
           "receiveArgs": true
         }
       ]
@@ -158,53 +94,16 @@
       "description": "Creates the distribution package",
       "steps": [
         {
-          "spawn": "package:js",
-          "condition": "node -e \"if (!process.env.CI) process.exit(1)\""
+          "exec": "mkdir -p dist/js"
         },
         {
-          "spawn": "package-all",
-          "condition": "node -e \"if (process.env.CI) process.exit(1)\""
-        }
-      ]
-    },
-    "package-all": {
-      "name": "package-all",
-      "description": "Packages artifacts for all target languages",
-      "steps": [
-        {
-          "spawn": "package:js"
-        },
-        {
-          "spawn": "package:python"
-        }
-      ]
-    },
-    "package:js": {
-      "name": "package:js",
-      "description": "Create js language bindings",
-      "steps": [
-        {
-          "exec": "jsii-pacmak -v --target js"
-        }
-      ]
-    },
-    "package:python": {
-      "name": "package:python",
-      "description": "Create python language bindings",
-      "steps": [
-        {
-          "exec": "jsii-pacmak -v --target python"
+          "exec": "npm pack --pack-destination dist/js"
         }
       ]
     },
     "post-compile": {
       "name": "post-compile",
-      "description": "Runs after successful compilation",
-      "steps": [
-        {
-          "spawn": "docgen"
-        }
-      ]
+      "description": "Runs after successful compilation"
     },
     "post-upgrade": {
       "name": "post-upgrade",
@@ -285,13 +184,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/jest,@types/node,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node,typescript,cdk-nag"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/jest,@types/node,eslint-import-resolver-typescript,eslint-plugin-import,jest,ts-jest,typescript,cdk-nag"
         },
         {
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @stylistic/eslint-plugin @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser commit-and-tag-version eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii projen ts-jest ts-node typescript aws-cdk-lib constructs cdk-nag"
+          "exec": "yarn upgrade @stylistic/eslint-plugin @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk commit-and-tag-version eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit ts-jest typescript @aws-quickstart/eks-blueprints aws-cdk-lib cdk-nag constructs"
         },
         {
           "exec": "npx projen"
@@ -306,7 +205,7 @@
       "description": "Watch & compile in the background",
       "steps": [
         {
-          "exec": "jsii -w --silence-warnings=reserved-word"
+          "exec": "tsc --build -w"
         }
       ]
     }
@@ -314,5 +213,5 @@
   "env": {
     "PATH": "$(npx -c \"node --print process.env.PATH\")"
   },
-  "//": "~~ Generated by projen. To modify, edit .projenrc.ts and run \"npx projen\"."
+  "//": "~~ Generated by projen. To modify, edit .projenrc.js and run \"npx projen\"."
 }
