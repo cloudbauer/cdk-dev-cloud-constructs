@@ -137,38 +137,6 @@ public readonly domainName: string;
 
 ## Structs <a name="Structs" id="Structs"></a>
 
-### EksClusterStackProps <a name="EksClusterStackProps" id="cdk-dev-cloud-constructs.EksClusterStackProps"></a>
-
-Properties for the EksCluster construct.
-
-#### Initializer <a name="Initializer" id="cdk-dev-cloud-constructs.EksClusterStackProps.Initializer"></a>
-
-```typescript
-import { EksClusterStackProps } from 'cdk-dev-cloud-constructs'
-
-const eksClusterStackProps: EksClusterStackProps = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#cdk-dev-cloud-constructs.EksClusterStackProps.property.domainName">domainName</a></code> | <code>string</code> | cluster base domain name. |
-
----
-
-##### `domainName`<sup>Optional</sup> <a name="domainName" id="cdk-dev-cloud-constructs.EksClusterStackProps.property.domainName"></a>
-
-```typescript
-public readonly domainName: string;
-```
-
-- *Type:* string
-
-cluster base domain name.
-
----
-
 ### GitlabProps <a name="GitlabProps" id="cdk-dev-cloud-constructs.GitlabProps"></a>
 
 Properties for the Gitlab construct.
@@ -202,48 +170,6 @@ Gitlab full qualified domain name.
 ---
 
 ## Classes <a name="Classes" id="Classes"></a>
-
-### EksClusterStackBuilder <a name="EksClusterStackBuilder" id="cdk-dev-cloud-constructs.EksClusterStackBuilder"></a>
-
-Demonstrates how to leverage more than one node group along with Fargate profiles.
-
-#### Initializers <a name="Initializers" id="cdk-dev-cloud-constructs.EksClusterStackBuilder.Initializer"></a>
-
-```typescript
-import { EksClusterStackBuilder } from 'cdk-dev-cloud-constructs'
-
-new EksClusterStackBuilder(scope: Construct, id: string, props?: StackProps)
-```
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#cdk-dev-cloud-constructs.EksClusterStackBuilder.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#cdk-dev-cloud-constructs.EksClusterStackBuilder.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#cdk-dev-cloud-constructs.EksClusterStackBuilder.Initializer.parameter.props">props</a></code> | <code>aws-cdk-lib.StackProps</code> | *No description.* |
-
----
-
-##### `scope`<sup>Required</sup> <a name="scope" id="cdk-dev-cloud-constructs.EksClusterStackBuilder.Initializer.parameter.scope"></a>
-
-- *Type:* constructs.Construct
-
----
-
-##### `id`<sup>Required</sup> <a name="id" id="cdk-dev-cloud-constructs.EksClusterStackBuilder.Initializer.parameter.id"></a>
-
-- *Type:* string
-
----
-
-##### `props`<sup>Optional</sup> <a name="props" id="cdk-dev-cloud-constructs.EksClusterStackBuilder.Initializer.parameter.props"></a>
-
-- *Type:* aws-cdk-lib.StackProps
-
----
-
-
-
-
 
 ### Hello <a name="Hello" id="cdk-dev-cloud-constructs.Hello"></a>
 
