@@ -25,6 +25,9 @@ const eksChartsConstructs = new awscdk.AwsCdkConstructLibrary({
   },
   projenrcTs: true,
   repositoryUrl: 'https://github.com/' + GITHUB_USER + '/' + PROJECT_NAME,
+  npmignore: [
+    '/stack/',
+  ],
 
   // deps: [],                /* Runtime dependencies of this module. */
   // devDeps: [],             /* Build dependencies for this module. */
