@@ -64,7 +64,7 @@
     "constructs": "^10.4.2"
   },
   "dependencies": {
-    "cdk-nag": "^2.35.70"
+    "cdk-nag": "^2.35.71"
   },
   "keywords": [
     "awscdk",
