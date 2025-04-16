@@ -1,6 +1,10 @@
 {
   "name": "cdk-dev-cloud-stack",
   "description": "CDK Blueprint Builder for EKS Stack to create an open source developer platform at AWS",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cloudbauer/cdk-dev-cloud-constructs"
+  },
   "scripts": {
     "build": "npx projen build",
     "bump": "npx projen bump",

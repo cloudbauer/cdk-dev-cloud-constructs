@@ -43,7 +43,7 @@ const eksClusterBuilder = new typescript.TypeScriptProject({
   defaultReleaseBranch: 'main',
   stability: 'experimental',
   keywords: ['awscdk', 'eks', 'kubernetes', 'gitlab', 'jenkins'],
-  projenrcTs: true,
+
   deps: [
     '@aws-quickstart/eks-blueprints@1.16.3',
     'aws-cdk-lib@' + CDK_VERSION,
@@ -54,10 +54,12 @@ const eksClusterBuilder = new typescript.TypeScriptProject({
     'aws-cdk@' + CDK_VERSION,
   ],
 
+  projenrcTs: true,
   outdir: 'stack',
   releaseToNpm: true,
   release: true,
 
+  repository: 'https://github.com/' + GITHUB_USER + '/' + PROJECT_NAME,
   copyrightOwner: 'bitbauer',
   license: 'MIT',
 });
