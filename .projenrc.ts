@@ -1,4 +1,4 @@
-import { awscdk, typescript } from 'projen';
+import { awscdk, typescript, JsonPatch, TestFailureBehavior } from 'projen';
 
 // Constants
 const GITHUB_USER = 'cloudbauer';
@@ -62,5 +62,13 @@ const eksClusterBuilder = new typescript.TypeScriptProject({
   license: 'MIT',
 });
 
+// fixes wrong working directory for yarn install step in release workflow
+eksChartsConstructs.tryFindObjectFile('.github/workflows/release_cdk-dev-cloud-stack.yml')?.patch(
+  JsonPatch.test('/jobs/release/steps/2/name', 'Install dependencies', TestFailureBehavior.FAIL_SYNTHESIS),
+  JsonPatch.remove('/jobs/release/steps/2/working-directory'),
+);
+
 eksChartsConstructs.synth();
 eksClusterBuilder.synth();
+
+
