@@ -1,3 +1,4 @@
+import { Construct } from 'constructs';
 import {
   aws_eks as eks,
   // Aspects,
@@ -8,7 +9,6 @@ import {
   // Tags,
 } from 'aws-cdk-lib';
 import { Asset } from 'aws-cdk-lib/aws-s3-assets';
-import { Construct } from 'constructs';
 // import { Construct, IConstruct } from 'constructs';
 // import { NagSuppressions } from 'cdk-nag';
 
@@ -56,15 +56,15 @@ export class GitlabConstruct extends Construct {
       'certmanager-issuer': {
         email: 'administrator@' + this.domainName,
       },
-      'global': {
+      global: {
         hosts: {
-          domain: this.domainName,
+          domain: this.domainName
         },
         email: {
           from: 'gitlab@' + this.domainName,
           display_name: `GitLab (${this.domainName})`,
-        },
-      },
+        }
+      }
     };
 
     this.chart = new eks.HelmChart(this, id + 'Chart', {
@@ -73,7 +73,7 @@ export class GitlabConstruct extends Construct {
       repository: 'https://charts.gitlab.io/',
       namespace: this.namespace,
       version: this._version,
-      values: default_values,
+      values: default_values
     });
 
   }
