@@ -21,7 +21,7 @@ class TeamPlatform extends blueprints.teams.PlatformTeam {
 /**
  * Properties for the EksCluster construct
  */
-export interface EksClusterStackProps {
+export interface EksClusterStackProps extends cdk.StackProps {
   /**
      * cluster base domain name
      */
@@ -34,7 +34,7 @@ export interface EksClusterStackProps {
  */
 
 export class EksClusterStackBuilder {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props?: EksClusterStackProps) {
 
     const account = props?.env?.account!;
     const region = props?.env?.region!;
