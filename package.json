@@ -82,12 +82,19 @@
   "version": "0.0.0",
   "jest": {
     "coverageProvider": "v8",
+    "projects": [
+      "./",
+      "./stack/"
+    ],
     "testMatch": [
+      "**/*.test.ts",
       "<rootDir>/@(src|test)/**/*(*.)@(spec|test).ts?(x)",
       "<rootDir>/@(src|test)/**/__tests__/**/*.ts?(x)",
       "<rootDir>/@(projenrc)/**/*(*.)@(spec|test).ts?(x)",
       "<rootDir>/@(projenrc)/**/__tests__/**/*.ts?(x)"
     ],
+    "maxWorkers": "50%",
+    "detectOpenHandles": true,
     "clearMocks": true,
     "collectCoverage": true,
     "coverageReporters": [
