@@ -19,6 +19,20 @@ const eksChartsConstructs = new awscdk.AwsCdkConstructLibrary({
     'cdk-nag',
   ],
 
+  tsJestOptions: {
+
+  },
+  jest: true,
+  jestOptions: {
+    passWithNoTests: true,
+    jestConfig: {
+      projects: ['./', './stack/'],
+      testMatch: ['**/*.test.ts'],
+      maxWorkers: '50%',
+      detectOpenHandles: true,
+    },
+  },
+
   publishToPypi: {
     distName: 'cdk-dev-cloud-constructs',
     module: 'cdk_dev_cloud_constructs',
@@ -69,6 +83,7 @@ eksChartsConstructs.tryFindObjectFile('.github/workflows/release_cdk-dev-cloud-s
   JsonPatch.test('/jobs/release/steps/2/name', 'Install dependencies', TestFailureBehavior.FAIL_SYNTHESIS),
   JsonPatch.remove('/jobs/release/steps/2/working-directory'),
 );
+
 
 eksChartsConstructs.synth();
 eksClusterBuilder.synth();
