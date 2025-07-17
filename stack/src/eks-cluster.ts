@@ -6,6 +6,10 @@ import { ArnPrincipal } from 'aws-cdk-lib/aws-iam';
 import { merge } from 'ts-deepmerge';
 
 
+const DEFAULT_K8S_VERSION = '1.32';
+const DEFAULT_NODES_INSTANCE_CLASSES = [ec2.InstanceClass.T3];
+const DEFAULT_NODES_INSTANCE_SIZES =[ec2.InstanceSize.MEDIUM, ec2.InstanceSize.LARGE];
+
 // Team implementations
 export class TeamPlatform extends blueprints.teams.PlatformTeam {
   constructor(accountID: string) {
@@ -26,15 +30,15 @@ export interface EksClusterOptions {
   readonly domainName: string;
 
   /**
-   * Required, Kubernetes version to use for the cluster.
+   * Optional, Kubernetes version to use for the cluster.
    */
   kubernetesVersion?: eks.KubernetesVersion;
   /**
-   * Required, Instance class to use for the cluster.
+   * Optional, Instance class to use for the cluster.
    */
   instanceClasses?: ec2.InstanceClass[];
   /**
-   * Required, Instance size to use for the cluster.
+   * Optional, Instance size to use for the cluster.
    */
   instanceSizes?: ec2.InstanceSize[];
   /**
@@ -79,9 +83,9 @@ export interface EksClusterOptions {
  */
 const defaultOptions: EksClusterOptions = {
   domainName: 'undefined.com',
-  kubernetesVersion: eks.KubernetesVersion.of('1.32'),
-  instanceClasses: [ec2.InstanceClass.T3],
-  instanceSizes: [ec2.InstanceSize.MEDIUM, ec2.InstanceSize.LARGE],
+  kubernetesVersion: eks.KubernetesVersion.of(DEFAULT_K8S_VERSION),
+  instanceClasses: DEFAULT_NODES_INSTANCE_CLASSES,
+  instanceSizes: DEFAULT_NODES_INSTANCE_SIZES,
   desiredNodeSize: 2,
   minNodeSize: 2,
   maxNodeSize: 6,
@@ -111,7 +115,14 @@ export class EksClusterStackBuilder extends blueprints.stacks.BlueprintBuilder {
   public static builder(options: EksClusterOptions): EksClusterStackBuilder {
     const builder = new EksClusterStackBuilder();
     const mergedOptions = merge(defaultOptions, options);
-    const nodeInstanceTypes = mergedOptions.instanceClasses?.map(category => mergedOptions.instanceSizes?.map(size => ec2.InstanceType.of(category, size)) ?? []).flat();
+
+    // combine list of all valid instance classes and sizes
+    const nodeInstanceTypes =
+      (mergedOptions.instanceClasses ?? DEFAULT_NODES_INSTANCE_CLASSES).map(instance_class =>
+        (mergedOptions.instanceSizes ?? DEFAULT_NODES_INSTANCE_SIZES).map(size =>
+          ec2.InstanceType.of(instance_class, size),
+        ),
+      ).flat();
 
     const clusterProvider = new blueprints.GenericClusterProvider({
       version: mergedOptions.kubernetesVersion,
