@@ -19,9 +19,6 @@ const eksChartsConstructs = new awscdk.AwsCdkConstructLibrary({
     'cdk-nag',
   ],
 
-  tsJestOptions: {
-
-  },
   jest: true,
   jestOptions: {
     passWithNoTests: true,
@@ -62,11 +59,23 @@ const eksClusterBuilder = new typescript.TypeScriptProject({
     '@aws-quickstart/eks-blueprints@1.16.3',
     'aws-cdk-lib@' + CDK_VERSION,
     'constructs@' + CDK_CONSTRUCTS_VERSION,
+    'source-map-support',
+    'ts-deepmerge',
     'cdk-nag',
   ],
   peerDeps: [
     'aws-cdk@' + CDK_VERSION,
   ],
+
+  jest: true,
+  jestOptions: {
+    passWithNoTests: true,
+    jestConfig: {
+      testMatch: ['**/*.test.ts'],
+      maxWorkers: '50%',
+      detectOpenHandles: true,
+    },
+  },
 
   projenrcTs: true,
   outdir: 'stack',
