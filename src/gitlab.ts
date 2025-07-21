@@ -19,7 +19,7 @@ export interface GitlabProps {
   /**
    * Gitlab full qualified domain name
    */
-  readonly cluster: eks.Cluster;
+  readonly cluster: eks.ICluster;
   readonly namespace?: string;
   readonly domainName?: string;
   readonly chartRepository?: string;
@@ -33,7 +33,7 @@ export interface GitlabProps {
  * GitLab Helm Chart construct for Kubernetes on AWS
  */
 export class GitlabConstruct extends Construct {
-  readonly cluster: eks.Cluster;
+  readonly cluster: eks.ICluster;
   readonly namespace: string;
   readonly chart: eks.HelmChart;
   readonly name: string;
