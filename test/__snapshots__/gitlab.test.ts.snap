@@ -2703,7 +2703,7 @@ exports[`gitlab-chart cluster-custom-props 1`] = `
             "Outputs.testStackawscdkawseksKubectlProviderframeworkonEvent78E97BF6Arn",
           ],
         },
-        "Values": "{"certmanager-issuer":{"email":"administrator@gitlab.internal"},"global":{"hosts":{"domain":"gitlab.internal"},"email":{"from":"gitlab@gitlab.internal","display_name":"GitLab (gitlab.internal)"}}}",
+        "Values": "{"certmanager-issuer":{"email":"administrator@gitlab.internal"},"global":{"hosts":{"domain":"test"},"email":{"from":"gitlab@gitlab.internal","display_name":"GitLab (gitlab.internal)"}}}",
         "Version": "8.11.7",
       },
       "Type": "Custom::AWSCDK-EKS-HelmChart",
