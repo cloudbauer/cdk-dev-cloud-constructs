@@ -66,6 +66,9 @@
   "dependencies": {
     "cdk-nag": "^2.36.43"
   },
+  "bundledDependencies": [
+    "ts-deepmerge"
+  ],
   "keywords": [
     "awscdk",
     "cdk",
