@@ -17,12 +17,11 @@ const eksChartsConstructs = new awscdk.AwsCdkConstructLibrary({
   keywords: ['awscdk', 'eks', 'kubernetes', 'gitlab', 'jenkins'],
   deps: [
     'cdk-nag',
-    'yaml',
   ],
   bundledDeps: [
     'ts-deepmerge',
+    'yaml',
   ],
-
   jest: true,
   jestOptions: {
     passWithNoTests: true,
