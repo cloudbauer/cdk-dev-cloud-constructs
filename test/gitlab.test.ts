@@ -48,13 +48,13 @@ describe('gitlab-chart', () => {
       cluster: cluster,
       namespace: 'gitlab',
       domainName: 'gitlab.internal',
-      chartRepository: 'https://charts.gitlab.io/',
       chartName: 'gitlab',
       chartVersion: '8.11.7',
-      valuesOverride: '',
+      valuesOverride: new Map().set('global.hosts.domain', 'test'),
     };
 
-    new GitlabConstruct(stack, 'testGitlabChart', testProps);
+    const testResource = new GitlabConstruct(stack, 'testGitlabChart', testProps);
+    expect(testResource.values.global.hosts.domain).toEqual('test');
 
     const template = Template.fromStack(stack);
     expect(template.toJSON()).toMatchSnapshot();
