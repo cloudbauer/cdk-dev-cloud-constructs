@@ -4,14 +4,14 @@
 
 ### GitlabConstruct <a name="GitlabConstruct" id="cdk-dev-cloud-constructs.GitlabConstruct"></a>
 
-VSCodeServer - spin it up in under 10 minutes.
+GitLab Helm Chart construct for Kubernetes on AWS.
 
 #### Initializers <a name="Initializers" id="cdk-dev-cloud-constructs.GitlabConstruct.Initializer"></a>
 
 ```typescript
 import { GitlabConstruct } from 'cdk-dev-cloud-constructs'
 
-new GitlabConstruct(scope: Construct, id: string, props?: GitlabProps)
+new GitlabConstruct(scope: Construct, id: string, props: GitlabProps)
 ```
 
 | **Name** | **Type** | **Description** |
@@ -34,7 +34,7 @@ new GitlabConstruct(scope: Construct, id: string, props?: GitlabProps)
 
 ---
 
-##### `props`<sup>Optional</sup> <a name="props" id="cdk-dev-cloud-constructs.GitlabConstruct.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="cdk-dev-cloud-constructs.GitlabConstruct.Initializer.parameter.props"></a>
 
 - *Type:* <a href="#cdk-dev-cloud-constructs.GitlabProps">GitlabProps</a>
 
@@ -45,7 +45,6 @@ new GitlabConstruct(scope: Construct, id: string, props?: GitlabProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.domain">domain</a></code> | *No description.* |
 
 ---
 
@@ -56,12 +55,6 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
-
-##### `domain` <a name="domain" id="cdk-dev-cloud-constructs.GitlabConstruct.domain"></a>
-
-```typescript
-public domain(): string
-```
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 
@@ -108,7 +101,17 @@ Any object.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.chart">chart</a></code> | <code>aws-cdk-lib.aws_eks.HelmChart</code> | *No description.* |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.cluster">cluster</a></code> | <code>aws-cdk-lib.aws_eks.ICluster</code> | *No description.* |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.defaultValues">defaultValues</a></code> | <code>{[ key: string ]: any}</code> | *No description.* |
 | <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.domainName">domainName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.fqdn">fqdn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.mergedValues">mergedValues</a></code> | <code>{[ key: string ]: any}</code> | *No description.* |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.namespace">namespace</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.values">values</a></code> | <code>{[ key: string ]: any}</code> | *No description.* |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.version">version</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.yamlValues">yamlValues</a></code> | <code>{[ key: string ]: any}</code> | *No description.* |
 
 ---
 
@@ -124,6 +127,36 @@ The tree node.
 
 ---
 
+##### `chart`<sup>Required</sup> <a name="chart" id="cdk-dev-cloud-constructs.GitlabConstruct.property.chart"></a>
+
+```typescript
+public readonly chart: HelmChart;
+```
+
+- *Type:* aws-cdk-lib.aws_eks.HelmChart
+
+---
+
+##### `cluster`<sup>Required</sup> <a name="cluster" id="cdk-dev-cloud-constructs.GitlabConstruct.property.cluster"></a>
+
+```typescript
+public readonly cluster: ICluster;
+```
+
+- *Type:* aws-cdk-lib.aws_eks.ICluster
+
+---
+
+##### `defaultValues`<sup>Required</sup> <a name="defaultValues" id="cdk-dev-cloud-constructs.GitlabConstruct.property.defaultValues"></a>
+
+```typescript
+public readonly defaultValues: {[ key: string ]: any};
+```
+
+- *Type:* {[ key: string ]: any}
+
+---
+
 ##### `domainName`<sup>Required</sup> <a name="domainName" id="cdk-dev-cloud-constructs.GitlabConstruct.property.domainName"></a>
 
 ```typescript
@@ -134,12 +167,82 @@ public readonly domainName: string;
 
 ---
 
+##### `fqdn`<sup>Required</sup> <a name="fqdn" id="cdk-dev-cloud-constructs.GitlabConstruct.property.fqdn"></a>
+
+```typescript
+public readonly fqdn: string;
+```
+
+- *Type:* string
+
+---
+
+##### `mergedValues`<sup>Required</sup> <a name="mergedValues" id="cdk-dev-cloud-constructs.GitlabConstruct.property.mergedValues"></a>
+
+```typescript
+public readonly mergedValues: {[ key: string ]: any};
+```
+
+- *Type:* {[ key: string ]: any}
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="cdk-dev-cloud-constructs.GitlabConstruct.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+---
+
+##### `namespace`<sup>Required</sup> <a name="namespace" id="cdk-dev-cloud-constructs.GitlabConstruct.property.namespace"></a>
+
+```typescript
+public readonly namespace: string;
+```
+
+- *Type:* string
+
+---
+
+##### `values`<sup>Required</sup> <a name="values" id="cdk-dev-cloud-constructs.GitlabConstruct.property.values"></a>
+
+```typescript
+public readonly values: {[ key: string ]: any};
+```
+
+- *Type:* {[ key: string ]: any}
+
+---
+
+##### `version`<sup>Required</sup> <a name="version" id="cdk-dev-cloud-constructs.GitlabConstruct.property.version"></a>
+
+```typescript
+public readonly version: string;
+```
+
+- *Type:* string
+
+---
+
+##### `yamlValues`<sup>Required</sup> <a name="yamlValues" id="cdk-dev-cloud-constructs.GitlabConstruct.property.yamlValues"></a>
+
+```typescript
+public readonly yamlValues: {[ key: string ]: any};
+```
+
+- *Type:* {[ key: string ]: any}
+
+---
+
 
 ## Structs <a name="Structs" id="Structs"></a>
 
 ### GitlabProps <a name="GitlabProps" id="cdk-dev-cloud-constructs.GitlabProps"></a>
 
-Properties for the Gitlab construct.
+Properties for the GitLab Helm Chart construct.
 
 #### Initializer <a name="Initializer" id="cdk-dev-cloud-constructs.GitlabProps.Initializer"></a>
 
@@ -153,7 +256,45 @@ const gitlabProps: GitlabProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#cdk-dev-cloud-constructs.GitlabProps.property.domainName">domainName</a></code> | <code>string</code> | Gitlab full qualified domain name. |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabProps.property.cluster">cluster</a></code> | <code>aws-cdk-lib.aws_eks.ICluster</code> | Gitlab full qualified domain name. |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabProps.property.chartName">chartName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabProps.property.chartVersion">chartVersion</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabProps.property.domainName">domainName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabProps.property.namespace">namespace</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabProps.property.valuesOverride">valuesOverride</a></code> | <code>{[ key: string ]: string}</code> | *No description.* |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabProps.property.valuesYamlFile">valuesYamlFile</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `cluster`<sup>Required</sup> <a name="cluster" id="cdk-dev-cloud-constructs.GitlabProps.property.cluster"></a>
+
+```typescript
+public readonly cluster: ICluster;
+```
+
+- *Type:* aws-cdk-lib.aws_eks.ICluster
+
+Gitlab full qualified domain name.
+
+---
+
+##### `chartName`<sup>Optional</sup> <a name="chartName" id="cdk-dev-cloud-constructs.GitlabProps.property.chartName"></a>
+
+```typescript
+public readonly chartName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `chartVersion`<sup>Optional</sup> <a name="chartVersion" id="cdk-dev-cloud-constructs.GitlabProps.property.chartVersion"></a>
+
+```typescript
+public readonly chartVersion: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -165,7 +306,35 @@ public readonly domainName: string;
 
 - *Type:* string
 
-Gitlab full qualified domain name.
+---
+
+##### `namespace`<sup>Optional</sup> <a name="namespace" id="cdk-dev-cloud-constructs.GitlabProps.property.namespace"></a>
+
+```typescript
+public readonly namespace: string;
+```
+
+- *Type:* string
+
+---
+
+##### `valuesOverride`<sup>Optional</sup> <a name="valuesOverride" id="cdk-dev-cloud-constructs.GitlabProps.property.valuesOverride"></a>
+
+```typescript
+public readonly valuesOverride: {[ key: string ]: string};
+```
+
+- *Type:* {[ key: string ]: string}
+
+---
+
+##### `valuesYamlFile`<sup>Optional</sup> <a name="valuesYamlFile" id="cdk-dev-cloud-constructs.GitlabProps.property.valuesYamlFile"></a>
+
+```typescript
+public readonly valuesYamlFile: string;
+```
+
+- *Type:* string
 
 ---
 
