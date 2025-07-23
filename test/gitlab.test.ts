@@ -50,7 +50,7 @@ describe('gitlab-chart', () => {
       domainName: 'gitlab.internal',
       chartName: 'gitlab',
       chartVersion: '8.11.7',
-      valuesOverride: new Map().set('global.hosts.domain', 'test'),
+      valuesOverride: { 'global.hosts.domain': 'test' },
     };
 
     const testResource = new GitlabConstruct(stack, 'testGitlabChart', testProps);

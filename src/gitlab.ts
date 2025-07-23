@@ -18,7 +18,7 @@ export interface GitlabProps {
   readonly domainName?: string;
   readonly chartName?: string;
   readonly chartVersion?: string;
-  readonly valuesOverride?: Map<string, string>;
+  readonly valuesOverride?: { [key: string]: string };
   readonly valuesYamlFile?: string;
 }
 
@@ -69,16 +69,18 @@ export class GitlabConstruct extends Construct {
     this.yamlValues = props.valuesYamlFile? parse(readFileSync(props.valuesYamlFile, 'utf8')) : {};
     this.mergedValues = merge(this.defaultValues, this.yamlValues);
 
-    // overwrite each value given by dotted key path
-    for (let [key, value] of (props.valuesOverride ?? new Map())) {
-      const keys = key.split('.');
-      let values = this.mergedValues;
-      let key_part: string | undefined;
+    if ( props.valuesOverride ) {
+      for (let key in props.valuesOverride) {
+        const keys = key.split('.');
+        let values = this.mergedValues;
+        let key_part: string | undefined;
 
-      while (key_part = keys.shift()) {
-        if (keys.length == 0) {values[key_part] = value;} else if (values[key_part] === undefined) {values[key_part] = {};}
+        while (key_part = keys.shift()) {
+          if (keys.length == 0) {values[key_part] = props.valuesOverride[key];} else
+            if (values[key_part] === undefined) {values[key_part] = {};}
 
-        values = values[key_part];
+          values = values[key_part];
+        }
       }
     }
 
