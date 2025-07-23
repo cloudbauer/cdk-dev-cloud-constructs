@@ -84,7 +84,7 @@ const eksClusterBuilder = new typescript.TypeScriptProject({
   outdir: 'stack',
   releaseToNpm: true,
   release: true,
-  releaseTagPrefix: 'stack',
+  releaseTagPrefix: 'stack_',
 
   repository: 'https://github.com/' + GITHUB_USER + '/' + PROJECT_NAME,
   copyrightOwner: 'bitbauer',
