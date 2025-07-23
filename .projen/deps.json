@@ -90,6 +90,14 @@
       "type": "build"
     },
     {
+      "name": "ts-deepmerge",
+      "type": "bundled"
+    },
+    {
+      "name": "yaml",
+      "type": "bundled"
+    },
+    {
       "name": "aws-cdk-lib",
       "version": "^2.173.4",
       "type": "peer"

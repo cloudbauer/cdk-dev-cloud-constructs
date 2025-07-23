@@ -18,7 +18,10 @@ const eksChartsConstructs = new awscdk.AwsCdkConstructLibrary({
   deps: [
     'cdk-nag',
   ],
-
+  bundledDeps: [
+    'ts-deepmerge',
+    'yaml',
+  ],
   jest: true,
   jestOptions: {
     passWithNoTests: true,

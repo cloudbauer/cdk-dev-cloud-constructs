@@ -64,8 +64,14 @@
     "constructs": "^10.4.2"
   },
   "dependencies": {
-    "cdk-nag": "^2.36.43"
+    "cdk-nag": "^2.36.43",
+    "ts-deepmerge": "^7.0.3",
+    "yaml": "^2.8.0"
   },
+  "bundledDependencies": [
+    "ts-deepmerge",
+    "yaml"
+  ],
   "keywords": [
     "awscdk",
     "cdk",

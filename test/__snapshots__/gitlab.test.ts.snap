@@ -1,0 +1,2741 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`gitlab-chart c-default-props 1`] = `
+{
+  "Conditions": {
+    "EksFargateClusterHasEcrPublicDA4139A2": {
+      "Fn::Equals": [
+        {
+          "Ref": "AWS::Partition",
+        },
+        "aws",
+      ],
+    },
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "EksFargateCluster07FC3D2B": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcIGW873355B9",
+        "EksFargateClusterDefaultVpcPrivateSubnet1DefaultRouteFC74D52F",
+        "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableA89DA11A",
+        "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableAssociationD371B43F",
+        "EksFargateClusterDefaultVpcPrivateSubnet1Subnet053F522B",
+        "EksFargateClusterDefaultVpcPrivateSubnet2DefaultRoute9560F1B8",
+        "EksFargateClusterDefaultVpcPrivateSubnet2RouteTable5A33D66C",
+        "EksFargateClusterDefaultVpcPrivateSubnet2RouteTableAssociation15B80A6E",
+        "EksFargateClusterDefaultVpcPrivateSubnet2Subnet70E698AC",
+        "EksFargateClusterDefaultVpcPrivateSubnet3DefaultRoute6A9433AF",
+        "EksFargateClusterDefaultVpcPrivateSubnet3RouteTable15012281",
+        "EksFargateClusterDefaultVpcPrivateSubnet3RouteTableAssociation008742DE",
+        "EksFargateClusterDefaultVpcPrivateSubnet3Subnet7CFC5C44",
+        "EksFargateClusterDefaultVpcPublicSubnet1DefaultRoute0475531F",
+        "EksFargateClusterDefaultVpcPublicSubnet1EIPB5DAAC51",
+        "EksFargateClusterDefaultVpcPublicSubnet1NATGateway938DA6B5",
+        "EksFargateClusterDefaultVpcPublicSubnet1RouteTable65A86989",
+        "EksFargateClusterDefaultVpcPublicSubnet1RouteTableAssociationBA0B87CB",
+        "EksFargateClusterDefaultVpcPublicSubnet1Subnet0F8F4DE9",
+        "EksFargateClusterDefaultVpcPublicSubnet2DefaultRouteCD9E4CC8",
+        "EksFargateClusterDefaultVpcPublicSubnet2EIPA08BC91B",
+        "EksFargateClusterDefaultVpcPublicSubnet2NATGateway1E766B40",
+        "EksFargateClusterDefaultVpcPublicSubnet2RouteTableE3A07D36",
+        "EksFargateClusterDefaultVpcPublicSubnet2RouteTableAssociation8C0183DB",
+        "EksFargateClusterDefaultVpcPublicSubnet2Subnet68B17FF5",
+        "EksFargateClusterDefaultVpcPublicSubnet3DefaultRouteA9B45922",
+        "EksFargateClusterDefaultVpcPublicSubnet3EIP0D7D35B7",
+        "EksFargateClusterDefaultVpcPublicSubnet3NATGatewayFCBE46BE",
+        "EksFargateClusterDefaultVpcPublicSubnet3RouteTableE50EF8F8",
+        "EksFargateClusterDefaultVpcPublicSubnet3RouteTableAssociation3CACF627",
+        "EksFargateClusterDefaultVpcPublicSubnet3SubnetCE02D4AC",
+        "EksFargateClusterDefaultVpc2E432D8C",
+        "EksFargateClusterDefaultVpcVPCGWE43C2B57",
+        "EksFargateClusterCreationRoleDefaultPolicy57720159",
+        "EksFargateClusterCreationRole3BAC8A6F",
+      ],
+      "Properties": {
+        "AssumeRoleArn": {
+          "Fn::GetAtt": [
+            "EksFargateClusterCreationRole3BAC8A6F",
+            "Arn",
+          ],
+        },
+        "AttributesRevision": 3,
+        "Config": {
+          "accessConfig": {},
+          "kubernetesNetworkConfig": {
+            "ipFamily": "ipv4",
+          },
+          "resourcesVpcConfig": {
+            "endpointPrivateAccess": true,
+            "endpointPublicAccess": true,
+            "securityGroupIds": [
+              {
+                "Fn::GetAtt": [
+                  "EksFargateClusterControlPlaneSecurityGroup2F5FA7A4",
+                  "GroupId",
+                ],
+              },
+            ],
+            "subnetIds": [
+              {
+                "Ref": "EksFargateClusterDefaultVpcPublicSubnet1Subnet0F8F4DE9",
+              },
+              {
+                "Ref": "EksFargateClusterDefaultVpcPublicSubnet2Subnet68B17FF5",
+              },
+              {
+                "Ref": "EksFargateClusterDefaultVpcPublicSubnet3SubnetCE02D4AC",
+              },
+              {
+                "Ref": "EksFargateClusterDefaultVpcPrivateSubnet1Subnet053F522B",
+              },
+              {
+                "Ref": "EksFargateClusterDefaultVpcPrivateSubnet2Subnet70E698AC",
+              },
+              {
+                "Ref": "EksFargateClusterDefaultVpcPrivateSubnet3Subnet7CFC5C44",
+              },
+            ],
+          },
+          "roleArn": {
+            "Fn::GetAtt": [
+              "EksFargateClusterRole327FA8B1",
+              "Arn",
+            ],
+          },
+          "version": "1.31",
+        },
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+            "Outputs.testStackawscdkawseksClusterResourceProviderframeworkonEventE9BB4D2BArn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-Cluster",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "EksFargateClusterAwsAuthmanifestAEC8FAAF": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "EksFargateClusterKubectlReadyBarrier2FAD8674",
+      ],
+      "Properties": {
+        "ClusterName": {
+          "Ref": "EksFargateCluster07FC3D2B",
+        },
+        "Manifest": {
+          "Fn::Join": [
+            "",
+            [
+              "[{"apiVersion":"v1","kind":"ConfigMap","metadata":{"name":"aws-auth","namespace":"kube-system","labels":{"aws.cdk.eks/prune-c8a00bc8cfd7f8d45cb94bba594eea1dc2de6c7012":""}},"data":{"mapRoles":"[{\\"rolearn\\":\\"",
+              {
+                "Fn::GetAtt": [
+                  "EksFargateClusterfargateprofiledefaultPodExecutionRoleB2FD25FD",
+                  "Arn",
+                ],
+              },
+              "\\",\\"username\\":\\"system:node:{{SessionName}}\\",\\"groups\\":[\\"system:bootstrappers\\",\\"system:nodes\\",\\"system:node-proxier\\"]}]","mapUsers":"[]","mapAccounts":"[]"}}]",
+            ],
+          ],
+        },
+        "Overwrite": true,
+        "PruneLabel": "aws.cdk.eks/prune-c8a00bc8cfd7f8d45cb94bba594eea1dc2de6c7012",
+        "RoleArn": {
+          "Fn::GetAtt": [
+            "EksFargateClusterCreationRole3BAC8A6F",
+            "Arn",
+          ],
+        },
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.testStackawscdkawseksKubectlProviderframeworkonEvent78E97BF6Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "EksFargateClusterControlPlaneSecurityGroup2F5FA7A4": {
+      "Properties": {
+        "GroupDescription": "EKS Control Plane Security Group",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "EksFargateClusterCoreDnsComputeTypePatch45C8EFD8": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "EksFargateClusterKubectlReadyBarrier2FAD8674",
+      ],
+      "Properties": {
+        "ApplyPatchJson": "{"spec":{"template":{"metadata":{"annotations":{"eks.amazonaws.com/compute-type":"fargate"}}}}}",
+        "ClusterName": {
+          "Ref": "EksFargateCluster07FC3D2B",
+        },
+        "PatchType": "strategic",
+        "ResourceName": "deployment/coredns",
+        "ResourceNamespace": "kube-system",
+        "RestorePatchJson": "{"spec":{"template":{"metadata":{"annotations":{"eks.amazonaws.com/compute-type":"ec2"}}}}}",
+        "RoleArn": {
+          "Fn::GetAtt": [
+            "EksFargateClusterCreationRole3BAC8A6F",
+            "Arn",
+          ],
+        },
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.testStackawscdkawseksKubectlProviderframeworkonEvent78E97BF6Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesPatch",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "EksFargateClusterCreationRole3BAC8A6F": {
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcIGW873355B9",
+        "EksFargateClusterDefaultVpcPrivateSubnet1DefaultRouteFC74D52F",
+        "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableA89DA11A",
+        "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableAssociationD371B43F",
+        "EksFargateClusterDefaultVpcPrivateSubnet1Subnet053F522B",
+        "EksFargateClusterDefaultVpcPrivateSubnet2DefaultRoute9560F1B8",
+        "EksFargateClusterDefaultVpcPrivateSubnet2RouteTable5A33D66C",
+        "EksFargateClusterDefaultVpcPrivateSubnet2RouteTableAssociation15B80A6E",
+        "EksFargateClusterDefaultVpcPrivateSubnet2Subnet70E698AC",
+        "EksFargateClusterDefaultVpcPrivateSubnet3DefaultRoute6A9433AF",
+        "EksFargateClusterDefaultVpcPrivateSubnet3RouteTable15012281",
+        "EksFargateClusterDefaultVpcPrivateSubnet3RouteTableAssociation008742DE",
+        "EksFargateClusterDefaultVpcPrivateSubnet3Subnet7CFC5C44",
+        "EksFargateClusterDefaultVpcPublicSubnet1DefaultRoute0475531F",
+        "EksFargateClusterDefaultVpcPublicSubnet1EIPB5DAAC51",
+        "EksFargateClusterDefaultVpcPublicSubnet1NATGateway938DA6B5",
+        "EksFargateClusterDefaultVpcPublicSubnet1RouteTable65A86989",
+        "EksFargateClusterDefaultVpcPublicSubnet1RouteTableAssociationBA0B87CB",
+        "EksFargateClusterDefaultVpcPublicSubnet1Subnet0F8F4DE9",
+        "EksFargateClusterDefaultVpcPublicSubnet2DefaultRouteCD9E4CC8",
+        "EksFargateClusterDefaultVpcPublicSubnet2EIPA08BC91B",
+        "EksFargateClusterDefaultVpcPublicSubnet2NATGateway1E766B40",
+        "EksFargateClusterDefaultVpcPublicSubnet2RouteTableE3A07D36",
+        "EksFargateClusterDefaultVpcPublicSubnet2RouteTableAssociation8C0183DB",
+        "EksFargateClusterDefaultVpcPublicSubnet2Subnet68B17FF5",
+        "EksFargateClusterDefaultVpcPublicSubnet3DefaultRouteA9B45922",
+        "EksFargateClusterDefaultVpcPublicSubnet3EIP0D7D35B7",
+        "EksFargateClusterDefaultVpcPublicSubnet3NATGatewayFCBE46BE",
+        "EksFargateClusterDefaultVpcPublicSubnet3RouteTableE50EF8F8",
+        "EksFargateClusterDefaultVpcPublicSubnet3RouteTableAssociation3CACF627",
+        "EksFargateClusterDefaultVpcPublicSubnet3SubnetCE02D4AC",
+        "EksFargateClusterDefaultVpc2E432D8C",
+        "EksFargateClusterDefaultVpcVPCGWE43C2B57",
+      ],
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::GetAtt": [
+                    "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+                    "Outputs.testStackawscdkawseksClusterResourceProviderOnEventHandlerServiceRoleD221C8B4Arn",
+                  ],
+                },
+              },
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::GetAtt": [
+                    "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+                    "Outputs.testStackawscdkawseksClusterResourceProviderIsCompleteHandlerServiceRoleD84687D3Arn",
+                  ],
+                },
+              },
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::GetAtt": [
+                    "EksFargateClusterKubectlHandlerRole1C33FD06",
+                    "Arn",
+                  ],
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EksFargateClusterCreationRoleDefaultPolicy57720159": {
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcIGW873355B9",
+        "EksFargateClusterDefaultVpcPrivateSubnet1DefaultRouteFC74D52F",
+        "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableA89DA11A",
+        "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableAssociationD371B43F",
+        "EksFargateClusterDefaultVpcPrivateSubnet1Subnet053F522B",
+        "EksFargateClusterDefaultVpcPrivateSubnet2DefaultRoute9560F1B8",
+        "EksFargateClusterDefaultVpcPrivateSubnet2RouteTable5A33D66C",
+        "EksFargateClusterDefaultVpcPrivateSubnet2RouteTableAssociation15B80A6E",
+        "EksFargateClusterDefaultVpcPrivateSubnet2Subnet70E698AC",
+        "EksFargateClusterDefaultVpcPrivateSubnet3DefaultRoute6A9433AF",
+        "EksFargateClusterDefaultVpcPrivateSubnet3RouteTable15012281",
+        "EksFargateClusterDefaultVpcPrivateSubnet3RouteTableAssociation008742DE",
+        "EksFargateClusterDefaultVpcPrivateSubnet3Subnet7CFC5C44",
+        "EksFargateClusterDefaultVpcPublicSubnet1DefaultRoute0475531F",
+        "EksFargateClusterDefaultVpcPublicSubnet1EIPB5DAAC51",
+        "EksFargateClusterDefaultVpcPublicSubnet1NATGateway938DA6B5",
+        "EksFargateClusterDefaultVpcPublicSubnet1RouteTable65A86989",
+        "EksFargateClusterDefaultVpcPublicSubnet1RouteTableAssociationBA0B87CB",
+        "EksFargateClusterDefaultVpcPublicSubnet1Subnet0F8F4DE9",
+        "EksFargateClusterDefaultVpcPublicSubnet2DefaultRouteCD9E4CC8",
+        "EksFargateClusterDefaultVpcPublicSubnet2EIPA08BC91B",
+        "EksFargateClusterDefaultVpcPublicSubnet2NATGateway1E766B40",
+        "EksFargateClusterDefaultVpcPublicSubnet2RouteTableE3A07D36",
+        "EksFargateClusterDefaultVpcPublicSubnet2RouteTableAssociation8C0183DB",
+        "EksFargateClusterDefaultVpcPublicSubnet2Subnet68B17FF5",
+        "EksFargateClusterDefaultVpcPublicSubnet3DefaultRouteA9B45922",
+        "EksFargateClusterDefaultVpcPublicSubnet3EIP0D7D35B7",
+        "EksFargateClusterDefaultVpcPublicSubnet3NATGatewayFCBE46BE",
+        "EksFargateClusterDefaultVpcPublicSubnet3RouteTableE50EF8F8",
+        "EksFargateClusterDefaultVpcPublicSubnet3RouteTableAssociation3CACF627",
+        "EksFargateClusterDefaultVpcPublicSubnet3SubnetCE02D4AC",
+        "EksFargateClusterDefaultVpc2E432D8C",
+        "EksFargateClusterDefaultVpcVPCGWE43C2B57",
+      ],
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "iam:PassRole",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "EksFargateClusterRole327FA8B1",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": [
+                "eks:CreateCluster",
+                "eks:DescribeCluster",
+                "eks:DescribeUpdate",
+                "eks:DeleteCluster",
+                "eks:UpdateClusterVersion",
+                "eks:UpdateClusterConfig",
+                "eks:CreateFargateProfile",
+                "eks:TagResource",
+                "eks:UntagResource",
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                "*",
+              ],
+            },
+            {
+              "Action": [
+                "eks:DescribeFargateProfile",
+                "eks:DeleteFargateProfile",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": [
+                "iam:GetRole",
+                "iam:listAttachedRolePolicies",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": "iam:CreateServiceLinkedRole",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": [
+                "ec2:DescribeInstances",
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeRouteTables",
+                "ec2:DescribeDhcpOptions",
+                "ec2:DescribeVpcs",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": "iam:PassRole",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "EksFargateClusterfargateprofiledefaultPodExecutionRoleB2FD25FD",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "EksFargateClusterCreationRoleDefaultPolicy57720159",
+        "Roles": [
+          {
+            "Ref": "EksFargateClusterCreationRole3BAC8A6F",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "EksFargateClusterDefaultVpc2E432D8C": {
+      "Properties": {
+        "CidrBlock": "10.0.0.0/16",
+        "EnableDnsHostnames": true,
+        "EnableDnsSupport": true,
+        "InstanceTenancy": "default",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::VPC",
+    },
+    "EksFargateClusterDefaultVpcIGW873355B9": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::InternetGateway",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet1DefaultRouteFC74D52F": {
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet1NATGateway938DA6B5",
+        },
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableA89DA11A",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableA89DA11A": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/internal-elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PrivateSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableAssociationD371B43F": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableA89DA11A",
+        },
+        "SubnetId": {
+          "Ref": "EksFargateClusterDefaultVpcPrivateSubnet1Subnet053F522B",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet1Subnet053F522B": {
+      "Properties": {
+        "AvailabilityZone": "dummy1a",
+        "CidrBlock": "10.0.96.0/19",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          {
+            "Key": "kubernetes.io/role/internal-elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PrivateSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet2DefaultRoute9560F1B8": {
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet2NATGateway1E766B40",
+        },
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPrivateSubnet2RouteTable5A33D66C",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet2RouteTable5A33D66C": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/internal-elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PrivateSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet2RouteTableAssociation15B80A6E": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPrivateSubnet2RouteTable5A33D66C",
+        },
+        "SubnetId": {
+          "Ref": "EksFargateClusterDefaultVpcPrivateSubnet2Subnet70E698AC",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet2Subnet70E698AC": {
+      "Properties": {
+        "AvailabilityZone": "dummy1b",
+        "CidrBlock": "10.0.128.0/19",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          {
+            "Key": "kubernetes.io/role/internal-elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PrivateSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet3DefaultRoute6A9433AF": {
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet3NATGatewayFCBE46BE",
+        },
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPrivateSubnet3RouteTable15012281",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet3RouteTable15012281": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/internal-elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PrivateSubnet3",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet3RouteTableAssociation008742DE": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPrivateSubnet3RouteTable15012281",
+        },
+        "SubnetId": {
+          "Ref": "EksFargateClusterDefaultVpcPrivateSubnet3Subnet7CFC5C44",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet3Subnet7CFC5C44": {
+      "Properties": {
+        "AvailabilityZone": "dummy1c",
+        "CidrBlock": "10.0.160.0/19",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          {
+            "Key": "kubernetes.io/role/internal-elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PrivateSubnet3",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet1DefaultRoute0475531F": {
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcVPCGWE43C2B57",
+      ],
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "EksFargateClusterDefaultVpcIGW873355B9",
+        },
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet1RouteTable65A86989",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet1EIPB5DAAC51": {
+      "Properties": {
+        "Domain": "vpc",
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet1",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::EIP",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet1NATGateway938DA6B5": {
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcPublicSubnet1DefaultRoute0475531F",
+        "EksFargateClusterDefaultVpcPublicSubnet1RouteTableAssociationBA0B87CB",
+      ],
+      "Properties": {
+        "AllocationId": {
+          "Fn::GetAtt": [
+            "EksFargateClusterDefaultVpcPublicSubnet1EIPB5DAAC51",
+            "AllocationId",
+          ],
+        },
+        "SubnetId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet1Subnet0F8F4DE9",
+        },
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet1",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::NatGateway",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet1RouteTable65A86989": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet1RouteTableAssociationBA0B87CB": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet1RouteTable65A86989",
+        },
+        "SubnetId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet1Subnet0F8F4DE9",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet1Subnet0F8F4DE9": {
+      "Properties": {
+        "AvailabilityZone": "dummy1a",
+        "CidrBlock": "10.0.0.0/19",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet2DefaultRouteCD9E4CC8": {
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcVPCGWE43C2B57",
+      ],
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "EksFargateClusterDefaultVpcIGW873355B9",
+        },
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet2RouteTableE3A07D36",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet2EIPA08BC91B": {
+      "Properties": {
+        "Domain": "vpc",
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet2",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::EIP",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet2NATGateway1E766B40": {
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcPublicSubnet2DefaultRouteCD9E4CC8",
+        "EksFargateClusterDefaultVpcPublicSubnet2RouteTableAssociation8C0183DB",
+      ],
+      "Properties": {
+        "AllocationId": {
+          "Fn::GetAtt": [
+            "EksFargateClusterDefaultVpcPublicSubnet2EIPA08BC91B",
+            "AllocationId",
+          ],
+        },
+        "SubnetId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet2Subnet68B17FF5",
+        },
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet2",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::NatGateway",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet2RouteTableAssociation8C0183DB": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet2RouteTableE3A07D36",
+        },
+        "SubnetId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet2Subnet68B17FF5",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet2RouteTableE3A07D36": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet2Subnet68B17FF5": {
+      "Properties": {
+        "AvailabilityZone": "dummy1b",
+        "CidrBlock": "10.0.32.0/19",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet3DefaultRouteA9B45922": {
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcVPCGWE43C2B57",
+      ],
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "EksFargateClusterDefaultVpcIGW873355B9",
+        },
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet3RouteTableE50EF8F8",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet3EIP0D7D35B7": {
+      "Properties": {
+        "Domain": "vpc",
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet3",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::EIP",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet3NATGatewayFCBE46BE": {
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcPublicSubnet3DefaultRouteA9B45922",
+        "EksFargateClusterDefaultVpcPublicSubnet3RouteTableAssociation3CACF627",
+      ],
+      "Properties": {
+        "AllocationId": {
+          "Fn::GetAtt": [
+            "EksFargateClusterDefaultVpcPublicSubnet3EIP0D7D35B7",
+            "AllocationId",
+          ],
+        },
+        "SubnetId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet3SubnetCE02D4AC",
+        },
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet3",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::NatGateway",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet3RouteTableAssociation3CACF627": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet3RouteTableE50EF8F8",
+        },
+        "SubnetId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet3SubnetCE02D4AC",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet3RouteTableE50EF8F8": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet3",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet3SubnetCE02D4AC": {
+      "Properties": {
+        "AvailabilityZone": "dummy1c",
+        "CidrBlock": "10.0.64.0/19",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet3",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "EksFargateClusterDefaultVpcVPCGWE43C2B57": {
+      "Properties": {
+        "InternetGatewayId": {
+          "Ref": "EksFargateClusterDefaultVpcIGW873355B9",
+        },
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+    },
+    "EksFargateClusterKubectlHandlerRole1C33FD06": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole",
+              ],
+            ],
+          },
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+              ],
+            ],
+          },
+          {
+            "Fn::If": [
+              "EksFargateClusterHasEcrPublicDA4139A2",
+              {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly",
+                  ],
+                ],
+              },
+              {
+                "Ref": "AWS::NoValue",
+              },
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EksFargateClusterKubectlHandlerRoleDefaultPolicy31251719": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "eks:DescribeCluster",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "EksFargateCluster07FC3D2B",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "EksFargateClusterCreationRole3BAC8A6F",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "EksFargateClusterKubectlHandlerRoleDefaultPolicy31251719",
+        "Roles": [
+          {
+            "Ref": "EksFargateClusterKubectlHandlerRole1C33FD06",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "EksFargateClusterKubectlReadyBarrier2FAD8674": {
+      "DependsOn": [
+        "EksFargateClusterfargateprofiledefaultPodExecutionRoleB2FD25FD",
+        "EksFargateClusterfargateprofiledefaultE09EC374",
+        "EksFargateClusterCreationRoleDefaultPolicy57720159",
+        "EksFargateClusterCreationRole3BAC8A6F",
+        "EksFargateCluster07FC3D2B",
+      ],
+      "Properties": {
+        "Type": "String",
+        "Value": "aws:cdk:eks:kubectl-ready",
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "EksFargateClusterRole327FA8B1": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "eks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonEKSClusterPolicy",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EksFargateClusterfargateprofiledefaultE09EC374": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "AssumeRoleArn": {
+          "Fn::GetAtt": [
+            "EksFargateClusterCreationRole3BAC8A6F",
+            "Arn",
+          ],
+        },
+        "Config": {
+          "clusterName": {
+            "Ref": "EksFargateCluster07FC3D2B",
+          },
+          "podExecutionRoleArn": {
+            "Fn::GetAtt": [
+              "EksFargateClusterfargateprofiledefaultPodExecutionRoleB2FD25FD",
+              "Arn",
+            ],
+          },
+          "selectors": [
+            {
+              "namespace": "default",
+            },
+            {
+              "namespace": "kube-system",
+            },
+          ],
+        },
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+            "Outputs.testStackawscdkawseksClusterResourceProviderframeworkonEventE9BB4D2BArn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-FargateProfile",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "EksFargateClusterfargateprofiledefaultPodExecutionRoleB2FD25FD": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "eks-fargate-pods.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "TemplateURL": {
+          "Fn::Join": [
+            "",
+            [
+              "https://s3.eu-central-1.",
+              {
+                "Ref": "AWS::URLSuffix",
+              },
+              "/cdk-hnb659fds-assets-123567891-eu-central-1/0d74bc09c0c665f0179481cb2288b55a4d34335d113740837809aa15f9740e57.json",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::Stack",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcPrivateSubnet1DefaultRouteFC74D52F",
+        "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableAssociationD371B43F",
+        "EksFargateClusterDefaultVpcPrivateSubnet2DefaultRoute9560F1B8",
+        "EksFargateClusterDefaultVpcPrivateSubnet2RouteTableAssociation15B80A6E",
+        "EksFargateClusterDefaultVpcPrivateSubnet3DefaultRoute6A9433AF",
+        "EksFargateClusterDefaultVpcPrivateSubnet3RouteTableAssociation008742DE",
+        "EksFargateClusterKubectlHandlerRoleDefaultPolicy31251719",
+        "EksFargateClusterKubectlHandlerRole1C33FD06",
+      ],
+      "Properties": {
+        "Parameters": {
+          "referencetotestStackEksFargateCluster9B10F7B9ClusterSecurityGroupId": {
+            "Fn::GetAtt": [
+              "EksFargateCluster07FC3D2B",
+              "ClusterSecurityGroupId",
+            ],
+          },
+          "referencetotestStackEksFargateClusterDefaultVpcPrivateSubnet1Subnet5BCE3C6CRef": {
+            "Ref": "EksFargateClusterDefaultVpcPrivateSubnet1Subnet053F522B",
+          },
+          "referencetotestStackEksFargateClusterDefaultVpcPrivateSubnet2Subnet38A3E998Ref": {
+            "Ref": "EksFargateClusterDefaultVpcPrivateSubnet2Subnet70E698AC",
+          },
+          "referencetotestStackEksFargateClusterDefaultVpcPrivateSubnet3Subnet0C750BF0Ref": {
+            "Ref": "EksFargateClusterDefaultVpcPrivateSubnet3Subnet7CFC5C44",
+          },
+          "referencetotestStackEksFargateClusterKubectlHandlerRole93445CE0Arn": {
+            "Fn::GetAtt": [
+              "EksFargateClusterKubectlHandlerRole1C33FD06",
+              "Arn",
+            ],
+          },
+        },
+        "TemplateURL": {
+          "Fn::Join": [
+            "",
+            [
+              "https://s3.eu-central-1.",
+              {
+                "Ref": "AWS::URLSuffix",
+              },
+              "/cdk-hnb659fds-assets-123567891-eu-central-1/caa681d64d38ebddac923915867e10c2e3c4c3f8e7f8295a182d8b19a7cd6699.json",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::Stack",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "testGitlabCharttestGitlabChartChart656A915C": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "EksFargateClusterKubectlReadyBarrier2FAD8674",
+      ],
+      "Properties": {
+        "Chart": "gitlab",
+        "ClusterName": {
+          "Ref": "EksFargateCluster07FC3D2B",
+        },
+        "CreateNamespace": true,
+        "Namespace": "default",
+        "Release": "teststacktestgitlabcharttestgitlabchartchart4214b710",
+        "Repository": "https://charts.gitlab.io/",
+        "RoleArn": {
+          "Fn::GetAtt": [
+            "EksFargateClusterCreationRole3BAC8A6F",
+            "Arn",
+          ],
+        },
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.testStackawscdkawseksKubectlProviderframeworkonEvent78E97BF6Arn",
+          ],
+        },
+        "Values": "{"certmanager-issuer":{"email":"administrator@gitlab.example.com"},"global":{"hosts":{"domain":"gitlab.example.com"},"email":{"from":"gitlab@gitlab.example.com","display_name":"GitLab (gitlab.example.com)"}}}",
+        "Version": "latest",
+      },
+      "Type": "Custom::AWSCDK-EKS-HelmChart",
+      "UpdateReplacePolicy": "Delete",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`gitlab-chart cluster-custom-props 1`] = `
+{
+  "Conditions": {
+    "EksFargateClusterHasEcrPublicDA4139A2": {
+      "Fn::Equals": [
+        {
+          "Ref": "AWS::Partition",
+        },
+        "aws",
+      ],
+    },
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "EksFargateCluster07FC3D2B": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcIGW873355B9",
+        "EksFargateClusterDefaultVpcPrivateSubnet1DefaultRouteFC74D52F",
+        "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableA89DA11A",
+        "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableAssociationD371B43F",
+        "EksFargateClusterDefaultVpcPrivateSubnet1Subnet053F522B",
+        "EksFargateClusterDefaultVpcPrivateSubnet2DefaultRoute9560F1B8",
+        "EksFargateClusterDefaultVpcPrivateSubnet2RouteTable5A33D66C",
+        "EksFargateClusterDefaultVpcPrivateSubnet2RouteTableAssociation15B80A6E",
+        "EksFargateClusterDefaultVpcPrivateSubnet2Subnet70E698AC",
+        "EksFargateClusterDefaultVpcPrivateSubnet3DefaultRoute6A9433AF",
+        "EksFargateClusterDefaultVpcPrivateSubnet3RouteTable15012281",
+        "EksFargateClusterDefaultVpcPrivateSubnet3RouteTableAssociation008742DE",
+        "EksFargateClusterDefaultVpcPrivateSubnet3Subnet7CFC5C44",
+        "EksFargateClusterDefaultVpcPublicSubnet1DefaultRoute0475531F",
+        "EksFargateClusterDefaultVpcPublicSubnet1EIPB5DAAC51",
+        "EksFargateClusterDefaultVpcPublicSubnet1NATGateway938DA6B5",
+        "EksFargateClusterDefaultVpcPublicSubnet1RouteTable65A86989",
+        "EksFargateClusterDefaultVpcPublicSubnet1RouteTableAssociationBA0B87CB",
+        "EksFargateClusterDefaultVpcPublicSubnet1Subnet0F8F4DE9",
+        "EksFargateClusterDefaultVpcPublicSubnet2DefaultRouteCD9E4CC8",
+        "EksFargateClusterDefaultVpcPublicSubnet2EIPA08BC91B",
+        "EksFargateClusterDefaultVpcPublicSubnet2NATGateway1E766B40",
+        "EksFargateClusterDefaultVpcPublicSubnet2RouteTableE3A07D36",
+        "EksFargateClusterDefaultVpcPublicSubnet2RouteTableAssociation8C0183DB",
+        "EksFargateClusterDefaultVpcPublicSubnet2Subnet68B17FF5",
+        "EksFargateClusterDefaultVpcPublicSubnet3DefaultRouteA9B45922",
+        "EksFargateClusterDefaultVpcPublicSubnet3EIP0D7D35B7",
+        "EksFargateClusterDefaultVpcPublicSubnet3NATGatewayFCBE46BE",
+        "EksFargateClusterDefaultVpcPublicSubnet3RouteTableE50EF8F8",
+        "EksFargateClusterDefaultVpcPublicSubnet3RouteTableAssociation3CACF627",
+        "EksFargateClusterDefaultVpcPublicSubnet3SubnetCE02D4AC",
+        "EksFargateClusterDefaultVpc2E432D8C",
+        "EksFargateClusterDefaultVpcVPCGWE43C2B57",
+        "EksFargateClusterCreationRoleDefaultPolicy57720159",
+        "EksFargateClusterCreationRole3BAC8A6F",
+      ],
+      "Properties": {
+        "AssumeRoleArn": {
+          "Fn::GetAtt": [
+            "EksFargateClusterCreationRole3BAC8A6F",
+            "Arn",
+          ],
+        },
+        "AttributesRevision": 3,
+        "Config": {
+          "accessConfig": {},
+          "kubernetesNetworkConfig": {
+            "ipFamily": "ipv4",
+          },
+          "resourcesVpcConfig": {
+            "endpointPrivateAccess": true,
+            "endpointPublicAccess": true,
+            "securityGroupIds": [
+              {
+                "Fn::GetAtt": [
+                  "EksFargateClusterControlPlaneSecurityGroup2F5FA7A4",
+                  "GroupId",
+                ],
+              },
+            ],
+            "subnetIds": [
+              {
+                "Ref": "EksFargateClusterDefaultVpcPublicSubnet1Subnet0F8F4DE9",
+              },
+              {
+                "Ref": "EksFargateClusterDefaultVpcPublicSubnet2Subnet68B17FF5",
+              },
+              {
+                "Ref": "EksFargateClusterDefaultVpcPublicSubnet3SubnetCE02D4AC",
+              },
+              {
+                "Ref": "EksFargateClusterDefaultVpcPrivateSubnet1Subnet053F522B",
+              },
+              {
+                "Ref": "EksFargateClusterDefaultVpcPrivateSubnet2Subnet70E698AC",
+              },
+              {
+                "Ref": "EksFargateClusterDefaultVpcPrivateSubnet3Subnet7CFC5C44",
+              },
+            ],
+          },
+          "roleArn": {
+            "Fn::GetAtt": [
+              "EksFargateClusterRole327FA8B1",
+              "Arn",
+            ],
+          },
+          "version": "1.31",
+        },
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+            "Outputs.testStackawscdkawseksClusterResourceProviderframeworkonEventE9BB4D2BArn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-Cluster",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "EksFargateClusterAwsAuthmanifestAEC8FAAF": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "EksFargateClusterKubectlReadyBarrier2FAD8674",
+      ],
+      "Properties": {
+        "ClusterName": {
+          "Ref": "EksFargateCluster07FC3D2B",
+        },
+        "Manifest": {
+          "Fn::Join": [
+            "",
+            [
+              "[{"apiVersion":"v1","kind":"ConfigMap","metadata":{"name":"aws-auth","namespace":"kube-system","labels":{"aws.cdk.eks/prune-c8a00bc8cfd7f8d45cb94bba594eea1dc2de6c7012":""}},"data":{"mapRoles":"[{\\"rolearn\\":\\"",
+              {
+                "Fn::GetAtt": [
+                  "EksFargateClusterfargateprofiledefaultPodExecutionRoleB2FD25FD",
+                  "Arn",
+                ],
+              },
+              "\\",\\"username\\":\\"system:node:{{SessionName}}\\",\\"groups\\":[\\"system:bootstrappers\\",\\"system:nodes\\",\\"system:node-proxier\\"]}]","mapUsers":"[]","mapAccounts":"[]"}}]",
+            ],
+          ],
+        },
+        "Overwrite": true,
+        "PruneLabel": "aws.cdk.eks/prune-c8a00bc8cfd7f8d45cb94bba594eea1dc2de6c7012",
+        "RoleArn": {
+          "Fn::GetAtt": [
+            "EksFargateClusterCreationRole3BAC8A6F",
+            "Arn",
+          ],
+        },
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.testStackawscdkawseksKubectlProviderframeworkonEvent78E97BF6Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "EksFargateClusterControlPlaneSecurityGroup2F5FA7A4": {
+      "Properties": {
+        "GroupDescription": "EKS Control Plane Security Group",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "EksFargateClusterCoreDnsComputeTypePatch45C8EFD8": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "EksFargateClusterKubectlReadyBarrier2FAD8674",
+      ],
+      "Properties": {
+        "ApplyPatchJson": "{"spec":{"template":{"metadata":{"annotations":{"eks.amazonaws.com/compute-type":"fargate"}}}}}",
+        "ClusterName": {
+          "Ref": "EksFargateCluster07FC3D2B",
+        },
+        "PatchType": "strategic",
+        "ResourceName": "deployment/coredns",
+        "ResourceNamespace": "kube-system",
+        "RestorePatchJson": "{"spec":{"template":{"metadata":{"annotations":{"eks.amazonaws.com/compute-type":"ec2"}}}}}",
+        "RoleArn": {
+          "Fn::GetAtt": [
+            "EksFargateClusterCreationRole3BAC8A6F",
+            "Arn",
+          ],
+        },
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.testStackawscdkawseksKubectlProviderframeworkonEvent78E97BF6Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesPatch",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "EksFargateClusterCreationRole3BAC8A6F": {
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcIGW873355B9",
+        "EksFargateClusterDefaultVpcPrivateSubnet1DefaultRouteFC74D52F",
+        "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableA89DA11A",
+        "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableAssociationD371B43F",
+        "EksFargateClusterDefaultVpcPrivateSubnet1Subnet053F522B",
+        "EksFargateClusterDefaultVpcPrivateSubnet2DefaultRoute9560F1B8",
+        "EksFargateClusterDefaultVpcPrivateSubnet2RouteTable5A33D66C",
+        "EksFargateClusterDefaultVpcPrivateSubnet2RouteTableAssociation15B80A6E",
+        "EksFargateClusterDefaultVpcPrivateSubnet2Subnet70E698AC",
+        "EksFargateClusterDefaultVpcPrivateSubnet3DefaultRoute6A9433AF",
+        "EksFargateClusterDefaultVpcPrivateSubnet3RouteTable15012281",
+        "EksFargateClusterDefaultVpcPrivateSubnet3RouteTableAssociation008742DE",
+        "EksFargateClusterDefaultVpcPrivateSubnet3Subnet7CFC5C44",
+        "EksFargateClusterDefaultVpcPublicSubnet1DefaultRoute0475531F",
+        "EksFargateClusterDefaultVpcPublicSubnet1EIPB5DAAC51",
+        "EksFargateClusterDefaultVpcPublicSubnet1NATGateway938DA6B5",
+        "EksFargateClusterDefaultVpcPublicSubnet1RouteTable65A86989",
+        "EksFargateClusterDefaultVpcPublicSubnet1RouteTableAssociationBA0B87CB",
+        "EksFargateClusterDefaultVpcPublicSubnet1Subnet0F8F4DE9",
+        "EksFargateClusterDefaultVpcPublicSubnet2DefaultRouteCD9E4CC8",
+        "EksFargateClusterDefaultVpcPublicSubnet2EIPA08BC91B",
+        "EksFargateClusterDefaultVpcPublicSubnet2NATGateway1E766B40",
+        "EksFargateClusterDefaultVpcPublicSubnet2RouteTableE3A07D36",
+        "EksFargateClusterDefaultVpcPublicSubnet2RouteTableAssociation8C0183DB",
+        "EksFargateClusterDefaultVpcPublicSubnet2Subnet68B17FF5",
+        "EksFargateClusterDefaultVpcPublicSubnet3DefaultRouteA9B45922",
+        "EksFargateClusterDefaultVpcPublicSubnet3EIP0D7D35B7",
+        "EksFargateClusterDefaultVpcPublicSubnet3NATGatewayFCBE46BE",
+        "EksFargateClusterDefaultVpcPublicSubnet3RouteTableE50EF8F8",
+        "EksFargateClusterDefaultVpcPublicSubnet3RouteTableAssociation3CACF627",
+        "EksFargateClusterDefaultVpcPublicSubnet3SubnetCE02D4AC",
+        "EksFargateClusterDefaultVpc2E432D8C",
+        "EksFargateClusterDefaultVpcVPCGWE43C2B57",
+      ],
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::GetAtt": [
+                    "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+                    "Outputs.testStackawscdkawseksClusterResourceProviderOnEventHandlerServiceRoleD221C8B4Arn",
+                  ],
+                },
+              },
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::GetAtt": [
+                    "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+                    "Outputs.testStackawscdkawseksClusterResourceProviderIsCompleteHandlerServiceRoleD84687D3Arn",
+                  ],
+                },
+              },
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::GetAtt": [
+                    "EksFargateClusterKubectlHandlerRole1C33FD06",
+                    "Arn",
+                  ],
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EksFargateClusterCreationRoleDefaultPolicy57720159": {
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcIGW873355B9",
+        "EksFargateClusterDefaultVpcPrivateSubnet1DefaultRouteFC74D52F",
+        "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableA89DA11A",
+        "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableAssociationD371B43F",
+        "EksFargateClusterDefaultVpcPrivateSubnet1Subnet053F522B",
+        "EksFargateClusterDefaultVpcPrivateSubnet2DefaultRoute9560F1B8",
+        "EksFargateClusterDefaultVpcPrivateSubnet2RouteTable5A33D66C",
+        "EksFargateClusterDefaultVpcPrivateSubnet2RouteTableAssociation15B80A6E",
+        "EksFargateClusterDefaultVpcPrivateSubnet2Subnet70E698AC",
+        "EksFargateClusterDefaultVpcPrivateSubnet3DefaultRoute6A9433AF",
+        "EksFargateClusterDefaultVpcPrivateSubnet3RouteTable15012281",
+        "EksFargateClusterDefaultVpcPrivateSubnet3RouteTableAssociation008742DE",
+        "EksFargateClusterDefaultVpcPrivateSubnet3Subnet7CFC5C44",
+        "EksFargateClusterDefaultVpcPublicSubnet1DefaultRoute0475531F",
+        "EksFargateClusterDefaultVpcPublicSubnet1EIPB5DAAC51",
+        "EksFargateClusterDefaultVpcPublicSubnet1NATGateway938DA6B5",
+        "EksFargateClusterDefaultVpcPublicSubnet1RouteTable65A86989",
+        "EksFargateClusterDefaultVpcPublicSubnet1RouteTableAssociationBA0B87CB",
+        "EksFargateClusterDefaultVpcPublicSubnet1Subnet0F8F4DE9",
+        "EksFargateClusterDefaultVpcPublicSubnet2DefaultRouteCD9E4CC8",
+        "EksFargateClusterDefaultVpcPublicSubnet2EIPA08BC91B",
+        "EksFargateClusterDefaultVpcPublicSubnet2NATGateway1E766B40",
+        "EksFargateClusterDefaultVpcPublicSubnet2RouteTableE3A07D36",
+        "EksFargateClusterDefaultVpcPublicSubnet2RouteTableAssociation8C0183DB",
+        "EksFargateClusterDefaultVpcPublicSubnet2Subnet68B17FF5",
+        "EksFargateClusterDefaultVpcPublicSubnet3DefaultRouteA9B45922",
+        "EksFargateClusterDefaultVpcPublicSubnet3EIP0D7D35B7",
+        "EksFargateClusterDefaultVpcPublicSubnet3NATGatewayFCBE46BE",
+        "EksFargateClusterDefaultVpcPublicSubnet3RouteTableE50EF8F8",
+        "EksFargateClusterDefaultVpcPublicSubnet3RouteTableAssociation3CACF627",
+        "EksFargateClusterDefaultVpcPublicSubnet3SubnetCE02D4AC",
+        "EksFargateClusterDefaultVpc2E432D8C",
+        "EksFargateClusterDefaultVpcVPCGWE43C2B57",
+      ],
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "iam:PassRole",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "EksFargateClusterRole327FA8B1",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": [
+                "eks:CreateCluster",
+                "eks:DescribeCluster",
+                "eks:DescribeUpdate",
+                "eks:DeleteCluster",
+                "eks:UpdateClusterVersion",
+                "eks:UpdateClusterConfig",
+                "eks:CreateFargateProfile",
+                "eks:TagResource",
+                "eks:UntagResource",
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                "*",
+              ],
+            },
+            {
+              "Action": [
+                "eks:DescribeFargateProfile",
+                "eks:DeleteFargateProfile",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": [
+                "iam:GetRole",
+                "iam:listAttachedRolePolicies",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": "iam:CreateServiceLinkedRole",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": [
+                "ec2:DescribeInstances",
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeRouteTables",
+                "ec2:DescribeDhcpOptions",
+                "ec2:DescribeVpcs",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": "iam:PassRole",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "EksFargateClusterfargateprofiledefaultPodExecutionRoleB2FD25FD",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "EksFargateClusterCreationRoleDefaultPolicy57720159",
+        "Roles": [
+          {
+            "Ref": "EksFargateClusterCreationRole3BAC8A6F",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "EksFargateClusterDefaultVpc2E432D8C": {
+      "Properties": {
+        "CidrBlock": "10.0.0.0/16",
+        "EnableDnsHostnames": true,
+        "EnableDnsSupport": true,
+        "InstanceTenancy": "default",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::VPC",
+    },
+    "EksFargateClusterDefaultVpcIGW873355B9": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::InternetGateway",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet1DefaultRouteFC74D52F": {
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet1NATGateway938DA6B5",
+        },
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableA89DA11A",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableA89DA11A": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/internal-elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PrivateSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableAssociationD371B43F": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableA89DA11A",
+        },
+        "SubnetId": {
+          "Ref": "EksFargateClusterDefaultVpcPrivateSubnet1Subnet053F522B",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet1Subnet053F522B": {
+      "Properties": {
+        "AvailabilityZone": "dummy1a",
+        "CidrBlock": "10.0.96.0/19",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          {
+            "Key": "kubernetes.io/role/internal-elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PrivateSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet2DefaultRoute9560F1B8": {
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet2NATGateway1E766B40",
+        },
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPrivateSubnet2RouteTable5A33D66C",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet2RouteTable5A33D66C": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/internal-elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PrivateSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet2RouteTableAssociation15B80A6E": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPrivateSubnet2RouteTable5A33D66C",
+        },
+        "SubnetId": {
+          "Ref": "EksFargateClusterDefaultVpcPrivateSubnet2Subnet70E698AC",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet2Subnet70E698AC": {
+      "Properties": {
+        "AvailabilityZone": "dummy1b",
+        "CidrBlock": "10.0.128.0/19",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          {
+            "Key": "kubernetes.io/role/internal-elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PrivateSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet3DefaultRoute6A9433AF": {
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet3NATGatewayFCBE46BE",
+        },
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPrivateSubnet3RouteTable15012281",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet3RouteTable15012281": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/internal-elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PrivateSubnet3",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet3RouteTableAssociation008742DE": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPrivateSubnet3RouteTable15012281",
+        },
+        "SubnetId": {
+          "Ref": "EksFargateClusterDefaultVpcPrivateSubnet3Subnet7CFC5C44",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "EksFargateClusterDefaultVpcPrivateSubnet3Subnet7CFC5C44": {
+      "Properties": {
+        "AvailabilityZone": "dummy1c",
+        "CidrBlock": "10.0.160.0/19",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          {
+            "Key": "kubernetes.io/role/internal-elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PrivateSubnet3",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet1DefaultRoute0475531F": {
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcVPCGWE43C2B57",
+      ],
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "EksFargateClusterDefaultVpcIGW873355B9",
+        },
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet1RouteTable65A86989",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet1EIPB5DAAC51": {
+      "Properties": {
+        "Domain": "vpc",
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet1",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::EIP",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet1NATGateway938DA6B5": {
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcPublicSubnet1DefaultRoute0475531F",
+        "EksFargateClusterDefaultVpcPublicSubnet1RouteTableAssociationBA0B87CB",
+      ],
+      "Properties": {
+        "AllocationId": {
+          "Fn::GetAtt": [
+            "EksFargateClusterDefaultVpcPublicSubnet1EIPB5DAAC51",
+            "AllocationId",
+          ],
+        },
+        "SubnetId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet1Subnet0F8F4DE9",
+        },
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet1",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::NatGateway",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet1RouteTable65A86989": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet1RouteTableAssociationBA0B87CB": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet1RouteTable65A86989",
+        },
+        "SubnetId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet1Subnet0F8F4DE9",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet1Subnet0F8F4DE9": {
+      "Properties": {
+        "AvailabilityZone": "dummy1a",
+        "CidrBlock": "10.0.0.0/19",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet2DefaultRouteCD9E4CC8": {
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcVPCGWE43C2B57",
+      ],
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "EksFargateClusterDefaultVpcIGW873355B9",
+        },
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet2RouteTableE3A07D36",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet2EIPA08BC91B": {
+      "Properties": {
+        "Domain": "vpc",
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet2",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::EIP",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet2NATGateway1E766B40": {
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcPublicSubnet2DefaultRouteCD9E4CC8",
+        "EksFargateClusterDefaultVpcPublicSubnet2RouteTableAssociation8C0183DB",
+      ],
+      "Properties": {
+        "AllocationId": {
+          "Fn::GetAtt": [
+            "EksFargateClusterDefaultVpcPublicSubnet2EIPA08BC91B",
+            "AllocationId",
+          ],
+        },
+        "SubnetId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet2Subnet68B17FF5",
+        },
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet2",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::NatGateway",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet2RouteTableAssociation8C0183DB": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet2RouteTableE3A07D36",
+        },
+        "SubnetId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet2Subnet68B17FF5",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet2RouteTableE3A07D36": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet2Subnet68B17FF5": {
+      "Properties": {
+        "AvailabilityZone": "dummy1b",
+        "CidrBlock": "10.0.32.0/19",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet3DefaultRouteA9B45922": {
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcVPCGWE43C2B57",
+      ],
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "EksFargateClusterDefaultVpcIGW873355B9",
+        },
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet3RouteTableE50EF8F8",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet3EIP0D7D35B7": {
+      "Properties": {
+        "Domain": "vpc",
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet3",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::EIP",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet3NATGatewayFCBE46BE": {
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcPublicSubnet3DefaultRouteA9B45922",
+        "EksFargateClusterDefaultVpcPublicSubnet3RouteTableAssociation3CACF627",
+      ],
+      "Properties": {
+        "AllocationId": {
+          "Fn::GetAtt": [
+            "EksFargateClusterDefaultVpcPublicSubnet3EIP0D7D35B7",
+            "AllocationId",
+          ],
+        },
+        "SubnetId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet3SubnetCE02D4AC",
+        },
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet3",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::NatGateway",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet3RouteTableAssociation3CACF627": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet3RouteTableE50EF8F8",
+        },
+        "SubnetId": {
+          "Ref": "EksFargateClusterDefaultVpcPublicSubnet3SubnetCE02D4AC",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet3RouteTableE50EF8F8": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet3",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "EksFargateClusterDefaultVpcPublicSubnet3SubnetCE02D4AC": {
+      "Properties": {
+        "AvailabilityZone": "dummy1c",
+        "CidrBlock": "10.0.64.0/19",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          {
+            "Key": "Name",
+            "Value": "testStack/EksFargateCluster/DefaultVpc/PublicSubnet3",
+          },
+        ],
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "EksFargateClusterDefaultVpcVPCGWE43C2B57": {
+      "Properties": {
+        "InternetGatewayId": {
+          "Ref": "EksFargateClusterDefaultVpcIGW873355B9",
+        },
+        "VpcId": {
+          "Ref": "EksFargateClusterDefaultVpc2E432D8C",
+        },
+      },
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+    },
+    "EksFargateClusterKubectlHandlerRole1C33FD06": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole",
+              ],
+            ],
+          },
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+              ],
+            ],
+          },
+          {
+            "Fn::If": [
+              "EksFargateClusterHasEcrPublicDA4139A2",
+              {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly",
+                  ],
+                ],
+              },
+              {
+                "Ref": "AWS::NoValue",
+              },
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EksFargateClusterKubectlHandlerRoleDefaultPolicy31251719": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "eks:DescribeCluster",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "EksFargateCluster07FC3D2B",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "EksFargateClusterCreationRole3BAC8A6F",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "EksFargateClusterKubectlHandlerRoleDefaultPolicy31251719",
+        "Roles": [
+          {
+            "Ref": "EksFargateClusterKubectlHandlerRole1C33FD06",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "EksFargateClusterKubectlReadyBarrier2FAD8674": {
+      "DependsOn": [
+        "EksFargateClusterfargateprofiledefaultPodExecutionRoleB2FD25FD",
+        "EksFargateClusterfargateprofiledefaultE09EC374",
+        "EksFargateClusterCreationRoleDefaultPolicy57720159",
+        "EksFargateClusterCreationRole3BAC8A6F",
+        "EksFargateCluster07FC3D2B",
+      ],
+      "Properties": {
+        "Type": "String",
+        "Value": "aws:cdk:eks:kubectl-ready",
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "EksFargateClusterRole327FA8B1": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "eks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonEKSClusterPolicy",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EksFargateClusterfargateprofiledefaultE09EC374": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "AssumeRoleArn": {
+          "Fn::GetAtt": [
+            "EksFargateClusterCreationRole3BAC8A6F",
+            "Arn",
+          ],
+        },
+        "Config": {
+          "clusterName": {
+            "Ref": "EksFargateCluster07FC3D2B",
+          },
+          "podExecutionRoleArn": {
+            "Fn::GetAtt": [
+              "EksFargateClusterfargateprofiledefaultPodExecutionRoleB2FD25FD",
+              "Arn",
+            ],
+          },
+          "selectors": [
+            {
+              "namespace": "default",
+            },
+            {
+              "namespace": "kube-system",
+            },
+          ],
+        },
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+            "Outputs.testStackawscdkawseksClusterResourceProviderframeworkonEventE9BB4D2BArn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-FargateProfile",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "EksFargateClusterfargateprofiledefaultPodExecutionRoleB2FD25FD": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "eks-fargate-pods.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "TemplateURL": {
+          "Fn::Join": [
+            "",
+            [
+              "https://s3.eu-central-1.",
+              {
+                "Ref": "AWS::URLSuffix",
+              },
+              "/cdk-hnb659fds-assets-123567891-eu-central-1/0d74bc09c0c665f0179481cb2288b55a4d34335d113740837809aa15f9740e57.json",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::Stack",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "EksFargateClusterDefaultVpcPrivateSubnet1DefaultRouteFC74D52F",
+        "EksFargateClusterDefaultVpcPrivateSubnet1RouteTableAssociationD371B43F",
+        "EksFargateClusterDefaultVpcPrivateSubnet2DefaultRoute9560F1B8",
+        "EksFargateClusterDefaultVpcPrivateSubnet2RouteTableAssociation15B80A6E",
+        "EksFargateClusterDefaultVpcPrivateSubnet3DefaultRoute6A9433AF",
+        "EksFargateClusterDefaultVpcPrivateSubnet3RouteTableAssociation008742DE",
+        "EksFargateClusterKubectlHandlerRoleDefaultPolicy31251719",
+        "EksFargateClusterKubectlHandlerRole1C33FD06",
+      ],
+      "Properties": {
+        "Parameters": {
+          "referencetotestStackEksFargateCluster9B10F7B9ClusterSecurityGroupId": {
+            "Fn::GetAtt": [
+              "EksFargateCluster07FC3D2B",
+              "ClusterSecurityGroupId",
+            ],
+          },
+          "referencetotestStackEksFargateClusterDefaultVpcPrivateSubnet1Subnet5BCE3C6CRef": {
+            "Ref": "EksFargateClusterDefaultVpcPrivateSubnet1Subnet053F522B",
+          },
+          "referencetotestStackEksFargateClusterDefaultVpcPrivateSubnet2Subnet38A3E998Ref": {
+            "Ref": "EksFargateClusterDefaultVpcPrivateSubnet2Subnet70E698AC",
+          },
+          "referencetotestStackEksFargateClusterDefaultVpcPrivateSubnet3Subnet0C750BF0Ref": {
+            "Ref": "EksFargateClusterDefaultVpcPrivateSubnet3Subnet7CFC5C44",
+          },
+          "referencetotestStackEksFargateClusterKubectlHandlerRole93445CE0Arn": {
+            "Fn::GetAtt": [
+              "EksFargateClusterKubectlHandlerRole1C33FD06",
+              "Arn",
+            ],
+          },
+        },
+        "TemplateURL": {
+          "Fn::Join": [
+            "",
+            [
+              "https://s3.eu-central-1.",
+              {
+                "Ref": "AWS::URLSuffix",
+              },
+              "/cdk-hnb659fds-assets-123567891-eu-central-1/caa681d64d38ebddac923915867e10c2e3c4c3f8e7f8295a182d8b19a7cd6699.json",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::Stack",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "testGitlabCharttestGitlabChartChart656A915C": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "EksFargateClusterKubectlReadyBarrier2FAD8674",
+      ],
+      "Properties": {
+        "Chart": "gitlab",
+        "ClusterName": {
+          "Ref": "EksFargateCluster07FC3D2B",
+        },
+        "CreateNamespace": true,
+        "Namespace": "gitlab",
+        "Release": "teststacktestgitlabcharttestgitlabchartchart4214b710",
+        "Repository": "https://charts.gitlab.io/",
+        "RoleArn": {
+          "Fn::GetAtt": [
+            "EksFargateClusterCreationRole3BAC8A6F",
+            "Arn",
+          ],
+        },
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.testStackawscdkawseksKubectlProviderframeworkonEvent78E97BF6Arn",
+          ],
+        },
+        "Values": "{"certmanager-issuer":{"email":"administrator@gitlab.internal"},"global":{"hosts":{"domain":"test"},"email":{"from":"gitlab@gitlab.internal","display_name":"GitLab (gitlab.internal)"}}}",
+        "Version": "8.11.7",
+      },
+      "Type": "Custom::AWSCDK-EKS-HelmChart",
+      "UpdateReplacePolicy": "Delete",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
