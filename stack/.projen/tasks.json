@@ -29,7 +29,7 @@
         "CHANGELOG": "dist/changelog.md",
         "BUMPFILE": "dist/version.txt",
         "RELEASETAG": "dist/releasetag.txt",
-        "RELEASE_TAG_PREFIX": "",
+        "RELEASE_TAG_PREFIX": "stack",
         "BUMP_PACKAGE": "commit-and-tag-version@^12"
       },
       "steps": [
@@ -117,7 +117,8 @@
       "name": "release",
       "description": "Prepare a release from \"main\" branch",
       "env": {
-        "RELEASE": "true"
+        "RELEASE": "true",
+        "RELEASE_TAG_PREFIX": "stack"
       },
       "steps": [
         {
@@ -167,7 +168,7 @@
         "CHANGELOG": "dist/changelog.md",
         "BUMPFILE": "dist/version.txt",
         "RELEASETAG": "dist/releasetag.txt",
-        "RELEASE_TAG_PREFIX": "",
+        "RELEASE_TAG_PREFIX": "stack",
         "BUMP_PACKAGE": "commit-and-tag-version@^12"
       },
       "steps": [
