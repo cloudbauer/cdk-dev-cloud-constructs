@@ -16,7 +16,7 @@ export class TeamPlatform extends blueprints.teams.PlatformTeam {
     super({
       name: 'platform',
       users: [
-        new ArnPrincipal(`arn:aws:iam::${accountID}:assumed-role/AWSReservedSSO_AWSAdministratorAccess_*`)
+        new ArnPrincipal(`arn:aws:iam::${accountID}:assumed-role/AWSReservedSSO_AWSAdministratorAccess_*`),
       ],
     });
   }
