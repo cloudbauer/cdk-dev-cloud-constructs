@@ -132,7 +132,7 @@ export class EksClusterStackBuilder extends blueprints.stacks.BlueprintBuilder {
           ec2.InstanceType.of(instance_class, size),
         ),
       ).flat();
-    const clusterMasterRole: IRole = blueprints.getNamedResource('master-role'); 
+    const clusterMasterRole: IRole = blueprints.getNamedResource('master-role');
     const clusterProvider = new blueprints.GenericClusterProvider({
       version: mergedOptions.kubernetesVersion,
       mastersRole: clusterMasterRole,
