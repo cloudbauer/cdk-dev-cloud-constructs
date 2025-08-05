@@ -64,7 +64,7 @@
     "constructs": "^10.4.2"
   },
   "dependencies": {
-    "cdk-nag": "^2.36.50",
+    "cdk-nag": "^2.36.54",
     "ts-deepmerge": "^7.0.3",
     "yaml": "^2.8.0"
   },
