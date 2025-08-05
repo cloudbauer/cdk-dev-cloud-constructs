@@ -17,8 +17,6 @@ const eksChartsConstructs = new awscdk.AwsCdkConstructLibrary({
   keywords: ['awscdk', 'eks', 'kubernetes', 'gitlab', 'jenkins'],
   deps: [
     'cdk-nag',
-    'ts-deepmerge',
-    'yaml',
   ],
   bundledDeps: [
     'ts-deepmerge',
