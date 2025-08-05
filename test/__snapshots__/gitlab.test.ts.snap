@@ -1299,7 +1299,7 @@ exports[`gitlab-chart c-default-props 1`] = `
               {
                 "Ref": "AWS::URLSuffix",
               },
-              "/cdk-hnb659fds-assets-123567891-eu-central-1/682f831d1c8127b12df587c69773105729aa1980ca2f5e4857ff9cddf86f73c8.json",
+              "/cdk-hnb659fds-assets-123567891-eu-central-1/caa681d64d38ebddac923915867e10c2e3c4c3f8e7f8295a182d8b19a7cd6699.json",
             ],
           ],
         },
@@ -2669,7 +2669,7 @@ exports[`gitlab-chart cluster-custom-props 1`] = `
               {
                 "Ref": "AWS::URLSuffix",
               },
-              "/cdk-hnb659fds-assets-123567891-eu-central-1/682f831d1c8127b12df587c69773105729aa1980ca2f5e4857ff9cddf86f73c8.json",
+              "/cdk-hnb659fds-assets-123567891-eu-central-1/caa681d64d38ebddac923915867e10c2e3c4c3f8e7f8295a182d8b19a7cd6699.json",
             ],
           ],
         },
