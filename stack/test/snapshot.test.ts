@@ -1,8 +1,8 @@
-import { App } from 'aws-cdk-lib';
 import { CreateRoleProvider } from '@aws-quickstart/eks-blueprints';
+import { App } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
-import { EksClusterStackBuilder, PlatformTeamByUsers } from '../src';
 import { ArnPrincipal, ManagedPolicy } from 'aws-cdk-lib/aws-iam';
+import { EksClusterStackBuilder, PlatformTeamByUsers } from '../src';
 
 jest.useFakeTimers(); // speed-up test execution
 
@@ -19,7 +19,7 @@ describe('synth correctly', () => {
       .resourceProvider('master-role',
         new CreateRoleProvider('master-role',
           new ArnPrincipal(`arn:aws:iam::${app.account}:root`),
-          [ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess')]
+          [ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess')],
         ))
       .teams(new PlatformTeamByUsers( [`arn:aws:iam::${app.account}:user/my-user`] ))
       .build(app, 'snapshot-stack');
