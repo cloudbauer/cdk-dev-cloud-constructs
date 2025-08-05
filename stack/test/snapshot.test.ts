@@ -1,22 +1,27 @@
-import * as cdk from 'aws-cdk-lib';
+import { App } from 'aws-cdk-lib';
+import { CreateRoleProvider } from '@aws-quickstart/eks-blueprints';
 import { Template } from 'aws-cdk-lib/assertions';
-import { EksClusterStackBuilder, TeamPlatform } from '../src';
-// import { logger } from '@aws-quickstart/eks-blueprints/dist/utils/log-utils';
+import { EksClusterStackBuilder, PlatformTeamByUsers } from '../src';
+import { ArnPrincipal, ManagedPolicy } from 'aws-cdk-lib/aws-iam';
 
-jest.useFakeTimers();
+jest.useFakeTimers(); // speed-up test execution
 
 describe('synth correctly', () => {
 
   test('Stack creation matches snapshot', () => {
-    // logger.info("*");
-    const app = new cdk.App();
+    const app = new App();
 
     const stackbuilder = EksClusterStackBuilder.builder({ domainName: 'snapshot.internal' });
 
     const stack = stackbuilder
-      .account('123567891')
-      .region('eu-central-1')
-      .teams(new TeamPlatform( '123567891' ))
+      .account(app.account)
+      .region(app.region)
+      .resourceProvider('master-role',
+        new CreateRoleProvider('master-role',
+          new ArnPrincipal(`arn:aws:iam::${app.account}:root`),
+          [ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess')]
+        ))
+      .teams(new PlatformTeamByUsers( [`arn:aws:iam::${app.account}:user/my-user`] ))
       .build(app, 'snapshot-stack');
 
     expect(stackbuilder).toBeDefined();

@@ -13,6 +13,130 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
     },
   },
   "Description": "Blueprints tracking (qs-1s1r465hk)",
+  "Mappings": {
+    "LatestNodeRuntimeMap": {
+      "af-south-1": {
+        "value": "nodejs20.x",
+      },
+      "ap-east-1": {
+        "value": "nodejs20.x",
+      },
+      "ap-northeast-1": {
+        "value": "nodejs20.x",
+      },
+      "ap-northeast-2": {
+        "value": "nodejs20.x",
+      },
+      "ap-northeast-3": {
+        "value": "nodejs20.x",
+      },
+      "ap-south-1": {
+        "value": "nodejs20.x",
+      },
+      "ap-south-2": {
+        "value": "nodejs20.x",
+      },
+      "ap-southeast-1": {
+        "value": "nodejs20.x",
+      },
+      "ap-southeast-2": {
+        "value": "nodejs20.x",
+      },
+      "ap-southeast-3": {
+        "value": "nodejs20.x",
+      },
+      "ap-southeast-4": {
+        "value": "nodejs20.x",
+      },
+      "ap-southeast-5": {
+        "value": "nodejs20.x",
+      },
+      "ap-southeast-7": {
+        "value": "nodejs20.x",
+      },
+      "ca-central-1": {
+        "value": "nodejs20.x",
+      },
+      "ca-west-1": {
+        "value": "nodejs20.x",
+      },
+      "cn-north-1": {
+        "value": "nodejs18.x",
+      },
+      "cn-northwest-1": {
+        "value": "nodejs18.x",
+      },
+      "eu-central-1": {
+        "value": "nodejs20.x",
+      },
+      "eu-central-2": {
+        "value": "nodejs20.x",
+      },
+      "eu-isoe-west-1": {
+        "value": "nodejs18.x",
+      },
+      "eu-north-1": {
+        "value": "nodejs20.x",
+      },
+      "eu-south-1": {
+        "value": "nodejs20.x",
+      },
+      "eu-south-2": {
+        "value": "nodejs20.x",
+      },
+      "eu-west-1": {
+        "value": "nodejs20.x",
+      },
+      "eu-west-2": {
+        "value": "nodejs20.x",
+      },
+      "eu-west-3": {
+        "value": "nodejs20.x",
+      },
+      "il-central-1": {
+        "value": "nodejs20.x",
+      },
+      "me-central-1": {
+        "value": "nodejs20.x",
+      },
+      "me-south-1": {
+        "value": "nodejs20.x",
+      },
+      "mx-central-1": {
+        "value": "nodejs20.x",
+      },
+      "sa-east-1": {
+        "value": "nodejs20.x",
+      },
+      "us-east-1": {
+        "value": "nodejs20.x",
+      },
+      "us-east-2": {
+        "value": "nodejs20.x",
+      },
+      "us-gov-east-1": {
+        "value": "nodejs18.x",
+      },
+      "us-gov-west-1": {
+        "value": "nodejs18.x",
+      },
+      "us-iso-east-1": {
+        "value": "nodejs18.x",
+      },
+      "us-iso-west-1": {
+        "value": "nodejs18.x",
+      },
+      "us-isob-east-1": {
+        "value": "nodejs18.x",
+      },
+      "us-west-1": {
+        "value": "nodejs20.x",
+      },
+      "us-west-2": {
+        "value": "nodejs20.x",
+      },
+    },
+  },
   "Outputs": {
     "snapshotstackClusterNameE9FA4DD0": {
       "Value": {
@@ -28,10 +152,14 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
             {
               "Ref": "snapshotstack046915C2",
             },
-            " --region eu-central-1 --role-arn ",
+            " --region ",
+            {
+              "Ref": "AWS::Region",
+            },
+            " --role-arn ",
             {
               "Fn::GetAtt": [
-                "snapshotstackAccessRole4EF6095C",
+                "masterroleEF831F2F",
                 "Arn",
               ],
             },
@@ -48,10 +176,14 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
             {
               "Ref": "snapshotstack046915C2",
             },
-            " --region eu-central-1 --role-arn ",
+            " --region ",
+            {
+              "Ref": "AWS::Region",
+            },
+            " --role-arn ",
             {
               "Fn::GetAtt": [
-                "snapshotstackAccessRole4EF6095C",
+                "masterroleEF831F2F",
                 "Arn",
               ],
             },
@@ -74,7 +206,9 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
       ],
       "Properties": {
         "Code": {
-          "S3Bucket": "cdk-hnb659fds-assets-123567891-eu-central-1",
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
           "S3Key": "c398d076c966a47ee4ef862fbaf5ea530bf035b867a0195292c99f77b323ed80.zip",
         },
         "Handler": "__entrypoint__.handler",
@@ -85,7 +219,15 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs20.x",
+        "Runtime": {
+          "Fn::FindInMap": [
+            "LatestNodeRuntimeMap",
+            {
+              "Ref": "AWS::Region",
+            },
+            "value",
+          ],
+        },
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -118,7 +260,9 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
       ],
       "Properties": {
         "Code": {
-          "S3Bucket": "cdk-hnb659fds-assets-123567891-eu-central-1",
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
           "S3Key": "2926656cdb97b26d98f8b957b0d3f7326b458679745f2817e50333a21767350c.zip",
         },
         "Handler": "__entrypoint__.handler",
@@ -129,7 +273,15 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs20.x",
+        "Runtime": {
+          "Fn::FindInMap": [
+            "LatestNodeRuntimeMap",
+            {
+              "Ref": "AWS::Region",
+            },
+            "value",
+          ],
+        },
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
@@ -184,11 +336,19 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
           "Fn::Join": [
             "",
             [
-              "https://s3.eu-central-1.",
+              "https://s3.",
+              {
+                "Ref": "AWS::Region",
+              },
+              ".",
               {
                 "Ref": "AWS::URLSuffix",
               },
-              "/cdk-hnb659fds-assets-123567891-eu-central-1/671f5ecdf0bb9474c8372eb8fff10b0f7fd04d71654d39390d04c842a84b03c0.json",
+              "/",
+              {
+                "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+              },
+              "/b04be272cf4ec7185683787e13a5cee220efd4067bfa245a9a58ef4d4bbfa28c.json",
             ],
           ],
         },
@@ -203,8 +363,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet1RouteTableAssociationE056EDF8",
         "snapshotstackvpcPrivateSubnet2DefaultRouteB695AA9D",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
         "snapshotstackKubectlHandlerRoleDefaultPolicyD36304B0",
         "snapshotstackKubectlHandlerRole092B5D6C",
       ],
@@ -231,19 +389,24 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
           "referencetosnapshotstacksnapshotstackvpcPrivateSubnet2Subnet594F5ACARef": {
             "Ref": "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
           },
-          "referencetosnapshotstacksnapshotstackvpcPrivateSubnet3SubnetAFEF6C79Ref": {
-            "Ref": "snapshotstackvpcPrivateSubnet3Subnet9021C226",
-          },
         },
         "TemplateURL": {
           "Fn::Join": [
             "",
             [
-              "https://s3.eu-central-1.",
+              "https://s3.",
+              {
+                "Ref": "AWS::Region",
+              },
+              ".",
               {
                 "Ref": "AWS::URLSuffix",
               },
-              "/cdk-hnb659fds-assets-123567891-eu-central-1/f9bbe2b2392105a06b7f46b6ac19bc038a5d9d735c32e041209ae44e59250619.json",
+              "/",
+              {
+                "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+              },
+              "/1f102e080526c051a8fd5a5244d1ab2f8c69a073bb389dbb31438455b443cd62.json",
             ],
           ],
         },
@@ -282,13 +445,46 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
     "kubectllayer311A31D9E6": {
       "Properties": {
         "Content": {
-          "S3Bucket": "cdk-hnb659fds-assets-123567891-eu-central-1",
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
           "S3Key": "9953ad4c3e84d120643ece4b2e51caf43fd9850063641b4d78bf30fbe6b4d381.zip",
         },
         "Description": "/opt/kubectl/kubectl 1.30; /opt/helm/helm 3.17.1",
         "LicenseInfo": "Apache-2.0",
       },
       "Type": "AWS::Lambda::LayerVersion",
+    },
+    "masterroleEF831F2F": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::undefined:root",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AdministratorAccess",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
     },
     "snapshotstack046915C2": {
       "DeletionPolicy": "Delete",
@@ -302,10 +498,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -318,12 +510,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
         "snapshotstackCreationRoleDefaultPolicy5F174653",
@@ -377,16 +563,10 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
                 "Ref": "snapshotstackvpcPublicSubnet2Subnet907DC56A",
               },
               {
-                "Ref": "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
-              },
-              {
                 "Ref": "snapshotstackvpcPrivateSubnet1Subnet900FE227",
               },
               {
                 "Ref": "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-              },
-              {
-                "Ref": "snapshotstackvpcPrivateSubnet3Subnet9021C226",
               },
             ],
           },
@@ -412,34 +592,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
       "Type": "Custom::AWSCDK-EKS-Cluster",
       "UpdateReplacePolicy": "Delete",
     },
-    "snapshotstackAccessRole4EF6095C": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition",
-                      },
-                      ":iam::123567891:root",
-                    ],
-                  ],
-                },
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-      },
-      "Type": "AWS::IAM::Role",
-    },
     "snapshotstackAwsAuthmanifestE20EB967": {
       "DeletionPolicy": "Delete",
       "DependsOn": [
@@ -452,10 +604,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -468,12 +616,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
         "snapshotstackKubectlReadyBarrier4BD1B744",
@@ -489,14 +631,14 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
               "[{"apiVersion":"v1","kind":"ConfigMap","metadata":{"name":"aws-auth","namespace":"kube-system","labels":{"aws.cdk.eks/prune-c80b6e1c13b917d0796348c23d885cf61fa733f549":""}},"data":{"mapRoles":"[{\\"rolearn\\":\\"",
               {
                 "Fn::GetAtt": [
-                  "snapshotstackAccessRole4EF6095C",
+                  "masterroleEF831F2F",
                   "Arn",
                 ],
               },
               "\\",\\"username\\":\\"",
               {
                 "Fn::GetAtt": [
-                  "snapshotstackAccessRole4EF6095C",
+                  "masterroleEF831F2F",
                   "Arn",
                 ],
               },
@@ -561,10 +703,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -577,12 +715,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
       ],
@@ -612,10 +744,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -628,12 +756,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
       ],
@@ -693,10 +815,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -709,12 +827,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
       ],
@@ -753,7 +865,15 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
                       {
                         "Ref": "AWS::Partition",
                       },
-                      ":eks:eu-central-1:123567891:cluster/snapshot-stack",
+                      ":eks:",
+                      {
+                        "Ref": "AWS::Region",
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":cluster/snapshot-stack",
                     ],
                   ],
                 },
@@ -765,7 +885,15 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
                       {
                         "Ref": "AWS::Partition",
                       },
-                      ":eks:eu-central-1:123567891:cluster/snapshot-stack/*",
+                      ":eks:",
+                      {
+                        "Ref": "AWS::Region",
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":cluster/snapshot-stack/*",
                     ],
                   ],
                 },
@@ -785,7 +913,15 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
                     {
                       "Ref": "AWS::Partition",
                     },
-                    ":eks:eu-central-1:123567891:fargateprofile/snapshot-stack/*",
+                    ":eks:",
+                    {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":fargateprofile/snapshot-stack/*",
                   ],
                 ],
               },
@@ -874,10 +1010,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -890,12 +1022,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
       ],
@@ -984,10 +1110,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -1000,12 +1122,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
       ],
@@ -1055,10 +1171,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -1071,12 +1183,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
         "snapshotstackfargateprofilefp1PodExecutionRole73EFA699",
@@ -1104,10 +1210,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -1120,12 +1222,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
       ],
@@ -1159,9 +1255,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
           {
             "Ref": "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
           },
-          {
-            "Ref": "snapshotstackvpcPrivateSubnet3Subnet9021C226",
-          },
         ],
       },
       "Type": "AWS::EKS::Nodegroup",
@@ -1177,10 +1270,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -1193,12 +1282,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
       ],
@@ -1267,10 +1350,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -1283,12 +1362,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
       ],
@@ -1321,9 +1394,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
           {
             "Ref": "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
           },
-          {
-            "Ref": "snapshotstackvpcPrivateSubnet3Subnet9021C226",
-          },
         ],
       },
       "Type": "AWS::EKS::Nodegroup",
@@ -1339,10 +1409,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -1355,12 +1421,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
       ],
@@ -1430,10 +1490,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -1446,12 +1502,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
       ],
@@ -1487,10 +1537,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -1503,12 +1549,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
       ],
@@ -1554,10 +1594,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -1570,12 +1606,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
       ],
@@ -1637,10 +1667,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -1653,12 +1679,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
       ],
@@ -1699,10 +1719,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -1715,12 +1731,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
       ],
@@ -2125,10 +2135,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -2141,12 +2147,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
         "snapshotstackKubectlReadyBarrier4BD1B744",
@@ -2199,10 +2199,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -2215,12 +2211,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
         "snapshotstackKubectlReadyBarrier4BD1B744",
@@ -2266,10 +2256,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -2282,12 +2268,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
         "snapshotstackawsloadbalancercontrollerConditionJsonE2A1476C",
@@ -2326,7 +2306,11 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
               {
                 "Ref": "snapshotstack046915C2",
               },
-              "","serviceAccount":{"create":false,"name":"aws-load-balancer-controller"},"enableShield":false,"enableWaf":false,"enableWafv2":false,"createIngressClassResource":true,"ingressClass":"alb","enableServiceMutatorWebhook":false,"region":"eu-central-1","image":{"repository":"602401143452.dkr.ecr.eu-central-1.amazonaws.com/amazon/aws-load-balancer-controller"},"vpcId":"",
+              "","serviceAccount":{"create":false,"name":"aws-load-balancer-controller"},"enableShield":false,"enableWaf":false,"enableWafv2":false,"createIngressClassResource":true,"ingressClass":"alb","enableServiceMutatorWebhook":false,"region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","vpcId":"",
               {
                 "Ref": "snapshotstackvpcD6CBA8E2",
               },
@@ -2353,10 +2337,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -2369,12 +2349,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
         "snapshotstackKubectlReadyBarrier4BD1B744",
@@ -2418,10 +2392,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -2434,12 +2404,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
         "snapshotstackKubectlReadyBarrier4BD1B744",
@@ -2483,10 +2447,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -2499,12 +2459,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
         "snapshotstackKubectlReadyBarrier4BD1B744",
@@ -2548,10 +2502,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -2564,12 +2514,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
       ],
@@ -2618,10 +2562,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -2634,12 +2574,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
       ],
@@ -2685,10 +2619,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -2701,12 +2631,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
         "snapshotstackfargateprofilefp1PodExecutionRole73EFA699",
@@ -2757,10 +2681,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -2773,12 +2693,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
       ],
@@ -2830,7 +2744,11 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
                       {
                         "Ref": "AWS::Partition",
                       },
-                      ":iam::123567891:root",
+                      ":iam::",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":root",
                     ],
                   ],
                 },
@@ -2856,10 +2774,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
         "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
         "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1",
-        "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49",
-        "snapshotstackvpcPrivateSubnet3Subnet9021C226",
         "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
         "snapshotstackvpcPublicSubnet1EIP1E36663B",
         "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
@@ -2872,12 +2786,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
         "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
         "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3EIPA853F82F",
-        "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-        "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
         "snapshotstackvpcD6CBA8E2",
         "snapshotstackvpcVPCGW71D5B893",
         "snapshotstackchartSecretsStoreCSIDriver37CF976C",
@@ -2974,8 +2882,15 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
     },
     "snapshotstackvpcPrivateSubnet1Subnet900FE227": {
       "Properties": {
-        "AvailabilityZone": "dummy1a",
-        "CidrBlock": "10.0.96.0/19",
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.128.0/18",
         "MapPublicIpOnLaunch": false,
         "Tags": [
           {
@@ -3044,8 +2959,15 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
     },
     "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C": {
       "Properties": {
-        "AvailabilityZone": "dummy1b",
-        "CidrBlock": "10.0.128.0/19",
+        "AvailabilityZone": {
+          "Fn::Select": [
+            1,
+            {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.192.0/18",
         "MapPublicIpOnLaunch": false,
         "Tags": [
           {
@@ -3063,76 +2985,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
           {
             "Key": "Name",
             "Value": "snapshot-stack/snapshot-stack-vpc/PrivateSubnet2",
-          },
-        ],
-        "VpcId": {
-          "Ref": "snapshotstackvpcD6CBA8E2",
-        },
-      },
-      "Type": "AWS::EC2::Subnet",
-    },
-    "snapshotstackvpcPrivateSubnet3DefaultRoute92EA33A1": {
-      "Properties": {
-        "DestinationCidrBlock": "0.0.0.0/0",
-        "NatGatewayId": {
-          "Ref": "snapshotstackvpcPublicSubnet3NATGateway8F138DB3",
-        },
-        "RouteTableId": {
-          "Ref": "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        },
-      },
-      "Type": "AWS::EC2::Route",
-    },
-    "snapshotstackvpcPrivateSubnet3RouteTableAssociation6B3C9D49": {
-      "Properties": {
-        "RouteTableId": {
-          "Ref": "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674",
-        },
-        "SubnetId": {
-          "Ref": "snapshotstackvpcPrivateSubnet3Subnet9021C226",
-        },
-      },
-      "Type": "AWS::EC2::SubnetRouteTableAssociation",
-    },
-    "snapshotstackvpcPrivateSubnet3RouteTableD2B6A674": {
-      "Properties": {
-        "Tags": [
-          {
-            "Key": "kubernetes.io/role/internal-elb",
-            "Value": "1",
-          },
-          {
-            "Key": "Name",
-            "Value": "snapshot-stack/snapshot-stack-vpc/PrivateSubnet3",
-          },
-        ],
-        "VpcId": {
-          "Ref": "snapshotstackvpcD6CBA8E2",
-        },
-      },
-      "Type": "AWS::EC2::RouteTable",
-    },
-    "snapshotstackvpcPrivateSubnet3Subnet9021C226": {
-      "Properties": {
-        "AvailabilityZone": "dummy1c",
-        "CidrBlock": "10.0.160.0/19",
-        "MapPublicIpOnLaunch": false,
-        "Tags": [
-          {
-            "Key": "aws-cdk:subnet-name",
-            "Value": "Private",
-          },
-          {
-            "Key": "aws-cdk:subnet-type",
-            "Value": "Private",
-          },
-          {
-            "Key": "kubernetes.io/role/internal-elb",
-            "Value": "1",
-          },
-          {
-            "Key": "Name",
-            "Value": "snapshot-stack/snapshot-stack-vpc/PrivateSubnet3",
           },
         ],
         "VpcId": {
@@ -3231,8 +3083,15 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
     },
     "snapshotstackvpcPublicSubnet1SubnetB1EA80F9": {
       "Properties": {
-        "AvailabilityZone": "dummy1a",
-        "CidrBlock": "10.0.0.0/19",
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.0.0/18",
         "MapPublicIpOnLaunch": true,
         "Tags": [
           {
@@ -3348,8 +3207,15 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
     },
     "snapshotstackvpcPublicSubnet2Subnet907DC56A": {
       "Properties": {
-        "AvailabilityZone": "dummy1b",
-        "CidrBlock": "10.0.32.0/19",
+        "AvailabilityZone": {
+          "Fn::Select": [
+            1,
+            {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.64.0/18",
         "MapPublicIpOnLaunch": true,
         "Tags": [
           {
@@ -3367,123 +3233,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
           {
             "Key": "Name",
             "Value": "snapshot-stack/snapshot-stack-vpc/PublicSubnet2",
-          },
-        ],
-        "VpcId": {
-          "Ref": "snapshotstackvpcD6CBA8E2",
-        },
-      },
-      "Type": "AWS::EC2::Subnet",
-    },
-    "snapshotstackvpcPublicSubnet3DefaultRoute447DB831": {
-      "DependsOn": [
-        "snapshotstackvpcVPCGW71D5B893",
-      ],
-      "Properties": {
-        "DestinationCidrBlock": "0.0.0.0/0",
-        "GatewayId": {
-          "Ref": "snapshotstackvpcIGW7FCDA420",
-        },
-        "RouteTableId": {
-          "Ref": "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        },
-      },
-      "Type": "AWS::EC2::Route",
-    },
-    "snapshotstackvpcPublicSubnet3EIPA853F82F": {
-      "Properties": {
-        "Domain": "vpc",
-        "Tags": [
-          {
-            "Key": "kubernetes.io/role/elb",
-            "Value": "1",
-          },
-          {
-            "Key": "Name",
-            "Value": "snapshot-stack/snapshot-stack-vpc/PublicSubnet3",
-          },
-        ],
-      },
-      "Type": "AWS::EC2::EIP",
-    },
-    "snapshotstackvpcPublicSubnet3NATGateway8F138DB3": {
-      "DependsOn": [
-        "snapshotstackvpcPublicSubnet3DefaultRoute447DB831",
-        "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5",
-      ],
-      "Properties": {
-        "AllocationId": {
-          "Fn::GetAtt": [
-            "snapshotstackvpcPublicSubnet3EIPA853F82F",
-            "AllocationId",
-          ],
-        },
-        "SubnetId": {
-          "Ref": "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
-        },
-        "Tags": [
-          {
-            "Key": "kubernetes.io/role/elb",
-            "Value": "1",
-          },
-          {
-            "Key": "Name",
-            "Value": "snapshot-stack/snapshot-stack-vpc/PublicSubnet3",
-          },
-        ],
-      },
-      "Type": "AWS::EC2::NatGateway",
-    },
-    "snapshotstackvpcPublicSubnet3RouteTable54AE559A": {
-      "Properties": {
-        "Tags": [
-          {
-            "Key": "kubernetes.io/role/elb",
-            "Value": "1",
-          },
-          {
-            "Key": "Name",
-            "Value": "snapshot-stack/snapshot-stack-vpc/PublicSubnet3",
-          },
-        ],
-        "VpcId": {
-          "Ref": "snapshotstackvpcD6CBA8E2",
-        },
-      },
-      "Type": "AWS::EC2::RouteTable",
-    },
-    "snapshotstackvpcPublicSubnet3RouteTableAssociationA63F73F5": {
-      "Properties": {
-        "RouteTableId": {
-          "Ref": "snapshotstackvpcPublicSubnet3RouteTable54AE559A",
-        },
-        "SubnetId": {
-          "Ref": "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F",
-        },
-      },
-      "Type": "AWS::EC2::SubnetRouteTableAssociation",
-    },
-    "snapshotstackvpcPublicSubnet3Subnet0AEB2E2F": {
-      "Properties": {
-        "AvailabilityZone": "dummy1c",
-        "CidrBlock": "10.0.64.0/19",
-        "MapPublicIpOnLaunch": true,
-        "Tags": [
-          {
-            "Key": "aws-cdk:subnet-name",
-            "Value": "Public",
-          },
-          {
-            "Key": "aws-cdk:subnet-type",
-            "Value": "Public",
-          },
-          {
-            "Key": "kubernetes.io/role/elb",
-            "Value": "1",
-          },
-          {
-            "Key": "Name",
-            "Value": "snapshot-stack/snapshot-stack-vpc/PublicSubnet3",
           },
         ],
         "VpcId": {
