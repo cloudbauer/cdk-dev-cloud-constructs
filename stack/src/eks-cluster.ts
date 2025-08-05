@@ -2,7 +2,7 @@ import 'source-map-support/register';
 import * as blueprints from '@aws-quickstart/eks-blueprints';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as eks from 'aws-cdk-lib/aws-eks';
-import { ArnPrincipal } from 'aws-cdk-lib/aws-iam';
+import { ArnPrincipal, IRole } from 'aws-cdk-lib/aws-iam';
 import { merge } from 'ts-deepmerge';
 
 
@@ -11,13 +11,20 @@ const DEFAULT_NODES_INSTANCE_CLASSES = [ec2.InstanceClass.T3];
 const DEFAULT_NODES_INSTANCE_SIZES =[ec2.InstanceSize.MEDIUM, ec2.InstanceSize.LARGE];
 
 // Team implementations
-export class TeamPlatform extends blueprints.teams.PlatformTeam {
-  constructor(accountID: string) {
+export class PlatformTeamByUsers extends blueprints.teams.PlatformTeam {
+  constructor(userArns: [string]) {
     super({
       name: 'platform',
-      users: [
-        new ArnPrincipal(`arn:aws:iam::${accountID}:assumed-role/AWSReservedSSO_AWSAdministratorAccess_*`),
-      ],
+      users: userArns.map(arn => new ArnPrincipal(arn)),
+    });
+  }
+}
+
+export class PlatformTeamByRole extends blueprints.teams.PlatformTeam {
+  constructor(roleArn: string) {
+    super({
+      name: 'platform',
+      userRoleArn: roleArn,
     });
   }
 }
@@ -125,9 +132,10 @@ export class EksClusterStackBuilder extends blueprints.stacks.BlueprintBuilder {
           ec2.InstanceType.of(instance_class, size),
         ),
       ).flat();
-
+    const clusterMasterRole: IRole = blueprints.getNamedResource('master-role'); 
     const clusterProvider = new blueprints.GenericClusterProvider({
       version: mergedOptions.kubernetesVersion,
+      mastersRole: clusterMasterRole,
       tags: mergedOptions.clusterProviderTags,
       managedNodeGroups: [
         {
