@@ -51,16 +51,20 @@ export class GitlabConstruct extends Construct {
 
     // set initial default values
     this.defaultValues = {
-      'certmanager-issuer': {
-        email: 'administrator@' + this.domainName,
-      },
-      'global': {
+      installCertmanager: 'false',
+      global: {
         hosts: {
           domain: this.domainName,
         },
         email: {
           from: 'gitlab@' + this.domainName,
           display_name: `GitLab (${this.domainName})`,
+        },
+        ingress: {
+          configureCertmanager: 'false',
+          annotations: {
+            'kubernetes.io/tls-acme': 'true',
+          },
         },
       },
     };
