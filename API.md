@@ -109,6 +109,7 @@ Any object.
 | <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.mergedValues">mergedValues</a></code> | <code>{[ key: string ]: any}</code> | *No description.* |
 | <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.name">name</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.namespace">namespace</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.release">release</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.values">values</a></code> | <code>{[ key: string ]: any}</code> | *No description.* |
 | <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.version">version</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cdk-dev-cloud-constructs.GitlabConstruct.property.yamlValues">yamlValues</a></code> | <code>{[ key: string ]: any}</code> | *No description.* |
@@ -207,6 +208,16 @@ public readonly namespace: string;
 
 ---
 
+##### `release`<sup>Required</sup> <a name="release" id="cdk-dev-cloud-constructs.GitlabConstruct.property.release"></a>
+
+```typescript
+public readonly release: string;
+```
+
+- *Type:* string
+
+---
+
 ##### `values`<sup>Required</sup> <a name="values" id="cdk-dev-cloud-constructs.GitlabConstruct.property.values"></a>
 
 ```typescript
@@ -261,6 +272,7 @@ const gitlabProps: GitlabProps = { ... }
 | <code><a href="#cdk-dev-cloud-constructs.GitlabProps.property.chartVersion">chartVersion</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cdk-dev-cloud-constructs.GitlabProps.property.domainName">domainName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cdk-dev-cloud-constructs.GitlabProps.property.namespace">namespace</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-dev-cloud-constructs.GitlabProps.property.releaseName">releaseName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cdk-dev-cloud-constructs.GitlabProps.property.valuesOverride">valuesOverride</a></code> | <code>{[ key: string ]: string}</code> | *No description.* |
 | <code><a href="#cdk-dev-cloud-constructs.GitlabProps.property.valuesYamlFile">valuesYamlFile</a></code> | <code>string</code> | *No description.* |
 
@@ -312,6 +324,16 @@ public readonly domainName: string;
 
 ```typescript
 public readonly namespace: string;
+```
+
+- *Type:* string
+
+---
+
+##### `releaseName`<sup>Optional</sup> <a name="releaseName" id="cdk-dev-cloud-constructs.GitlabProps.property.releaseName"></a>
+
+```typescript
+public readonly releaseName: string;
 ```
 
 - *Type:* string

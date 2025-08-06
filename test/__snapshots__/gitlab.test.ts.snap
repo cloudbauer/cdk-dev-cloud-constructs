@@ -1319,7 +1319,7 @@ exports[`gitlab-chart c-default-props 1`] = `
         },
         "CreateNamespace": true,
         "Namespace": "default",
-        "Release": "teststacktestgitlabcharttestgitlabchartchart4214b710",
+        "Release": "gitlab",
         "Repository": "https://charts.gitlab.io/",
         "RoleArn": {
           "Fn::GetAtt": [
@@ -2689,7 +2689,7 @@ exports[`gitlab-chart cluster-custom-props 1`] = `
         },
         "CreateNamespace": true,
         "Namespace": "gitlab",
-        "Release": "teststacktestgitlabcharttestgitlabchartchart4214b710",
+        "Release": "gitlab",
         "Repository": "https://charts.gitlab.io/",
         "RoleArn": {
           "Fn::GetAtt": [

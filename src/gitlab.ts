@@ -17,6 +17,7 @@ export interface GitlabProps {
   readonly namespace?: string;
   readonly domainName?: string;
   readonly chartName?: string;
+  readonly releaseName?: string;
   readonly chartVersion?: string;
   readonly valuesOverride?: { [key: string]: string };
   readonly valuesYamlFile?: string;
@@ -31,6 +32,7 @@ export class GitlabConstruct extends Construct {
   readonly namespace: string;
   readonly chart: eks.HelmChart;
   readonly name: string;
+  readonly release: string;
   readonly domainName: string;
   readonly defaultValues: { [key: string]: any };
   readonly mergedValues: { [key: string]: any };
@@ -47,6 +49,7 @@ export class GitlabConstruct extends Construct {
     this.domainName = props.domainName ?? 'gitlab.example.com';
     this.namespace = props.namespace ?? 'default';
     this.name = props.chartName ?? 'gitlab';
+    this.release = props.releaseName ?? 'gitlab';
     this._version = props.chartVersion ?? 'latest';
 
     // set initial default values
@@ -91,6 +94,7 @@ export class GitlabConstruct extends Construct {
     this.chart = new eks.HelmChart(this, id + 'Chart', {
       cluster: this.cluster,
       chart: this.name,
+      release: this.release,
       repository: 'https://charts.gitlab.io/',
       namespace: this.namespace,
       version: this._version,
