@@ -25,7 +25,7 @@
     "@types/node": "^24.2.0",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
-    "aws-cdk": "^2",
+    "aws-cdk": "2.1020.2",
     "esbuild": "^0.25.8",
     "eslint": "^9",
     "eslint-import-resolver-typescript": "^4.4.4",
@@ -34,13 +34,14 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
-    "@aws-quickstart/eks-blueprints": "1.16.3",
-    "aws-cdk-lib": "2.173.4",
-    "constructs": "^10.4.2",
+    "@aws-quickstart/eks-blueprints": "1.17.2",
+    "aws-cdk-lib": "2.204.0",
+    "cdk-nag": "^2.35.70",
+    "constructs": "10.4.2",
     "source-map-support": "^0.5.21",
     "ts-deepmerge": "^7.0.3"
   },
-  "license": "Apache-2.0",
+  "license": "UNLICENSED",
   "publishConfig": {
     "access": "public"
   },

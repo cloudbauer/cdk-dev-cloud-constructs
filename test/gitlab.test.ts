@@ -1,7 +1,7 @@
+import { KubectlV32Layer } from '@aws-cdk/lambda-layer-kubectl-v32';
 import { App, Stack, aws_eks } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import { GitlabConstruct, GitlabProps } from '../src';
-
 
 jest.useFakeTimers();
 
@@ -17,7 +17,8 @@ describe('gitlab-chart', () => {
 
     // Creating an EKS Cluster with default properties and Fargate workers
     const cluster = new aws_eks.FargateCluster(stack, 'EksFargateCluster', {
-      version: aws_eks.KubernetesVersion.V1_31,
+      version: aws_eks.KubernetesVersion.V1_32,
+      kubectlLayer: new KubectlV32Layer(stack, 'kubectllayer32'),
     });
 
     const testProps: GitlabProps = {
@@ -41,7 +42,8 @@ describe('gitlab-chart', () => {
 
     // Creating an EKS Cluster with default properties and Fargate workers
     const cluster = new aws_eks.FargateCluster(stack, 'EksFargateCluster', {
-      version: aws_eks.KubernetesVersion.V1_31,
+      version: aws_eks.KubernetesVersion.V1_32,
+      kubectlLayer: new KubectlV32Layer(stack, 'KubectlLayer'),
     });
 
     const testProps: GitlabProps = {

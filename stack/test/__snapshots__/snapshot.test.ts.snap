@@ -12,113 +12,119 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
       ],
     },
   },
-  "Description": "Blueprints tracking (qs-1s1r465hk)",
+  "Description": "Blueprints tracking (uksb-mjpcijbp3i)",
   "Mappings": {
     "LatestNodeRuntimeMap": {
       "af-south-1": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "ap-east-1": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
+      },
+      "ap-east-2": {
+        "value": "nodejs22.x",
       },
       "ap-northeast-1": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "ap-northeast-2": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "ap-northeast-3": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "ap-south-1": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "ap-south-2": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "ap-southeast-1": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "ap-southeast-2": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "ap-southeast-3": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "ap-southeast-4": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "ap-southeast-5": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "ap-southeast-7": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "ca-central-1": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "ca-west-1": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "cn-north-1": {
-        "value": "nodejs18.x",
+        "value": "nodejs22.x",
       },
       "cn-northwest-1": {
-        "value": "nodejs18.x",
+        "value": "nodejs22.x",
       },
       "eu-central-1": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "eu-central-2": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "eu-isoe-west-1": {
         "value": "nodejs18.x",
       },
       "eu-north-1": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "eu-south-1": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "eu-south-2": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "eu-west-1": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "eu-west-2": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "eu-west-3": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
+      },
+      "eusc-de-east-1": {
+        "value": "nodejs22.x",
       },
       "il-central-1": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "me-central-1": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "me-south-1": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "mx-central-1": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "sa-east-1": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "us-east-1": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "us-east-2": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "us-gov-east-1": {
-        "value": "nodejs18.x",
+        "value": "nodejs22.x",
       },
       "us-gov-west-1": {
-        "value": "nodejs18.x",
+        "value": "nodejs22.x",
       },
       "us-iso-east-1": {
         "value": "nodejs18.x",
@@ -129,11 +135,14 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
       "us-isob-east-1": {
         "value": "nodejs18.x",
       },
+      "us-isob-west-1": {
+        "value": "nodejs18.x",
+      },
       "us-west-1": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
       "us-west-2": {
-        "value": "nodejs20.x",
+        "value": "nodejs22.x",
       },
     },
   },
@@ -263,7 +272,7 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "2926656cdb97b26d98f8b957b0d3f7326b458679745f2817e50333a21767350c.zip",
+          "S3Key": "62fa02efcaa700e1c247e1d3cc2aa0cd07a0808a9a3e3d2230e51f57a02233fb.zip",
         },
         "Handler": "__entrypoint__.handler",
         "MemorySize": 128,
@@ -348,7 +357,7 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
               {
                 "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
               },
-              "/b04be272cf4ec7185683787e13a5cee220efd4067bfa245a9a58ef4d4bbfa28c.json",
+              "/1843a69fbb4a0eb68e205980f101a18c8325686bccb29496c2a5b27d6491c90c.json",
             ],
           ],
         },
@@ -380,8 +389,8 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
               "Arn",
             ],
           },
-          "referencetosnapshotstackkubectllayer310BC5262ERef": {
-            "Ref": "kubectllayer311A31D9E6",
+          "referencetosnapshotstackkubectllayer326BCF397DRef": {
+            "Ref": "kubectllayer328C149512",
           },
           "referencetosnapshotstacksnapshotstackvpcPrivateSubnet1Subnet90825ACBRef": {
             "Ref": "snapshotstackvpcPrivateSubnet1Subnet900FE227",
@@ -406,7 +415,7 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
               {
                 "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
               },
-              "/1f102e080526c051a8fd5a5244d1ab2f8c69a073bb389dbb31438455b443cd62.json",
+              "/8e7bdcf8ddc07e8ec53d3039a333b390ec168fe2895a43e1272ba85088d63a58.json",
             ],
           ],
         },
@@ -442,15 +451,15 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
       "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "kubectllayer311A31D9E6": {
+    "kubectllayer328C149512": {
       "Properties": {
         "Content": {
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "9953ad4c3e84d120643ece4b2e51caf43fd9850063641b4d78bf30fbe6b4d381.zip",
+          "S3Key": "6094cb0ff874f89ab5ab24fb6b9417df0fdeb6966645f90c88ec1d7e28130112.zip",
         },
-        "Description": "/opt/kubectl/kubectl 1.30; /opt/helm/helm 3.17.1",
+        "Description": "/opt/kubectl/kubectl 1.32.3; /opt/helm/helm 3.17.2",
         "LicenseInfo": "Apache-2.0",
       },
       "Type": "AWS::Lambda::LayerVersion",
@@ -522,7 +531,7 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
             "Arn",
           ],
         },
-        "AttributesRevision": 3,
+        "AttributesRevision": 5,
         "Config": {
           "accessConfig": {},
           "encryptionConfig": [
@@ -1509,7 +1518,8 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "ClientIDList": [
           "sts.amazonaws.com",
         ],
-        "CodeHash": "2926656cdb97b26d98f8b957b0d3f7326b458679745f2817e50333a21767350c",
+        "CodeHash": "62fa02efcaa700e1c247e1d3cc2aa0cd07a0808a9a3e3d2230e51f57a02233fb",
+        "RejectUnauthorized": false,
         "ServiceToken": {
           "Fn::GetAtt": [
             "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0",
@@ -1762,6 +1772,9 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
                 "ec2:DescribeTags",
                 "ec2:GetCoipPoolUsage",
                 "ec2:DescribeCoipPools",
+                "ec2:GetSecurityGroupsForVpc",
+                "ec2:DescribeIpamPools",
+                "ec2:DescribeRouteTables",
                 "elasticloadbalancing:DescribeLoadBalancers",
                 "elasticloadbalancing:DescribeLoadBalancerAttributes",
                 "elasticloadbalancing:DescribeListeners",
@@ -1774,6 +1787,7 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
                 "elasticloadbalancing:DescribeTags",
                 "elasticloadbalancing:DescribeTrustStores",
                 "elasticloadbalancing:DescribeListenerAttributes",
+                "elasticloadbalancing:DescribeCapacityReservation",
               ],
               "Effect": "Allow",
               "Resource": "*",
@@ -2019,6 +2033,8 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
                 "elasticloadbalancing:ModifyTargetGroupAttributes",
                 "elasticloadbalancing:DeleteTargetGroup",
                 "elasticloadbalancing:ModifyListenerAttributes",
+                "elasticloadbalancing:ModifyCapacityReservation",
+                "elasticloadbalancing:ModifyIpPools",
               ],
               "Condition": {
                 "Null": {
@@ -2107,6 +2123,7 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
                 "elasticloadbalancing:AddListenerCertificates",
                 "elasticloadbalancing:RemoveListenerCertificates",
                 "elasticloadbalancing:ModifyRule",
+                "elasticloadbalancing:SetRulePriorities",
               ],
               "Effect": "Allow",
               "Resource": "*",
@@ -2238,7 +2255,7 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         },
         "Timeout": "900s",
         "Values": "{"grpcSupportedProviders":"aws","syncSecret":{"enabled":"true"}}",
-        "Version": "1.4.6",
+        "Version": "1.5.0",
         "Wait": true,
       },
       "Type": "Custom::AWSCDK-EKS-HelmChart",
@@ -2318,7 +2335,7 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
             ],
           ],
         },
-        "Version": "1.11.0",
+        "Version": "1.12.0",
         "Wait": true,
       },
       "Type": "Custom::AWSCDK-EKS-HelmChart",
@@ -2375,7 +2392,7 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
           ],
         },
         "Values": "{"installCRDs":true}",
-        "Version": "1.16.1",
+        "Version": "1.17.2",
       },
       "Type": "Custom::AWSCDK-EKS-HelmChart",
       "UpdateReplacePolicy": "Delete",
@@ -2795,7 +2812,7 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         "ClusterName": {
           "Ref": "snapshotstack046915C2",
         },
-        "Manifest": "[{"apiVersion":"v1","kind":"ServiceAccount","metadata":{"name":"csi-secrets-store-provider-aws","namespace":"kube-system","labels":{"aws.cdk.eks/prune-c8a8e6372d76c9effa9b258d43b21555702836f2bd":""}}},{"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRole","metadata":{"name":"csi-secrets-store-provider-aws-cluster-role","labels":{"aws.cdk.eks/prune-c8a8e6372d76c9effa9b258d43b21555702836f2bd":""}},"rules":[{"apiGroups":[""],"resources":["serviceaccounts/token"],"verbs":["create"]},{"apiGroups":[""],"resources":["serviceaccounts"],"verbs":["get"]},{"apiGroups":[""],"resources":["pods"],"verbs":["get"]},{"apiGroups":[""],"resources":["nodes"],"verbs":["get"]}]},{"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"name":"csi-secrets-store-provider-aws-cluster-rolebinding","labels":{"aws.cdk.eks/prune-c8a8e6372d76c9effa9b258d43b21555702836f2bd":""}},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"csi-secrets-store-provider-aws-cluster-role"},"subjects":[{"kind":"ServiceAccount","name":"csi-secrets-store-provider-aws","namespace":"kube-system"}]},{"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"namespace":"kube-system","name":"csi-secrets-store-provider-aws","labels":{"aws.cdk.eks/prune-c8a8e6372d76c9effa9b258d43b21555702836f2bd":"","app":"csi-secrets-store-provider-aws"}},"spec":{"updateStrategy":{"type":"RollingUpdate"},"selector":{"matchLabels":{"app":"csi-secrets-store-provider-aws"}},"template":{"metadata":{"labels":{"app":"csi-secrets-store-provider-aws"}},"spec":{"serviceAccountName":"csi-secrets-store-provider-aws","hostNetwork":false,"containers":[{"name":"provider-aws-installer","image":"public.ecr.aws/aws-secrets-manager/secrets-store-csi-driver-provider-aws:2.0.0","imagePullPolicy":"Always","args":["--provider-volume=/var/run/secrets-store-csi-providers"],"resources":{"requests":{"cpu":"50m","memory":"100Mi"},"limits":{"cpu":"50m","memory":"100Mi"}},"securityContext":{"privileged":false,"allowPrivilegeEscalation":false},"volumeMounts":[{"mountPath":"/var/run/secrets-store-csi-providers","name":"providervol"},{"name":"mountpoint-dir","mountPath":"/var/lib/kubelet/pods","mountPropagation":"HostToContainer"}]}],"volumes":[{"name":"providervol","hostPath":{"path":"/var/run/secrets-store-csi-providers"}},{"name":"mountpoint-dir","hostPath":{"path":"/var/lib/kubelet/pods","type":"DirectoryOrCreate"}}],"nodeSelector":{"kubernetes.io/os":"linux"}}}}}]",
+        "Manifest": "[{"apiVersion":"v1","kind":"ServiceAccount","metadata":{"name":"csi-secrets-store-provider-aws","namespace":"kube-system","labels":{"aws.cdk.eks/prune-c8a8e6372d76c9effa9b258d43b21555702836f2bd":""}}},{"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRole","metadata":{"name":"csi-secrets-store-provider-aws-cluster-role","labels":{"aws.cdk.eks/prune-c8a8e6372d76c9effa9b258d43b21555702836f2bd":""}},"rules":[{"apiGroups":[""],"resources":["serviceaccounts/token"],"verbs":["create"]},{"apiGroups":[""],"resources":["serviceaccounts"],"verbs":["get"]},{"apiGroups":[""],"resources":["pods"],"verbs":["get"]},{"apiGroups":[""],"resources":["nodes"],"verbs":["get"]}]},{"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"name":"csi-secrets-store-provider-aws-cluster-rolebinding","labels":{"aws.cdk.eks/prune-c8a8e6372d76c9effa9b258d43b21555702836f2bd":""}},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"csi-secrets-store-provider-aws-cluster-role"},"subjects":[{"kind":"ServiceAccount","name":"csi-secrets-store-provider-aws","namespace":"kube-system"}]},{"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"namespace":"kube-system","name":"csi-secrets-store-provider-aws","labels":{"aws.cdk.eks/prune-c8a8e6372d76c9effa9b258d43b21555702836f2bd":"","app":"csi-secrets-store-provider-aws"}},"spec":{"updateStrategy":{"type":"RollingUpdate"},"selector":{"matchLabels":{"app":"csi-secrets-store-provider-aws"}},"template":{"metadata":{"labels":{"app":"csi-secrets-store-provider-aws"}},"spec":{"serviceAccountName":"csi-secrets-store-provider-aws","hostNetwork":false,"containers":[{"name":"provider-aws-installer","image":"public.ecr.aws/aws-secrets-manager/secrets-store-csi-driver-provider-aws:1.0.r2-80-g8244505-2025.02.10.18.44","imagePullPolicy":"Always","args":["--provider-volume=/etc/kubernetes/secrets-store-csi-providers"],"resources":{"requests":{"cpu":"50m","memory":"100Mi"},"limits":{"cpu":"50m","memory":"100Mi"}},"securityContext":{"privileged":false,"allowPrivilegeEscalation":false},"volumeMounts":[{"mountPath":"/etc/kubernetes/secrets-store-csi-providers","name":"providervol"},{"name":"mountpoint-dir","mountPath":"/var/lib/kubelet/pods","mountPropagation":"HostToContainer"}]}],"volumes":[{"name":"providervol","hostPath":{"path":"/etc/kubernetes/secrets-store-csi-providers"}},{"name":"mountpoint-dir","hostPath":{"path":"/var/lib/kubelet/pods","type":"DirectoryOrCreate"}}],"nodeSelector":{"kubernetes.io/os":"linux"}}}}}]",
         "PruneLabel": "aws.cdk.eks/prune-c8a8e6372d76c9effa9b258d43b21555702836f2bd",
         "RoleArn": {
           "Fn::GetAtt": [

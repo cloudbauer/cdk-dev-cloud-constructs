@@ -3,20 +3,25 @@ import { awscdk, typescript, JsonPatch, TestFailureBehavior } from 'projen';
 // Constants
 const GITHUB_USER = 'cloudbauer';
 const PROJECT_NAME = 'cdk-dev-cloud-constructs';
-const CDK_VERSION: string = '2.173.4';
-const CDK_CONSTRUCTS_VERSION: string = '10.4.2';
+const EKS_BLUEPRINTS_VERSION = '1.17.2'; // '1.16.3';
+const CDK_LIB_VERSION: string = '2.204.0'; // '2.173.4';
+const CDK_CLI_VERSION: string = '2.1020.2';
+const CDK_CONSTRUCTS_VERSION: string = '10.4.2'; // '10.4.2';
+const CDK_NAG_VERSION: string = '^2.35.70';
 
-const eksChartsConstructs = new awscdk.AwsCdkConstructLibrary({
+const parent = new awscdk.AwsCdkConstructLibrary({
   name: PROJECT_NAME,
   description: 'CDK Construct Library to create an open source developer platform at AWS',
   stability: 'experimental',
-  cdkVersion: CDK_VERSION,
+  cdkVersion: CDK_LIB_VERSION,
+  cdkCliVersion: CDK_CLI_VERSION,
   constructsVersion: CDK_CONSTRUCTS_VERSION,
   defaultReleaseBranch: 'main',
   jsiiVersion: '~5.7.0',
   keywords: ['awscdk', 'eks', 'kubernetes', 'gitlab', 'jenkins'],
   deps: [
-    'cdk-nag',
+    '@aws-cdk/lambda-layer-kubectl-v32',
+    'cdk-nag@' + CDK_NAG_VERSION,
   ],
   bundledDeps: [
     'ts-deepmerge',
@@ -41,6 +46,7 @@ const eksChartsConstructs = new awscdk.AwsCdkConstructLibrary({
   repositoryUrl: 'https://github.com/' + GITHUB_USER + '/' + PROJECT_NAME,
   npmignore: [
     '/stack/',
+    '/examples/',
   ],
 
   // deps: [],                /* Runtime dependencies of this module. */
@@ -50,8 +56,8 @@ const eksChartsConstructs = new awscdk.AwsCdkConstructLibrary({
   license: 'MIT',
 });
 
-const eksClusterBuilder = new typescript.TypeScriptProject({
-  parent: eksChartsConstructs,
+const stackbuilder = new typescript.TypeScriptProject({
+  parent: parent,
   name: 'cdk-dev-cloud-stack',
   description: 'CDK Blueprint Builder for EKS Stack to create an open source developer platform at AWS',
   defaultReleaseBranch: 'main',
@@ -59,15 +65,15 @@ const eksClusterBuilder = new typescript.TypeScriptProject({
   keywords: ['awscdk', 'eks', 'kubernetes', 'gitlab', 'jenkins'],
 
   deps: [
-    '@aws-quickstart/eks-blueprints@1.16.3',
-    'aws-cdk-lib@' + CDK_VERSION,
+    '@aws-quickstart/eks-blueprints@' + EKS_BLUEPRINTS_VERSION,
+    'aws-cdk-lib@' + CDK_LIB_VERSION,
     'constructs@' + CDK_CONSTRUCTS_VERSION,
+    'cdk-nag@' + CDK_NAG_VERSION,
     'source-map-support',
     'ts-deepmerge',
-    'cdk-nag',
   ],
   peerDeps: [
-    'aws-cdk@' + CDK_VERSION,
+    'aws-cdk@' + CDK_CLI_VERSION,
   ],
 
   jest: true,
@@ -92,55 +98,40 @@ const eksClusterBuilder = new typescript.TypeScriptProject({
 });
 
 // fixes wrong working directory for yarn install step in release workflow
-eksChartsConstructs.tryFindObjectFile('.github/workflows/release_cdk-dev-cloud-stack.yml')?.patch(
+parent.tryFindObjectFile('.github/workflows/release_cdk-dev-cloud-stack.yml')?.patch(
   JsonPatch.test('/jobs/release/steps/2/name', 'Install dependencies', TestFailureBehavior.FAIL_SYNTHESIS),
   JsonPatch.remove('/jobs/release/steps/2/working-directory'),
 );
 
-const example_options: typescript.TypeScriptProjectOptions = {
+const examples = new awscdk.AwsCdkTypeScriptApp({
+  parent: parent,
+  cdkVersion: CDK_LIB_VERSION,
+  constructsVersion: CDK_CONSTRUCTS_VERSION,
+  cdkCliVersion: CDK_CLI_VERSION,
+  // typescriptVersion: '5.8.2',
   defaultReleaseBranch: 'main',
   name: 'example-dev-cloud',
   projenrcTs: true,
 
   deps: [
-    '@aws-quickstart/eks-blueprints@1.16.3',
-    'aws-cdk-lib@' + CDK_VERSION,
-    'constructs@' + CDK_CONSTRUCTS_VERSION,
+    '@aws-quickstart/eks-blueprints@' + EKS_BLUEPRINTS_VERSION,
+    'cdk-nag@' + CDK_NAG_VERSION,
     'source-map-support',
     'ts-deepmerge',
-  ],
-  devDeps: [
-    'aws-cdk@' + CDK_VERSION,
   ],
 
   outdir: 'examples',
   jest: false,
   release: false,
-}
+  licensed: false,
+});
 
-// const examples = new typescript.TypeScriptAppProject({
-//   parent: eksChartsConstructs,
-//   ...example_options
-// });
+// Fixed problems with different version of CDK library, because internally used ^ version specifier
+examples.deps.removeDependency('aws-cdk-lib');
+examples.addDeps('aws-cdk-lib@' + CDK_LIB_VERSION);
+examples.deps.removeDependency('constructs');
+examples.addDeps('constructs@' + CDK_CONSTRUCTS_VERSION);
 
-const examples_cdk_extras = new awscdk.AwsCdkTypeScriptApp({
-  parent: eksChartsConstructs,
-  cdkVersion: CDK_VERSION,
-  constructsVersion: CDK_CONSTRUCTS_VERSION,
-  ...example_options
-})
-
-examples_cdk_extras.cdkConfig.json.synthesize();
-examples_cdk_extras.deps.removeDependency('aws-cdk-lib');
-examples_cdk_extras.deps.removeDependency('aws-cdk-lib');
-examples_cdk_extras.addDeps('aws-cdk-lib@' + CDK_VERSION);
-// examples.addTask('synth', { exec: 'cdk synth', description: 'Synthesizes your cdk app into cdk.out' });
-// examples.addTask('synth:silent', { exec: 'cdk synth -q', description: 'Synthesizes your cdk app into cdk.out and suppress yarn output' });
-// examples.postCompileTask.insertStep(0, { spawn: 'synth:silent' });
-// examples.addTask('deploy', { exec: 'cdk deploy', receiveArgs: true, description: 'Deploys your CDK app to the AWS cloud' });
-// examples.addTask('destroy', { exec: 'cdk destroy', receiveArgs: true, description: 'Destroys your cdk app in the AWS cloud' });
-
-// examples.synth();
-examples_cdk_extras.synth();
-eksChartsConstructs.synth();
-eksClusterBuilder.synth();
+parent.synth();
+examples.synth();
+stackbuilder.synth();

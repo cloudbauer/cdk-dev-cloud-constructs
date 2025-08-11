@@ -48,8 +48,8 @@ export class GitlabConstruct extends Construct {
     // defaults
     this.domainName = props.domainName ?? 'gitlab.example.com';
     this.namespace = props.namespace ?? 'default';
-    this.name = props.chartName ?? 'gitlab';
-    this.release = props.releaseName ?? 'gitlab';
+    this.name = props.chartName ?? 'https://charts.gitlab.io/gitlab/gitlab';
+    this.release = props.releaseName ?? id;
     this._version = props.chartVersion ?? 'latest';
 
     // set initial default values
@@ -95,7 +95,7 @@ export class GitlabConstruct extends Construct {
       cluster: this.cluster,
       chart: this.name,
       release: this.release,
-      repository: 'https://charts.gitlab.io/',
+      // repository: 'https://charts.gitlab.io/',
       namespace: this.namespace,
       version: this._version,
       values: this.mergedValues,

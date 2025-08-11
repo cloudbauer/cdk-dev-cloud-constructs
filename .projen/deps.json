@@ -99,7 +99,7 @@
     },
     {
       "name": "aws-cdk-lib",
-      "version": "^2.173.4",
+      "version": "^2.204.0",
       "type": "peer"
     },
     {
@@ -108,7 +108,12 @@
       "type": "peer"
     },
     {
+      "name": "@aws-cdk/lambda-layer-kubectl-v32",
+      "type": "runtime"
+    },
+    {
       "name": "cdk-nag",
+      "version": "^2.35.70",
       "type": "runtime"
     }
   ],
