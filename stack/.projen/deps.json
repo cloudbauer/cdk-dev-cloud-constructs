@@ -74,6 +74,11 @@
       "type": "runtime"
     },
     {
+      "name": "@aws-sdk/client-eks",
+      "version": "^3.478.0",
+      "type": "runtime"
+    },
+    {
       "name": "aws-cdk-lib",
       "version": "2.204.0",
       "type": "runtime"

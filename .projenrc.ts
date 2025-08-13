@@ -69,6 +69,7 @@ const stackbuilder = new typescript.TypeScriptProject({
     'aws-cdk-lib@' + CDK_LIB_VERSION,
     'constructs@' + CDK_CONSTRUCTS_VERSION,
     'cdk-nag@' + CDK_NAG_VERSION,
+    '@aws-sdk/client-eks@^3.478.0',
     'source-map-support',
     'ts-deepmerge',
   ],
