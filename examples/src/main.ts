@@ -73,6 +73,7 @@ class GitLabStack extends Stack {
 
 const app = configureApp();
 const env: Environment = { region: process.env.CDK_DEFAULT_REGION!, account: process.env.CDK_DEFAULT_ACCOUNT! };
+
 const masterRoleProvider = new blueprints.CreateRoleProvider('master-role',
   new iam.ArnPrincipal(`arn:aws:iam::${env.account}:root`),
   [iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess')],

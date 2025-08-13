@@ -2,11 +2,13 @@ import process from 'node:process';
 import {
   App,
   Stack,
+  StackProps,
   aws_eks as eks,
   aws_iam as iam
 } from 'aws-cdk-lib';
 import {
   EksBlueprint,
+  EksBlueprintProps,
   BlueprintBuilder,
   GlobalResources,
   ImportClusterProvider,
@@ -118,6 +120,10 @@ export interface ImportClusterBlueprintProps {
 }
 
 export class ImportClusterBlueprint extends EksBlueprint {
+  constructor(scope: Construct, blueprintProps: EksBlueprintProps, props?: StackProps) {
+    super(scope, blueprintProps, props);
+  };
+
   static import(scope: Construct, id: string, props: ImportClusterBlueprintProps) : BlueprintBuilder {
     const importClusterProvider = new ImportClusterProvider({
             clusterName: props.clusterName,
@@ -135,5 +141,5 @@ export class ImportClusterBlueprint extends EksBlueprint {
       .resourceProvider(GlobalResources.Vpc, new VpcProvider(props.vpcId)) // Important! register cluster VPC
       .account(props.account)
       .region(props.region);
-  }
+  };
 }

@@ -1327,14 +1327,13 @@ exports[`gitlab-chart c-default-props 1`] = `
         "EksFargateClusterKubectlReadyBarrier2FAD8674",
       ],
       "Properties": {
-        "Chart": "gitlab",
+        "Chart": "https://charts.gitlab.io/gitlab/gitlab",
         "ClusterName": {
           "Ref": "EksFargateCluster07FC3D2B",
         },
         "CreateNamespace": true,
         "Namespace": "default",
         "Release": "testGitlabChart",
-        "Repository": "https://charts.gitlab.io/",
         "RoleArn": {
           "Fn::GetAtt": [
             "EksFargateClusterCreationRole3BAC8A6F",
@@ -2718,7 +2717,6 @@ exports[`gitlab-chart cluster-custom-props 1`] = `
         "CreateNamespace": true,
         "Namespace": "gitlab",
         "Release": "testGitlabChart",
-        "Repository": "https://charts.gitlab.io/",
         "RoleArn": {
           "Fn::GetAtt": [
             "EksFargateClusterCreationRole3BAC8A6F",
