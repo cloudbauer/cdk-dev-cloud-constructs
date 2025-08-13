@@ -1,21 +1,22 @@
 import process from 'node:process';
 import {
-  App,
-  Stack,
-  StackProps,
-  aws_eks as eks,
-  aws_iam as iam
-} from 'aws-cdk-lib';
-import {
   EksBlueprint,
   EksBlueprintProps,
   BlueprintBuilder,
   GlobalResources,
   ImportClusterProvider,
-  VpcProvider,
+  DirectVpcProvider,
   HelmAddOn,
-  utils
+  utils,
 } from '@aws-quickstart/eks-blueprints';
+import {
+  App,
+  Stack,
+  StackProps,
+  aws_ec2 as ec2,
+  aws_eks as eks,
+  aws_iam as iam,
+} from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
 
@@ -53,93 +54,96 @@ export class EmptyStack extends Stack {
  * Properties object for the ImportClusterProvider.
  */
 export interface ImportClusterBlueprintProps {
-    /**
+  /**
      * The physical name of the Cluster
      */
-    readonly clusterName: string;
+  readonly clusterName: string;
 
-    /**
+  /**
      * The AWS Account ID of the Cluster
      */
-    readonly account: string;
+  readonly account: string;
 
-    /**
+  /**
      * The region of the Cluster
      */
-    readonly region: string;
+  readonly region: string;
 
-    /**
+  /**
      * The VPC Id of the Cluster
      */
-    readonly vpcId: string;
+  readonly vpc: ec2.IVpc;
 
-    /**
+  /**
      * The API Server endpoint URL
      * @default - if not specified `cluster.clusterEndpoint` will throw an error.
      */
-    readonly clusterEndpoint?: string;
+  readonly clusterEndpoint?: string;
 
-    /**
+  /**
      * An Open ID Connect provider for this cluster that can be used to configure service accounts.
      * You can either import an existing provider using `iam.OpenIdConnectProvider.fromProviderArn`,
      * or create a new provider using `new eks.OpenIdConnectProvider`
      * @default - if not specified `cluster.openIdConnectProvider` and `cluster.addServiceAccount` will throw an error.
      */
-    readonly openIdConnectProviderArn?: string;
+  readonly openIdConnectProviderArn?: string;
 
-    /**
+  /**
      * The certificate-authority-data for your cluster.
      * @default - if not specified `cluster.clusterCertificateAuthorityData` will
      * throw an error
      */
-    readonly clusterCertificateAuthorityData?: string;
-    /**
+  readonly clusterCertificateAuthorityData?: string;
+  /**
      * The cluster security group that was created by Amazon EKS for the cluster.
      * @default - if not specified `cluster.clusterSecurityGroupId` will throw an
      * error
      */
-    readonly clusterSecurityGroupId?: string;
-    /**
+  readonly clusterSecurityGroupId?: string;
+  /**
      * An IAM role with cluster administrator and "system:masters" permissions.
      * @default - if not specified, it not be possible to issue `kubectl` commands
      * against an imported cluster.
      */
-    readonly kubectlRoleArn?: string;
-    /**
+  readonly kubectlRoleArn?: string;
+  /**
      * Additional security groups associated with this cluster.
      * @default - if not specified, no additional security groups will be
      * considered in `cluster.connections`.
      */
-    readonly securityGroupIds?: string[];   
-    
-    /**
+  readonly securityGroupIds?: string[];
+
+  /**
      * The Kubernetes version to run in the cluster
      * This property is needed as it drives selection of certain add-on versions as well as kubectl layer.
     */
-    readonly kubernetesVersionString: string;
+  readonly kubernetesVersionString: string;
 }
 
 export class ImportClusterBlueprint extends EksBlueprint {
-  constructor(scope: Construct, blueprintProps: EksBlueprintProps, props?: StackProps) {
-    super(scope, blueprintProps, props);
-  };
-
   static import(scope: Construct, id: string, props: ImportClusterBlueprintProps) : BlueprintBuilder {
     const importClusterProvider = new ImportClusterProvider({
-            clusterName: props.clusterName,
-            version: eks.KubernetesVersion.of(props.kubernetesVersionString),
-            clusterEndpoint: props.clusterEndpoint,
-            openIdConnectProvider: props.openIdConnectProviderArn? iam.OpenIdConnectProvider.fromOpenIdConnectProviderArn(scope, id, props.openIdConnectProviderArn): undefined,
-            clusterCertificateAuthorityData: props.clusterCertificateAuthorityData,
-            kubectlRoleArn: props.kubectlRoleArn,
-            clusterSecurityGroupId: props.clusterSecurityGroupId,
-            securityGroupIds: props.securityGroupIds
-    })
+      clusterName: props.clusterName,
+      version: eks.KubernetesVersion.of(props.kubernetesVersionString),
+      clusterEndpoint: props.clusterEndpoint,
+      openIdConnectProvider:
+        props.openIdConnectProviderArn?
+          iam.OpenIdConnectProvider.fromOpenIdConnectProviderArn(scope, id, props.openIdConnectProviderArn):
+          undefined,
+      clusterCertificateAuthorityData: props.clusterCertificateAuthorityData,
+      kubectlRoleArn: props.kubectlRoleArn,
+      clusterSecurityGroupId: props.clusterSecurityGroupId,
+      securityGroupIds: props.securityGroupIds,
+    });
 
     return EksBlueprint.builder()
       .clusterProvider(importClusterProvider)
-      .resourceProvider(GlobalResources.Vpc, new VpcProvider(props.vpcId)) // Important! register cluster VPC
+      .resourceProvider(GlobalResources.Vpc, new DirectVpcProvider(props.vpc)) // Important! register cluster VPC
       .account(props.account)
       .region(props.region);
+  };
+
+  constructor(scope: Construct, blueprintProps: EksBlueprintProps, props?: StackProps) {
+    super(scope, blueprintProps, props);
   };
 }

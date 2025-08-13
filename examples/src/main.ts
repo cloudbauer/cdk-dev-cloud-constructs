@@ -1,11 +1,10 @@
 import process from 'node:process';
 import * as blueprints from '@aws-quickstart/eks-blueprints';
-import { Stack, StackProps, CfnOutput, Environment, Fn, aws_iam as iam, App } from 'aws-cdk-lib';
+import { Stack, StackProps, CfnOutput, Environment, Fn, aws_iam as iam, aws_ec2 as ec2 } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { configureApp, ImportClusterBlueprint, ImportClusterBlueprintProps } from '../../stack/src';
 import { EksClusterStackBuilder, PlatformTeamByRole } from '../../stack/src';
 import { KubectlProvider } from "@aws-quickstart/eks-blueprints/dist/addons/helm-addon/kubectl-provider";
-import { merge } from 'ts-deepmerge';
 
 interface GitLabStackProps extends Omit<ImportClusterBlueprintProps & StackProps, "account" | "region" > {
   /**
@@ -28,7 +27,7 @@ class GitLabStack extends Stack {
     const gitlabStackBuilder = ImportClusterBlueprint.import(this, 'clusterbuilder', {
       clusterName: props.clusterName,
       kubernetesVersionString: props.kubernetesVersionString,
-      vpcId: props.vpcId,
+      vpc: props.vpc,
       clusterEndpoint: props.clusterEndpoint,
       openIdConnectProviderArn: props.openIdConnectProviderArn,
       clusterCertificateAuthorityData: props.clusterCertificateAuthorityData,
@@ -83,7 +82,7 @@ interface ClusterStackProps extends  StackProps {
 interface ClusterStackOutputProps extends  ClusterStackProps {
   readonly clusterName: string;
   readonly kubernetesVersion: string;
-  readonly vpcId: string;
+  readonly vpc: ec2.IVpc;
   readonly clusterEndpoint: string;
   readonly clusterCertificateAuthorityData: string;
   readonly openIdConnectProviderArn: string;
@@ -124,17 +123,30 @@ class ClusterStack extends Stack {
     new CfnOutput(clusterStack, 'ClusterSecurityGroupId', { value: cluster.clusterSecurityGroupId, exportName: clusterStack.stackId + 'ClusterSecurityGroupId' });
     new CfnOutput(clusterStack, 'SecurityGroupIds', { value: securityGroupIds.join(' '), exportName: clusterStack.stackId + 'SecurityGroupIds' });
 
-    this.outputProps = merge(props, {
+    this.outputProps = {
+      description: props.description,
+      env: props.env,
+      stackName: props.stackName,
+      tags: props.tags,
+      notificationArns: props.notificationArns,
+      synthesizer: props.synthesizer,
+      terminationProtection: props.terminationProtection,
+      analyticsReporting: props.analyticsReporting,
+      crossRegionReferences: props.crossRegionReferences,
+      permissionsBoundary: props.permissionsBoundary,
+      suppressTemplateIndentation: props.suppressTemplateIndentation,
+      propertyInjectors: props.propertyInjectors,
+      domainName: props.domainName,
       clusterName: cluster.clusterName,
       kubernetesVersion: version,
-      vpcId: cluster.vpc.vpcId,
+      vpc: cluster.vpc,
       clusterEndpoint: cluster.clusterEndpoint,
       clusterCertificateAuthorityData: cluster.clusterCertificateAuthorityData,
       openIdConnectProviderArn: cluster.openIdConnectProvider.openIdConnectProviderArn,
       kubectlRoleArn: cluster.kubectlRole?.roleArn,
       clusterSecurityGroupId: cluster.clusterSecurityGroupId,
       securityGroupIds: securityGroupIds
-    })
+    }
   };
 }
 
@@ -150,11 +162,10 @@ const clusterStack = new ClusterStack(app, 'example-dev-cluster', {
   domainName: domainName,
 });
 
-
 const gitlabStack = new GitLabStack(app, 'example-dev-gitlab', {
   clusterName: Fn.importValue(clusterStack.stackId + 'ClusterName'),
   kubernetesVersionString: Fn.importValue(clusterStack.stackId + 'KubernetesVersion'),
-  vpcId: Fn.importValue(clusterStack.stackId + 'VpcId'),
+  vpc: clusterStack.outputProps.vpc, // Fn.importValue(clusterStack.stackId + 'VpcId'),
   clusterEndpoint: Fn.importValue(clusterStack.stackId + 'ClusterEndpoint'),
   openIdConnectProviderArn: Fn.importValue(clusterStack.stackId + 'OpenIdConnectProviderArn'),
   clusterCertificateAuthorityData: Fn.importValue(clusterStack.stackId + 'ClusterCertificateAuthorityData'),
