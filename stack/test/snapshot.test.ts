@@ -21,7 +21,7 @@ describe('synth correctly', () => {
           new ArnPrincipal(`arn:aws:iam::${app.account}:root`),
           [ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess')],
         ))
-      .teams(new PlatformTeamByUsers( [`arn:aws:iam::${app.account}:user/my-user`] ))
+      .teams(new PlatformTeamByUsers( { name: 'platform', platformTeamUserNames: ['my-user'] } ))
       .build(app, 'snapshot-stack');
 
     expect(stackbuilder).toBeDefined();

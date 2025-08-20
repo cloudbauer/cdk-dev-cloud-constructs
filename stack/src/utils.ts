@@ -4,20 +4,29 @@ import {
   EksBlueprintProps,
   BlueprintBuilder,
   GlobalResources,
+  CreateRoleProvider,
   ImportClusterProvider,
   DirectVpcProvider,
   HelmAddOn,
   utils,
+  AwsLoadBalancerControllerAddOn,
+  VpcCniAddOn,
+  KubeProxyAddOn,
+  EbsCsiDriverAddOn,
+  CertManagerAddOn,
+  KarpenterV1AddOn,
 } from '@aws-quickstart/eks-blueprints';
 import {
   App,
   Stack,
   StackProps,
+  CfnOutput,
   aws_ec2 as ec2,
   aws_eks as eks,
   aws_iam as iam,
 } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
+import { PlatformTeamByRole } from './';
 
 
 export function errorHandler(app: App, message: string, error?: Error) {
@@ -47,6 +56,159 @@ export class EmptyStack extends Stack {
     if (message) {
       message.forEach(m => utils.logger.info(m));
     }
+  }
+}
+
+export interface CreateClusterBuilderProps {
+  /**
+   * The domain name to be used for expose the service endpoint
+   * This property is needed.
+  */
+  domainName: string;
+  masterRoleName: string;
+}
+
+export interface CreateClusterBlueprintProps extends EksBlueprintProps, Partial<CreateClusterBuilderProps> {}
+
+export interface ClusterStackOutputProps extends StackProps {
+  readonly domainName: string;
+  readonly clusterName: string;
+  readonly kubernetesVersion: string;
+  readonly vpc: ec2.IVpc;
+  readonly clusterEndpoint: string;
+  readonly clusterCertificateAuthorityData: string;
+  readonly openIdConnectProviderArn: string;
+  readonly kubectlRoleArn?: string;
+  readonly clusterSecurityGroupId: string;
+  readonly securityGroupIds: string[];
+}
+
+export class CreateClusterBlueprint extends EksBlueprint {
+  static create(blueprintProps: CreateClusterBuilderProps, props?: StackProps) : CreateClusterBlueprintBuilder {
+    const masterRoleProvider = new CreateRoleProvider('master-role',
+      new iam.AccountRootPrincipal(),
+      [iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess')],
+    );
+    return CreateClusterBlueprint.builder()
+      .account(props?.env?.account)
+      .region(props?.env?.region)
+      .domainName(blueprintProps.domainName)
+      .resourceProvider('master-role', masterRoleProvider)
+      .teams(new PlatformTeamByRole( { name: 'platform', platformTeamRoleName: blueprintProps.masterRoleName } ))
+      .addOns(
+        new AwsLoadBalancerControllerAddOn,
+        new VpcCniAddOn,
+        new KubeProxyAddOn,
+        new EbsCsiDriverAddOn,
+        new CertManagerAddOn,
+        new KarpenterV1AddOn);
+  };
+
+  static builder(): CreateClusterBlueprintBuilder {
+    return new CreateClusterBlueprintBuilder();
+  }
+
+  readonly outputProps: ClusterStackOutputProps;
+
+  constructor(scope: Construct, blueprintProps: CreateClusterBlueprintProps, props?: StackProps) {
+    super(scope, blueprintProps, props);
+
+    const cluster = this.getClusterInfo().cluster;
+    const version = this.getClusterInfo().version.version;
+    const securityGroupIds = cluster.connections.securityGroups.map(value => value.securityGroupId);
+
+    new CfnOutput(this, 'ClusterName', { value: cluster.clusterName, exportName: 'ClusterName' });
+    new CfnOutput(this, 'KubernetesVersion', { value: version, exportName: 'KubernetesVersion' });
+    new CfnOutput(this, 'VpcId', { value: cluster.vpc.vpcId, exportName: 'VpcId' });
+    new CfnOutput(this, 'ClusterEndpoint', { value: cluster.clusterEndpoint, exportName: 'ClusterEndpoint' });
+    // new CfnOutput(this, 'ClusterCertificateAuthorityData', { value: cluster.clusterCertificateAuthorityData, exportName: 'ClusterCertificateAuthorityData' });  CREATE_FAILED Max length of 1024 exceeded
+    new CfnOutput(this, 'OpenIdConnectProviderArn', { value: cluster.openIdConnectProvider.openIdConnectProviderArn, exportName: 'OpenIdConnectProviderArn' });
+    new CfnOutput(this, 'KubectlRoleArn', { value: cluster.kubectlRole? cluster.kubectlRole.roleArn: '', exportName: 'KubectlRoleArn' });
+    new CfnOutput(this, 'ClusterSecurityGroupId', { value: cluster.clusterSecurityGroupId, exportName: 'ClusterSecurityGroupId' });
+    new CfnOutput(this, 'SecurityGroupIds', { value: securityGroupIds.join(' '), exportName: 'SecurityGroupIds' });
+
+    this.outputProps = {
+      description: props?.description,
+      env: props?.env,
+      stackName: props?.stackName,
+      tags: props?.tags,
+      notificationArns: props?.notificationArns,
+      synthesizer: props?.synthesizer,
+      terminationProtection: props?.terminationProtection,
+      analyticsReporting: props?.analyticsReporting,
+      crossRegionReferences: props?.crossRegionReferences,
+      permissionsBoundary: props?.permissionsBoundary,
+      suppressTemplateIndentation: props?.suppressTemplateIndentation,
+      propertyInjectors: props?.propertyInjectors,
+      domainName: blueprintProps.domainName ?? '',
+      clusterName: cluster.clusterName,
+      kubernetesVersion: version,
+      vpc: cluster.vpc,
+      clusterEndpoint: cluster.clusterEndpoint,
+      clusterCertificateAuthorityData: cluster.clusterCertificateAuthorityData,
+      openIdConnectProviderArn: cluster.openIdConnectProvider.openIdConnectProviderArn,
+      kubectlRoleArn: cluster.kubectlRole?.roleArn,
+      clusterSecurityGroupId: cluster.clusterSecurityGroupId,
+      securityGroupIds: securityGroupIds,
+    };
+  }
+
+  /**
+   * Since constructor cannot be marked as async, adding a separate method to wait
+   * for async code to finish.
+   * @returns Promise that resolves to the blueprint
+   */
+  public async waitForAsyncTasks(): Promise<CreateClusterBlueprint> {
+    return super.waitForAsyncTasks().then(() => {
+      return this;
+    });
+  }
+}
+// 149:5  error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+
+
+/**
+ * Needed to handle CreateClusterBlueprint extension
+ * inherents
+ * clone(region?: string, account?: string): BlueprintBuilder;
+ * build(scope: Construct, id: string, stackProps?: cdk.StackProps): EksBlueprint;
+ * compatibilityMode(compatibilityMode: boolean): BlueprintBuilder;
+ * buildAsync(scope: Construct, id: string, stackProps?: cdk.StackProps): Promise<EksBlueprint>;
+*/
+export class CreateClusterBlueprintBuilder extends BlueprintBuilder {
+  builderProps: Partial<CreateClusterBuilderProps>;
+
+  constructor() {
+    super();
+    this.builderProps = {};
+  }
+
+  public domainName(domainName?: string): this {
+    this.builderProps.domainName = domainName;
+    return this;
+  }
+
+  public clone(region?: string, account?: string): CreateClusterBlueprintBuilder {
+    return new CreateClusterBlueprintBuilder().withBlueprintProps(this.props)
+      .account(account ?? this.env.account).region(region ?? this.env.region);
+  }
+  public build(scope: Construct, id: string, stackProps?: StackProps): CreateClusterBlueprint {
+    return new CreateClusterBlueprint(scope, { ...this.props, ...this.builderProps, ...{ id } },
+      { ...{ env: this.env }, ...stackProps });
+  }
+
+  /**
+     * Sets compatibility mode
+     * @param compatibilityMode if true will attach blueprints resources directly to the stack.
+     * @returns
+     */
+  public compatibilityMode(compatibilityMode: boolean): CreateClusterBlueprintBuilder {
+    this.props = { ...this.props, ...{ compatibilityMode } };
+    return this;
+  }
+
+  public async buildAsync(scope: Construct, id: string, stackProps?: StackProps): Promise<CreateClusterBlueprint> {
+    return this.build(scope, id, stackProps).waitForAsyncTasks();
   }
 }
 

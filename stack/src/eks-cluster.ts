@@ -2,31 +2,58 @@ import 'source-map-support/register';
 import * as blueprints from '@aws-quickstart/eks-blueprints';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as eks from 'aws-cdk-lib/aws-eks';
-import { ArnPrincipal, IRole } from 'aws-cdk-lib/aws-iam';
+import { IRole, ArnPrincipal } from 'aws-cdk-lib/aws-iam';
 import { merge } from 'ts-deepmerge';
-
 
 const DEFAULT_K8S_VERSION = '1.32';
 const DEFAULT_NODES_INSTANCE_CLASSES = [ec2.InstanceClass.T3];
 const DEFAULT_NODES_INSTANCE_SIZES =[ec2.InstanceSize.MEDIUM, ec2.InstanceSize.LARGE];
 
 // Team implementations
-export class PlatformTeamByUsers extends blueprints.teams.PlatformTeam {
-  constructor(userArns: [string]) {
-    super({
-      name: 'platform',
-      users: userArns.map(arn => new ArnPrincipal(arn)),
-    });
-  }
+export interface PlatformTeamByRoleProps extends blueprints.teams.TeamProps {
+  readonly platformTeamRoleName: string;
 }
 
 export class PlatformTeamByRole extends blueprints.teams.PlatformTeam {
-  constructor(roleArn: string) {
-    super({
-      name: 'platform',
-      userRoleArn: roleArn,
-    });
+  teamProps: PlatformTeamByRoleProps;
+
+  constructor(props: PlatformTeamByRoleProps) {
+    super(props);
+    this.teamProps = props;
   }
+
+  setup(clusterInfo: blueprints.ClusterInfo): void {
+    const roleArn = `arn:aws:iam::${clusterInfo.cluster.env.account}:role/${this.teamProps.platformTeamRoleName}`;
+    this.teamProps = {
+      name: this.teamProps.name,
+      platformTeamRoleName: this.teamProps.platformTeamRoleName,
+      userRoleArn: roleArn,
+    };
+    super.setup(clusterInfo);
+  };
+}
+
+export interface PlatformTeamByUsersProps extends blueprints.teams.TeamProps {
+  readonly platformTeamUserNames: string[];
+}
+
+export class PlatformTeamByUsers extends blueprints.teams.PlatformTeam {
+  teamProps: PlatformTeamByUsersProps;
+
+  constructor(props: PlatformTeamByUsersProps) {
+    super(props);
+    this.teamProps = props;
+  }
+
+  setup(clusterInfo: blueprints.ClusterInfo): void {
+    const account = clusterInfo.cluster.env.account;
+    this.teamProps = {
+      name: this.teamProps.name,
+      platformTeamUserNames: this.teamProps.platformTeamUserNames,
+      users: this.teamProps.platformTeamUserNames.map(name => new ArnPrincipal(`arn:aws:iam::${account}:user/${name}`)),
+    };
+    super.setup(clusterInfo);
+  };
 }
 
 /**

@@ -1,10 +1,9 @@
 import process from 'node:process';
-import * as blueprints from '@aws-quickstart/eks-blueprints';
-import { Stack, StackProps, CfnOutput, Environment, Fn, aws_iam as iam, aws_ec2 as ec2 } from 'aws-cdk-lib';
+import { Stack, StackProps, Environment, Fn, aws_iam as iam, aws_ec2 as ec2 } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { configureApp, ImportClusterBlueprint, ImportClusterBlueprintProps } from '../../stack/src';
-import { EksClusterStackBuilder, PlatformTeamByRole } from '../../stack/src';
+import { configureApp, CreateClusterBlueprint, ImportClusterBlueprint, ImportClusterBlueprintProps } from '../../stack/src';
 import { KubectlProvider } from "@aws-quickstart/eks-blueprints/dist/addons/helm-addon/kubectl-provider";
+import { KubernetesVersion } from 'aws-cdk-lib/aws-eks';
 
 interface GitLabStackProps extends Omit<ImportClusterBlueprintProps & StackProps, "account" | "region" > {
   /**
@@ -66,88 +65,9 @@ class GitLabStack extends Stack {
           },
         },
       },
-      dependencyMode: false
+      dependencyMode: true
     });
   }
-}
-
-interface ClusterStackProps extends  StackProps {
-  /**
-   * The domain name to be used for expose the service endpoint
-   * This property is needed.
-  */  
-  readonly domainName: string;
-}
-
-interface ClusterStackOutputProps extends  ClusterStackProps {
-  readonly clusterName: string;
-  readonly kubernetesVersion: string;
-  readonly vpc: ec2.IVpc;
-  readonly clusterEndpoint: string;
-  readonly clusterCertificateAuthorityData: string;
-  readonly openIdConnectProviderArn: string;
-  readonly kubectlRoleArn?: string;
-  readonly clusterSecurityGroupId: string;
-  readonly securityGroupIds: string[];
-}
-
-class ClusterStack extends Stack {
-  readonly outputProps: ClusterStackOutputProps;
-
-  constructor(scope: Construct, id: 
-    string, props: ClusterStackProps) {
-    super(scope, id, props);
-
-    const masterRoleProvider = new blueprints.CreateRoleProvider('master-role',
-      new iam.ArnPrincipal(`arn:aws:iam::${env.account}:root`),
-      [iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess')],
-    )
-    const clusterStack = EksClusterStackBuilder.builder({ domainName: props.domainName })
-      .account(props.env?.account)
-      .region(props.env?.region)
-      .resourceProvider('master-role', masterRoleProvider)
-      .teams(new PlatformTeamByRole( `arn:aws:iam::${env.account!}:role/AWSReservedSSO_AWSAdministratorAccess_06b2ee70a910389f` ))
-      .build(this, id);
-
-    const cluster = clusterStack.getClusterInfo().cluster;
-    const version = clusterStack.getClusterInfo().version.version
-    const securityGroupIds = cluster.connections.securityGroups.map(value => value.securityGroupId)
-
-    new CfnOutput(clusterStack, 'ClusterName', { value: cluster.clusterName, exportName: clusterStack.stackId + 'ClusterName' });
-    new CfnOutput(clusterStack, 'KubernetesVersion', { value: version, exportName: clusterStack.stackId + 'KubernetesVersion' });
-    new CfnOutput(clusterStack, 'VpcId', { value: cluster.vpc.vpcId, exportName: clusterStack.stackId + 'VpcId' });
-    new CfnOutput(clusterStack, 'ClusterEndpoint', { value: cluster.clusterEndpoint, exportName: clusterStack.stackId + 'ClusterEndpoint' });
-    new CfnOutput(clusterStack, 'ClusterCertificateAuthorityData', { value: cluster.clusterCertificateAuthorityData, exportName: clusterStack.stackId + 'ClusterCertificateAuthorityData' });
-    new CfnOutput(clusterStack, 'OpenIdConnectProviderArn', { value: cluster.openIdConnectProvider.openIdConnectProviderArn, exportName: clusterStack.stackId + 'OpenIdConnectProviderArn' });
-    new CfnOutput(clusterStack, 'KubectlRoleArn', { value: cluster.kubectlRole? cluster.kubectlRole.roleArn: '', exportName: clusterStack.stackId + 'KubectlRoleArn' });
-    new CfnOutput(clusterStack, 'ClusterSecurityGroupId', { value: cluster.clusterSecurityGroupId, exportName: clusterStack.stackId + 'ClusterSecurityGroupId' });
-    new CfnOutput(clusterStack, 'SecurityGroupIds', { value: securityGroupIds.join(' '), exportName: clusterStack.stackId + 'SecurityGroupIds' });
-
-    this.outputProps = {
-      description: props.description,
-      env: props.env,
-      stackName: props.stackName,
-      tags: props.tags,
-      notificationArns: props.notificationArns,
-      synthesizer: props.synthesizer,
-      terminationProtection: props.terminationProtection,
-      analyticsReporting: props.analyticsReporting,
-      crossRegionReferences: props.crossRegionReferences,
-      permissionsBoundary: props.permissionsBoundary,
-      suppressTemplateIndentation: props.suppressTemplateIndentation,
-      propertyInjectors: props.propertyInjectors,
-      domainName: props.domainName,
-      clusterName: cluster.clusterName,
-      kubernetesVersion: version,
-      vpc: cluster.vpc,
-      clusterEndpoint: cluster.clusterEndpoint,
-      clusterCertificateAuthorityData: cluster.clusterCertificateAuthorityData,
-      openIdConnectProviderArn: cluster.openIdConnectProvider.openIdConnectProviderArn,
-      kubectlRoleArn: cluster.kubectlRole?.roleArn,
-      clusterSecurityGroupId: cluster.clusterSecurityGroupId,
-      securityGroupIds: securityGroupIds
-    }
-  };
 }
 
 const app = configureApp();
@@ -157,10 +77,18 @@ const domainName = 'start.123co.de';
 //-------------------------------------------
 // Single cluster with example configuration.
 //-------------------------------------------
-const clusterStack = new ClusterStack(app, 'example-dev-cluster', {
-  env: env,
-  domainName: domainName,
-});
+const clusterStack = CreateClusterBlueprint.create(
+  { domainName: domainName,
+    masterRoleName: 'AWSReservedSSO_AWSAdministratorAccess_06b2ee70a910389f' },
+  { env: env })
+  .version(KubernetesVersion.of('1.32'))
+  .build(app, 'example-dev-cluster', { env: env })
+
+// const clusterStack = new ClusterStack(app, 'example-dev-cluster', {
+//   env: env,
+//   domainName: domainName,
+//   masterRoleName: 'AWSReservedSSO_AWSAdministratorAccess_06b2ee70a910389f'
+// });
 
 const gitlabStack = new GitLabStack(app, 'example-dev-gitlab', {
   clusterName: Fn.importValue(clusterStack.stackId + 'ClusterName'),
@@ -168,7 +96,7 @@ const gitlabStack = new GitLabStack(app, 'example-dev-gitlab', {
   vpc: clusterStack.outputProps.vpc, // Fn.importValue(clusterStack.stackId + 'VpcId'),
   clusterEndpoint: Fn.importValue(clusterStack.stackId + 'ClusterEndpoint'),
   openIdConnectProviderArn: Fn.importValue(clusterStack.stackId + 'OpenIdConnectProviderArn'),
-  clusterCertificateAuthorityData: Fn.importValue(clusterStack.stackId + 'ClusterCertificateAuthorityData'),
+  clusterCertificateAuthorityData: clusterStack.outputProps.clusterCertificateAuthorityData,
   kubectlRoleArn: Fn.importValue(clusterStack.stackId + 'KubectlRoleArn'),
   clusterSecurityGroupId: Fn.importValue(clusterStack.stackId + 'ClusterSecurityGroupId'),
   securityGroupIds: Fn.importValue(clusterStack.stackId + 'SecurityGroupIds').split(' '),
