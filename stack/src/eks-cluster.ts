@@ -4,6 +4,7 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as eks from 'aws-cdk-lib/aws-eks';
 import { IRole, ArnPrincipal } from 'aws-cdk-lib/aws-iam';
 import { merge } from 'ts-deepmerge';
+// import { GitLabAddOn, GitLabServiceType } from './gitlabaddon';
 
 const DEFAULT_K8S_VERSION = '1.32';
 const DEFAULT_NODES_INSTANCE_CLASSES = [ec2.InstanceClass.T3];
@@ -196,7 +197,9 @@ export class EksClusterStackBuilder extends blueprints.stacks.BlueprintBuilder {
       .clusterProvider(clusterProvider)
       .addOns(
         new blueprints.AwsLoadBalancerControllerAddOn,
-        new blueprints.CertManagerAddOn,
+        // new blueprints.CertManagerAddOn({
+        //   namespace: 'default',
+        // }),
         // new blueprints.AdotCollectorAddOn({
         //   // namespace:'adot', //User supplied, non-default namespace
         //   version: 'v0.80.0-eksbuild.2'
@@ -212,6 +215,11 @@ export class EksClusterStackBuilder extends blueprints.stacks.BlueprintBuilder {
         //  new blueprints.CloudWatchAdotAddOn,
         // new blueprints.XrayAdotAddOn,
         new blueprints.SecretsStoreAddOn,
+        // new GitLabAddOn({
+        //   namespace: 'default',
+        //   serviceType: GitLabServiceType.ALB,
+        //   ingressHost: mergedOptions.domainName,
+        // })
       );
   }
 }

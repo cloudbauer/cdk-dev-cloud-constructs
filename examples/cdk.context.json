@@ -8,5 +8,9 @@
     "eu-central-1a",
     "eu-central-1b",
     "eu-central-1c"
-  ]
+  ],
+  "hosted-zone:account=891377009590:domainName=start.123co.de:region=eu-central-1": {
+    "Id": "/hostedzone/Z01564562K9FX8XOL1I2O",
+    "Name": "start.123co.de."
+  }
 }

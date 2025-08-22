@@ -2,8 +2,9 @@ import process from 'node:process';
 import { Stack, StackProps, Environment, Fn, aws_iam as iam, aws_ec2 as ec2 } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { configureApp, CreateClusterBlueprint, ImportClusterBlueprint, ImportClusterBlueprintProps } from '../../stack/src';
-import { KubectlProvider } from "@aws-quickstart/eks-blueprints/dist/addons/helm-addon/kubectl-provider";
+//import { KubectlProvider } from "@aws-quickstart/eks-blueprints/dist/addons/helm-addon/kubectl-provider";
 import { KubernetesVersion } from 'aws-cdk-lib/aws-eks';
+import { GitLabAddOn, GitLabServiceType } from '../../stack/src/gitlabaddon';
 
 interface GitLabStackProps extends Omit<ImportClusterBlueprintProps & StackProps, "account" | "region" > {
   /**
@@ -37,36 +38,41 @@ class GitLabStack extends Stack {
       region: props.env!.region!,
     })
 
-    const gitlabStack = gitlabStackBuilder.build(this, 'cluster');
+    const gitlabStack = gitlabStackBuilder
+      .addOns(new GitLabAddOn({
+        serviceType: GitLabServiceType.ALB,
+        ingressHost: props.domainName
+      }))
+      .build(this, 'cluster');
 
     // for examples, use account/region from cdk cli
-    KubectlProvider.applyHelmDeployment(gitlabStack.getClusterInfo(), {
-      name: 'gitlab',
-      namespace: 'default',
-      chart: 'gitlab/gitlab',
-      repository: 'https://charts.gitlab.io',
-      version: '9.1.1',
-      release: 'gitlab',
-      values: {
-        installCertmanager: false,
-        global: {
-          hosts: {
-            domain: props.domainName,
-          },
-          email: {
-            from: 'gitlab@' + props.domainName,
-            display_name: `GitLab (${props.domainName})`,
-          },
-          ingress: {
-            configureCertmanager: false,
-            annotations: {
-              'kubernetes.io/tls-acme': true,
-            },
-          },
-        },
-      },
-      dependencyMode: true
-    });
+    // KubectlProvider.applyHelmDeployment(gitlabStack.getClusterInfo(), {
+    //   name: 'gitlab',
+    //   namespace: 'default',
+    //   chart: 'gitlab/gitlab',
+    //   repository: 'https://charts.gitlab.io',
+    //   version: '9.1.1',
+    //   release: 'gitlab',
+    //   values: {
+    //     installCertmanager: false,
+    //     global: {
+    //       hosts: {
+    //         domain: props.domainName,
+    //       },
+    //       email: {
+    //         from: 'gitlab@' + props.domainName,
+    //         display_name: `GitLab (${props.domainName})`,
+    //       },
+    //       ingress: {
+    //         configureCertmanager: false,
+    //         annotations: {
+    //           'kubernetes.io/tls-acme': true,
+    //         },
+    //       },
+    //     },
+    //   },
+    //   dependencyMode: true
+    // });
   }
 }
 

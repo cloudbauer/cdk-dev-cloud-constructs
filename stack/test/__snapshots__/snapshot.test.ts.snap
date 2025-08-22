@@ -423,34 +423,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
       "Type": "AWS::CloudFormation::Stack",
       "UpdateReplacePolicy": "Delete",
     },
-    "certmanagernamespacestruct65ED8E81": {
-      "DeletionPolicy": "Delete",
-      "DependsOn": [
-        "snapshotstackKubectlReadyBarrier4BD1B744",
-      ],
-      "Properties": {
-        "ClusterName": {
-          "Ref": "snapshotstack046915C2",
-        },
-        "Manifest": "[{"apiVersion":"v1","kind":"Namespace","metadata":{"name":"cert-manager","labels":{"aws.cdk.eks/prune-c8ab26fad45b108fa726172a611684b87fdd4e9c35":""}}}]",
-        "Overwrite": true,
-        "PruneLabel": "aws.cdk.eks/prune-c8ab26fad45b108fa726172a611684b87fdd4e9c35",
-        "RoleArn": {
-          "Fn::GetAtt": [
-            "snapshotstackCreationRole9EA643C1",
-            "Arn",
-          ],
-        },
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
-            "Outputs.snapshotstackawscdkawseksKubectlProviderframeworkonEventA4484F27Arn",
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
-      "UpdateReplacePolicy": "Delete",
-    },
     "kubectllayer328C149512": {
       "Properties": {
         "Content": {
@@ -2337,62 +2309,6 @@ exports[`synth correctly Stack creation matches snapshot 1`] = `
         },
         "Version": "1.12.0",
         "Wait": true,
-      },
-      "Type": "Custom::AWSCDK-EKS-HelmChart",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "snapshotstackchartblueprintscertmanageraddon0A3FDE44": {
-      "DeletionPolicy": "Delete",
-      "DependsOn": [
-        "certmanagernamespacestruct65ED8E81",
-        "snapshotstackvpcIGW7FCDA420",
-        "snapshotstackvpcPrivateSubnet1DefaultRouteDBC931E1",
-        "snapshotstackvpcPrivateSubnet1RouteTable373B16F0",
-        "snapshotstackvpcPrivateSubnet1RouteTableAssociationE056EDF8",
-        "snapshotstackvpcPrivateSubnet1Subnet900FE227",
-        "snapshotstackvpcPrivateSubnet2DefaultRouteB695AA9D",
-        "snapshotstackvpcPrivateSubnet2RouteTable2A6F873B",
-        "snapshotstackvpcPrivateSubnet2RouteTableAssociationAE16B144",
-        "snapshotstackvpcPrivateSubnet2SubnetF8A71F7C",
-        "snapshotstackvpcPublicSubnet1DefaultRoute9FA29E6D",
-        "snapshotstackvpcPublicSubnet1EIP1E36663B",
-        "snapshotstackvpcPublicSubnet1NATGateway4F6DBF2B",
-        "snapshotstackvpcPublicSubnet1RouteTableCFC415BD",
-        "snapshotstackvpcPublicSubnet1RouteTableAssociation01596547",
-        "snapshotstackvpcPublicSubnet1SubnetB1EA80F9",
-        "snapshotstackvpcPublicSubnet2DefaultRoute7E1E0407",
-        "snapshotstackvpcPublicSubnet2EIPF40FEA33",
-        "snapshotstackvpcPublicSubnet2NATGateway3FFB1C21",
-        "snapshotstackvpcPublicSubnet2RouteTable8EAFDEBF",
-        "snapshotstackvpcPublicSubnet2RouteTableAssociationEEB91254",
-        "snapshotstackvpcPublicSubnet2Subnet907DC56A",
-        "snapshotstackvpcD6CBA8E2",
-        "snapshotstackvpcVPCGW71D5B893",
-        "snapshotstackKubectlReadyBarrier4BD1B744",
-      ],
-      "Properties": {
-        "Chart": "cert-manager",
-        "ClusterName": {
-          "Ref": "snapshotstack046915C2",
-        },
-        "CreateNamespace": true,
-        "Namespace": "cert-manager",
-        "Release": "cert-manager",
-        "Repository": "https://charts.jetstack.io",
-        "RoleArn": {
-          "Fn::GetAtt": [
-            "snapshotstackCreationRole9EA643C1",
-            "Arn",
-          ],
-        },
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
-            "Outputs.snapshotstackawscdkawseksKubectlProviderframeworkonEventA4484F27Arn",
-          ],
-        },
-        "Values": "{"installCRDs":true}",
-        "Version": "1.17.2",
       },
       "Type": "Custom::AWSCDK-EKS-HelmChart",
       "UpdateReplacePolicy": "Delete",

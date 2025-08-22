@@ -15,6 +15,9 @@ import {
   EbsCsiDriverAddOn,
   CertManagerAddOn,
   KarpenterV1AddOn,
+  MetricsServerAddOn,
+  ExternalDnsAddOn,
+  LookupHostedZoneProvider,
 } from '@aws-quickstart/eks-blueprints';
 import {
   App,
@@ -27,6 +30,7 @@ import {
 } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { PlatformTeamByRole } from './';
+import { GitLabAddOn, GitLabServiceType } from './gitlabaddon';
 
 
 export function errorHandler(app: App, message: string, error?: Error) {
@@ -89,20 +93,34 @@ export class CreateClusterBlueprint extends EksBlueprint {
       new iam.AccountRootPrincipal(),
       [iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess')],
     );
+
+    const hostedZone = new LookupHostedZoneProvider(blueprintProps.domainName);
+
     return CreateClusterBlueprint.builder()
       .account(props?.env?.account)
       .region(props?.env?.region)
       .domainName(blueprintProps.domainName)
       .resourceProvider('master-role', masterRoleProvider)
+      .resourceProvider(GlobalResources.HostedZone, hostedZone)
       .teams(new PlatformTeamByRole( { name: 'platform', platformTeamRoleName: blueprintProps.masterRoleName } ))
       .addOns(
         new AwsLoadBalancerControllerAddOn,
         new VpcCniAddOn,
         new KubeProxyAddOn,
         new EbsCsiDriverAddOn,
-        new CertManagerAddOn,
-        new KarpenterV1AddOn);
-  };
+        new MetricsServerAddOn,
+        new KarpenterV1AddOn,
+        new ExternalDnsAddOn({ hostedZoneResources: [GlobalResources.HostedZone] }),
+        new CertManagerAddOn({
+          namespace: 'default',
+        }),
+        new GitLabAddOn({
+          namespace: 'default',
+          serviceType: GitLabServiceType.ALB,
+          ingressHost: blueprintProps.domainName,
+        }),
+      );
+  }
 
   static builder(): CreateClusterBlueprintBuilder {
     return new CreateClusterBlueprintBuilder();
