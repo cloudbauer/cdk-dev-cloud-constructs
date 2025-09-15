@@ -182,6 +182,8 @@ export class GitLabAddOn extends HelmAddOn {
 
     const albAddOnCheck = clusterInfo.getScheduledAddOn(AwsLoadBalancerControllerAddOn.name);
     // Use Ingress and AWS ALB
+    // See https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/examples/aws/alb-full.yaml
+    // More details https://rtfm.co.ua/en/gitlab-helm-chart-of-values-dependencies-and-deployment-in-kubernetes-with-aws-s3/
     if (serviceType == GitLabServiceType.ALB) {
       // assert(albAddOnCheck, `Missing a dependency: ${AwsLoadBalancerControllerAddOn.name}. Please add it to your list of addons.`);
       const presetAnnotations: any = {
@@ -205,6 +207,8 @@ export class GitLabAddOn extends HelmAddOn {
 
       setPath(values, 'nginx-ingress.enabled', false); // Disable nginx-ingress
       setPath(values, 'global.hosts.domain', ingressHost);
+      // setPath(values, 'global.hosts.hostSuffix', 'extern');
+      setPath(values, 'global.hosts.https', true);
       setPath(values, 'global.email.from', 'gitlab@' + ingressHost);
       setPath(values, 'global.email.display_name', `GitLab (${ingressHost})`);
       setPath(values, 'installCertmanager', false);
@@ -221,22 +225,22 @@ export class GitLabAddOn extends HelmAddOn {
         setPath(values, 'gitlab.webservice.enabled', true);
         setPath(values, 'gitlab.webservice.service.type', 'NodePort');
         setPath(values, 'gitlab.kas.enabled', true);
-        setPath(values, 'gitlab.kas.service.type', 'NodePort');
+        setPath(values, 'gitlab.kas.service.type', 'NodePort'); // k8s services exposed via an ingress rule to an ELB need to be of type NodePort
         setPath(values, 'gitlab.kas.ingress.annotations', {
           'alb.ingress.kubernetes.io/healthcheck-path': '/liveness',
           'alb.ingress.kubernetes.io/healthcheck-port': '8151',
           'alb.ingress.kubernetes.io/load-balancer-attributes': 'idle_timeout.timeout_seconds=4000,routing.http2.enabled=false',
           'alb.ingress.kubernetes.io/target-group-attributes': 'stickiness.enabled=true,stickiness.lb_cookie.duration_seconds=86400',
-          'alb.ingress.kubernetes.io/target-type': 'ip',
+          'alb.ingress.kubernetes.io/target-type': 'ip', // target-type instance value needed if service type NodePort is used
           'kubernetes.io/tls-acme': 'true',
           'nginx.ingress.kubernetes.io/connection-proxy-header': 'keep-alive',
           'nginx.ingress.kubernetes.io/x-forwarded-prefix': '"/path',
         });
         setPath(values, 'gitlab.gitlab-shell.enabled', true); // gitlab-shell (ssh) needs an NLB
         setPath(values, 'gitlab.gitlab-shell.service.type', 'LoadBalancer');
-        setPath(values, 'gitlab.kas.ingress.annotations', {
+        setPath(values, 'gitlab.gitlab-shell.ingress.annotations', {
           'external-dns.alpha.kubernetes.io/hostname': 'gitlab-shell.' + ingressHost,
-          'service.beta.kubernetes.io/aws-load-balancer-nlb-target-type': 'ip',
+          'service.beta.kubernetes.io/aws-load-balancer-nlb-target-type': 'ip', // target-type instance value needed if service type NodePort is used
           'service.beta.kubernetes.io/aws-load-balancer-scheme': 'internet-facing',
           'service.beta.kubernetes.io/aws-load-balancer-type': 'external',
         });
@@ -340,7 +344,7 @@ registry:
           annotations: {
             'service.beta.kubernetes.io/aws-load-balancer-type': 'nlb',
             'service.beta.kubernetes.io/aws-load-balancer-scheme': 'internet-facing',
-            'service.beta.kubernetes.io/aws-load-balancer-nlb-target-type': 'ip',
+            'service.beta.kubernetes.io/aws-load-balancer-nlb-target-type': 'ip', // target-type instance value needed if service type NodePort is used
           },
         });
       }

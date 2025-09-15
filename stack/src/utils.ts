@@ -111,9 +111,9 @@ export class CreateClusterBlueprint extends EksBlueprint {
         new MetricsServerAddOn,
         new KarpenterV1AddOn,
         new ExternalDnsAddOn({ hostedZoneResources: [GlobalResources.HostedZone] }),
-        new CertManagerAddOn({
-          namespace: 'default',
-        }),
+        // new CertManagerAddOn({
+        //   namespace: 'default',
+        // }),
         new GitLabAddOn({
           namespace: 'default',
           serviceType: GitLabServiceType.ALB,
